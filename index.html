@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -9,167 +8,750 @@
 <title>わたしの時間割</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fdf6f0;--card:#fff9f5;--border:#f0ddd5;--accent:#f4a7b9;--text:#3d2c2c;--soft:#9b7b7b;--r:18px;--rs:12px;}
+/* THEMES */
+:root,[data-theme="blue"]{
+  --bg:#f0f7fc;--rule:#cce8f4;--border:#b8ddf0;
+  --accent:#5aaccd;--accent2:#7ecbde;--accent-light:#d6eef7;
+  --text:#2c4a58;--soft:#7da8bc;
+  --band-from:#5aaccd;--band-to:#7ecbde;
+  --margin-line:rgba(224,122,122,.28);
+  --nav-bg:rgba(255,255,255,.95);
+  --card-bg:rgba(255,255,255,.88);--card-now:rgba(214,238,247,.75);
+  --imp-bg:rgba(255,253,231,.92);--imp-border:#f0d060;--imp-top:#f0c96a;--imp-text:#5a4a1a;--imp-label:#b8942a;
+}
+[data-theme="orange"]{
+  --bg:#fff8f0;--rule:#fdddb0;--border:#f5c07a;
+  --accent:#f07030;--accent2:#f09040;--accent-light:#fde8cc;
+  --text:#3a2010;--soft:#c0804a;
+  --band-from:#f07030;--band-to:#f5a030;
+  --margin-line:rgba(80,160,220,.35);
+  --nav-bg:rgba(255,252,245,.95);
+  --card-bg:rgba(255,255,255,.9);--card-now:rgba(253,232,204,.8);
+  --imp-bg:rgba(255,248,220,.95);--imp-border:#f5c07a;--imp-top:#f07030;--imp-text:#5a3010;--imp-label:#c05020;
+}
+[data-theme="pink"]{
+  --bg:#fef2f6;--rule:#f8d4e4;--border:#f0b8d0;
+  --accent:#e8709a;--accent2:#f0a0be;--accent-light:#fce0ec;
+  --text:#4a1830;--soft:#c080a0;
+  --band-from:#e8709a;--band-to:#f0a0be;
+  --margin-line:rgba(180,220,180,.5);
+  --nav-bg:rgba(255,245,250,.95);
+  --card-bg:rgba(255,255,255,.9);--card-now:rgba(252,224,236,.8);
+  --imp-bg:rgba(255,240,248,.95);--imp-border:#f0b8d0;--imp-top:#e8709a;--imp-text:#6a1840;--imp-label:#c05080;
+}
+[data-theme="dark"]{
+  --bg:#1a1a1e;--rule:#2a2a32;--border:#3a3a44;
+  --accent:#c8c8d8;--accent2:#a0a0b8;--accent-light:#2e2e38;
+  --text:#e0e0ec;--soft:#787890;
+  --band-from:#252530;--band-to:#1e1e28;
+  --margin-line:rgba(255,255,255,.07);
+  --nav-bg:rgba(20,20,26,.97);
+  --card-bg:rgba(30,30,38,.92);--card-now:rgba(44,44,58,.95);
+  --imp-bg:rgba(28,28,38,.95);--imp-border:#3a3a4a;--imp-top:#505062;--imp-text:#b0b0c8;--imp-label:#8888a8;
+}
+[data-theme="dark"] .cc.sun{color:#f08080!important;}
+[data-theme="dark"] .cc.sat{color:#a090e0!important;}
+[data-theme="dark"] .bnav{border-top-color:#3a3a44;}
+[data-theme="dark"] .imp-item{color:var(--imp-text);}
+[data-theme="dark"] .imp-item::before{color:var(--imp-label);}
+[data-theme="dark"] .imp-ttl{color:var(--imp-label);}
+:root{
+  --red:#e07a7a;--green:#6bbf8e;--yellow:#f0c96a;--purple:#9b8fd4;
+  --r:14px;--rs:10px;--shadow:0 2px 12px rgba(0,0,0,.10);--LH:28px;
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,249,245,.96);backdrop-filter:blur(12px);border-top:1.5px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 0 7px;gap:2px;border:none;background:none;cursor:pointer;font-family:inherit;color:var(--soft);font-size:9px;}
+
+body{
+  font-family:'Zen Maru Gothic',sans-serif;
+  color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  background-color:var(--bg);
+  background-image:linear-gradient(var(--rule) 1px,transparent 1px);
+  background-size:100% var(--LH);
+  background-attachment:scroll;
+  transition:background-color .3s,color .3s;
+}
+body::before{
+  content:'';position:fixed;left:22px;top:0;bottom:0;
+  width:1.5px;background:var(--margin-line);z-index:0;pointer-events:none;
+}
+
+/* NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(14px);border-top:2px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 0 7px;gap:2px;border:none;background:none;cursor:pointer;font-family:inherit;color:var(--soft);font-size:9px;transition:color .2s;}
 .nb.active{color:var(--accent);}
 .nb svg{width:21px;height:21px;}
-.screen{display:none;padding:0 0 76px;min-height:100vh;}
+
+/* SCREEN — グリッドの先頭をヘッダー下に合わせるため padding-top を LH の倍数に */
+.screen{display:none;padding:0 0 76px;min-height:100vh;position:relative;z-index:1;}
 .screen.active{display:block;}
-.sh{padding:52px 18px 10px;display:flex;justify-content:space-between;align-items:center;}
-.st{font-size:20px;font-weight:700;}
-.hbtn{width:36px;height:36px;border-radius:50%;background:var(--card);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;}
-.sec{font-size:11px;font-weight:700;color:var(--soft);padding:0 18px 7px;display:flex;align-items:center;gap:6px;}
+
+/* HEADER BAND — 高さを LH の倍数に固定して罫線がずれない */
+.screen-band{
+  background:linear-gradient(135deg,var(--band-from),var(--band-to));
+  padding:calc(env(safe-area-inset-top,0px) + 44px) 18px 12px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  position:relative;box-shadow:0 3px 0 rgba(0,0,0,.12);
+  min-height:calc(var(--LH)*4);
+  transition:background .3s;
+}
+.screen-band::after{
+  content:'';position:absolute;bottom:-6px;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(90deg,var(--accent2) 0 18px,transparent 18px 22px);
+  opacity:.4;
+}
+.band-title{font-size:20px;font-weight:700;color:#fff;line-height:var(--LH);}
+.band-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:#fff;flex-shrink:0;}
+
+/* セクションラベル — LH に合わせる */
+.sec{
+  font-size:11px;font-weight:700;color:var(--soft);
+  padding:0 18px 8px;
+  margin-top:12px;
+  display:flex;align-items:center;gap:6px;
+  line-height:var(--LH);
+}
+.sec span{background:linear-gradient(transparent 45%,rgba(90,172,205,.28) 45%);padding:0 2px;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* TODAY */
-.today-bar{margin:4px 14px 12px;background:linear-gradient(135deg,#fde8f0,#fef4e8);border-radius:var(–r);padding:13px 14px;display:flex;align-items:center;gap:10px;}
-.tnav{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.7);border:1.5px solid var(–border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;}
+/* ── TODAY ── */
+.today-bar{
+  margin:0 14px 0;
+  /* 高さを LH×2 にスナップ */
+  padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  background:var(--card-bg);
+  border-radius:var(--r);
+  border:1px solid var(--border);
+  border-top:4px solid var(--accent2);
+  box-shadow:var(--shadow);
+  /* 罫線を透かすため背景を半透明に */
+}
+.tnav{width:28px;height:28px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;color:var(--accent);}
 .tcenter{flex:1;text-align:center;}
-.td-lbl{font-size:10px;color:var(–soft);}
-.td-big{font-size:19px;font-weight:700;line-height:1.2;}
-.td-badge{display:inline-block;background:#fff;color:var(–accent);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;margin-top:3px;}
-.slist{padding:0 14px;display:flex;flex-direction:column;gap:7px;}
-.pc{background:var(–card);border-radius:var(–rs);border:1.5px solid var(–border);padding:11px 13px;display:flex;align-items:center;gap:11px;}
-.pn{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
-.psub{font-size:14px;font-weight:700;}
-.ptm{font-size:10px;color:var(–soft);margin-top:1px;}
-.pc-now{border-color:var(–accent);background:linear-gradient(135deg,#fff5f8,#fff);}
-.pc-now .pn{background:var(–accent);color:#fff;}
-.pc-done{opacity:.4;}
-.evlist{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
-.evc{background:var(–card);border-left:3px solid #a8d8ea;border-radius:0 var(–rs) var(–rs) 0;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;}
-.evn{font-size:13px;font-weight:700;}
-.evt{font-size:10px;color:var(–soft);}
-.evdel{background:none;border:none;color:var(–soft);font-size:15px;cursor:pointer;}
-.memo-wrap{margin:0 14px;background:var(–card);border:1.5px solid var(–border);border-radius:var(–rs);padding:11px 13px;}
-.mlbl{font-size:10px;font-weight:700;color:var(–soft);margin-bottom:5px;}
-.min{width:100%;border:none;background:none;resize:none;font-family:inherit;font-size:13px;color:var(–text);outline:none;min-height:65px;line-height:1.6;}
-.photo-row{padding:0 14px;display:flex;gap:7px;}
-.pslot{flex:1;aspect-ratio:1;background:var(–card);border:1.5px dashed var(–border);border-radius:var(–rs);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;}
-.pslot img{width:100%;height:100%;object-fit:cover;}
-.pp{font-size:20px;color:var(–border);}
+.td-lbl{font-size:10px;color:var(--soft);line-height:1.4;}
+.td-big{font-size:18px;font-weight:700;line-height:var(--LH);color:var(--text);}
+.td-badge{display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;}
+
+/* 時間割カード — 半透明白で罫線を透かしつつ読みやすく */
+.slist{padding:0 14px;display:flex;flex-direction:column;gap:0;}
+.pc{
+  background:var(--card-bg);
+  border-radius:0;
+  border:none;
+  border-left:4px solid var(--border);
+  border-bottom:1px solid var(--rule);
+  /* 高さを LH の倍数に — padding で調整 */
+  padding:11px 14px;
+  min-height:calc(var(--LH)*2);
+  display:flex;align-items:center;gap:10px;
+  position:relative;
+}
+.pc:first-child{border-radius:var(--rs) var(--rs) 0 0;border-top:1px solid var(--border);}
+.pc:last-child{border-radius:0 0 var(--rs) var(--rs);border-bottom:1px solid var(--border);}
+.pc-now{
+  border-left-color:var(--accent);
+  background:var(--card-now);
+}
+.pc-now .psub{
+  background:linear-gradient(transparent 55%,rgba(90,172,205,.35) 55%);
+  display:inline;
+}
+.pn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;background:var(--accent-light);color:var(--accent);}
+.pc-now .pn{background:var(--accent);color:#fff;}
+.psub{font-size:14px;font-weight:700;line-height:var(--LH);}
+.ptm{font-size:10px;color:var(--soft);line-height:1.3;}
+.pc-done{opacity:.38;}
+
+/* 予定カード */
+.evlist{padding:0 14px;display:flex;flex-direction:column;gap:9px;}
+.evc{
+  background:var(--card-bg);
+  border-left:4px solid var(--green);
+  border-radius:0 var(--rs) var(--rs) 0;
+  padding:11px 13px;
+  min-height:calc(var(--LH)*2);
+  display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 1px 4px rgba(90,172,205,.08);
+}
+.evn{font-size:13px;font-weight:700;line-height:var(--LH);}
+.evt{font-size:10px;color:var(--soft);}
+.evdel{background:none;border:none;color:var(--soft);font-size:14px;cursor:pointer;}
+
+/* メモ — 罫線を引き継ぐ。背景を透明にして body の罫線をそのまま使う */
+.memo-wrap{
+  margin:0 14px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:var(--rs);
+  padding:13px 15px 13px;
+  box-shadow:var(--shadow);
+}
+.mlbl{
+  font-size:10px;font-weight:700;color:var(--soft);
+  height:var(--LH);line-height:var(--LH);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:0;
+}
+/* textarea の line-height を body の罫線 28px に完全一致させる */
+.min{
+  width:100%;border:none;background:transparent;
+  resize:none;font-family:inherit;font-size:13px;
+  color:var(--text);outline:none;
+  min-height:calc(var(--LH)*3);
+  line-height:var(--LH);
+  padding:0;
+  display:block;
+}
+
+/* 写真 — テープ留め */
+.photo-row{padding:0 14px 0;display:flex;gap:8px;margin-top:14px;}
+.pslot{
+  flex:1;aspect-ratio:1;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;overflow:visible;position:relative;
+  box-shadow:2px 3px 8px rgba(90,172,205,.15);
+}
+.pslot img{width:100%;height:100%;object-fit:cover;border-radius:3px;}
+.pp{font-size:18px;color:var(--border);}
 .pslot input{display:none;}
-.pdel{position:absolute;top:3px;right:3px;background:rgba(61,44,44,.6);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;}
+.pdel{position:absolute;top:-6px;right:-6px;background:var(--red);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2;}
 .pslot:hover .pdel,.pslot:active .pdel{display:flex;}
+.pslot::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:58%;height:13px;background:rgba(90,172,205,.42);border-radius:2px;z-index:1;pointer-events:none;}
+.pslot:nth-child(2n)::before{background:rgba(107,191,142,.44);}
+.pslot:nth-child(3n)::before{background:rgba(240,201,106,.52);}
+.pslot:nth-child(4n)::before{background:rgba(155,143,212,.44);}
 
 /* CALENDAR */
-.cal-top{padding:50px 14px 6px;display:flex;align-items:center;justify-content:center;gap:14px;}
-.cal-month{font-size:22px;font-weight:700;}
-.carrow{width:32px;height:32px;border-radius:50%;background:var(–card);border:1.5px solid var(–border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;}
-.cal-dh{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px;text-align:center;font-size:10px;color:var(–soft);font-weight:700;margin-bottom:3px;}
+.cal-top{padding:50px 14px 6px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.cal-month{font-size:21px;font-weight:700;line-height:var(--LH);}
+.carrow{width:30px;height:30px;border-radius:50%;background:var(--card-bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--accent);}
+.cal-dh{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px;text-align:center;font-size:10px;color:var(--soft);font-weight:700;line-height:var(--LH);}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px;gap:2px;}
 .cc{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;font-size:12px;position:relative;}
-.cc.today{background:var(–accent);color:#fff;font-weight:700;}
-.cc.selected{background:#ffd6a5;color:var(–text);font-weight:700;}
-.cc.has-event::after{content:’’;position:absolute;bottom:2px;width:3px;height:3px;border-radius:50%;background:#a8d8ea;}
+.cc.today{background:var(--accent);color:#fff;font-weight:700;}
+.cc.selected{background:var(--accent-light);color:var(--text);font-weight:700;outline:2px solid var(--accent);outline-offset:0;}
+.cc.has-event::after{content:'';position:absolute;bottom:2px;width:3px;height:3px;border-radius:50%;background:var(--green);}
 .cc.today.has-event::after{background:#fff;}
-.cc.sp-day::before{content:‘★’;position:absolute;top:-1px;right:-1px;font-size:7px;color:#ffd6a5;}
-.cc.sun{color:#e08080;}
-.cc.sat{color:#8080e0;}
-.imp-box{margin:10px 14px 0;background:linear-gradient(135deg,#fff0f5,#fef9f0);border:1.5px solid #ffd6a5;border-radius:var(–rs);padding:11px 13px;}
-.imp-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.imp-ttl{font-size:11px;font-weight:700;color:var(–soft);}
-.imp-edit{font-size:11px;color:var(–accent);border:none;background:none;font-family:inherit;cursor:pointer;font-weight:700;}
-.imp-item{font-size:12px;display:flex;gap:5px;align-items:flex-start;margin-bottom:3px;}
-.imp-item::before{content:‘●’;color:var(–accent);font-size:7px;margin-top:4px;flex-shrink:0;}
-.cal-detail-wrap{margin:10px 14px 0;}
-.cd{background:var(–card);border:1.5px solid var(–border);border-radius:var(–r);padding:14px;}
-.cd-hdr{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
-.cd-goto{font-size:11px;color:var(–accent);border:none;background:none;font-family:inherit;cursor:pointer;font-weight:700;}
-.cd-row{display:flex;gap:7px;font-size:12px;align-items:center;margin-bottom:3px;}
-.cd-num{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;background:var(–bg);color:var(–soft);}
-.add-ev-btn{display:flex;align-items:center;justify-content:center;gap:5px;margin:8px 14px 0;background:var(–card);border:1.5px dashed var(–border);border-radius:var(–rs);padding:11px;cursor:pointer;font-family:inherit;font-size:12px;color:var(–soft);width:calc(100% - 28px);}
+.cc.sp-day::before{content:'★';position:absolute;top:-1px;right:-1px;font-size:7px;color:var(--yellow);}
+.cc.sun{color:var(--red);}
+.cc.sat{color:var(--purple);}
+
+/* 付箋 */
+.imp-box{margin:8px 14px 0;background:var(--imp-bg);border:1px solid var(--imp-border);border-radius:var(--rs);padding:8px 12px;position:relative;box-shadow:2px 3px 0 rgba(0,0,0,.08);}
+.imp-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--imp-top);border-radius:var(--rs) var(--rs) 0 0;}
+.imp-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.imp-ttl{font-size:11px;font-weight:700;color:var(--imp-label);}
+.imp-edit{font-size:11px;color:var(--accent);border:none;background:none;font-family:inherit;cursor:pointer;font-weight:700;}
+.imp-item{font-size:12px;display:flex;gap:5px;align-items:flex-start;margin-bottom:2px;color:var(--imp-text);line-height:var(--LH);}
+.imp-item::before{content:'✓';color:var(--imp-label);font-size:10px;line-height:var(--LH);flex-shrink:0;}
+
+.cal-detail-wrap{margin:8px 14px 0;}
+.cd{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r);padding:12px;box-shadow:var(--shadow);}
+.cd-hdr{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;line-height:var(--LH);}
+.cd-goto{font-size:11px;color:var(--accent);border:none;background:none;font-family:inherit;cursor:pointer;font-weight:700;}
+.cd-row{display:flex;gap:7px;font-size:12px;align-items:center;line-height:var(--LH);}
+.cd-num{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;background:var(--accent-light);color:var(--accent);}
+.add-ev-btn{display:flex;align-items:center;justify-content:center;gap:5px;margin:8px 14px 0;background:rgba(255,255,255,.8);border:1.5px dashed var(--border);border-radius:var(--rs);padding:10px;cursor:pointer;font-family:inherit;font-size:12px;color:var(--soft);width:calc(100% - 28px);}
 
 /* TIMETABLE */
 .tt-top{padding:50px 14px 8px;display:flex;justify-content:space-between;align-items:center;}
-.day-tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:0 14px 10px;}
+.day-tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:0 14px 8px;}
 .day-tabs::-webkit-scrollbar{display:none;}
-.dtab{flex-shrink:0;padding:7px 13px;border-radius:20px;border:1.5px solid var(–border);background:var(–card);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;color:var(–soft);}
-.dtab.active{background:var(–accent);border-color:var(–accent);color:#fff;}
-.tt-grid{padding:0 14px;display:flex;flex-direction:column;gap:7px;}
-.ttc{background:var(–card);border:1.5px solid var(–border);border-radius:var(–rs);padding:12px 14px;display:flex;gap:12px;align-items:center;}
-.tt-num{font-size:19px;font-weight:700;color:var(–border);width:24px;text-align:center;flex-shrink:0;}
-.tt-subj{font-size:15px;font-weight:700;display:inline-block;padding:3px 10px;border-radius:8px;}
-.tt-time{font-size:10px;color:var(–soft);margin-top:2px;}
-.custom-list{padding:0 14px;display:flex;flex-direction:column;gap:7px;}
-.ctc{background:var(–card);border:1.5px solid var(–border);border-radius:var(–rs);padding:11px 13px;display:flex;justify-content:space-between;align-items:center;}
-.ct-name{font-size:13px;font-weight:700;}
-.ct-days{font-size:10px;color:var(–soft);margin-top:2px;}
-.ctdel{background:none;border:none;color:var(–soft);font-size:16px;cursor:pointer;}
+.dtab{flex-shrink:0;padding:6px 14px;border-radius:20px;border:2px solid var(--border);background:rgba(255,255,255,.8);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;color:var(--soft);}
+.dtab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.tt-grid{padding:0 14px;display:flex;flex-direction:column;gap:0;}
+.ttc{background:var(--card-bg);border:none;border-bottom:1px solid var(--rule);border-left:4px solid var(--accent-light);padding:6px 13px;min-height:calc(var(--LH)*2);display:flex;gap:11px;align-items:center;}
+.ttc:first-child{border-radius:var(--rs) var(--rs) 0 0;border-top:1px solid var(--border);}
+.ttc:last-child{border-radius:0 0 var(--rs) var(--rs);border-bottom:1px solid var(--border);}
+.tt-num{font-size:18px;font-weight:700;color:var(--border);width:22px;text-align:center;flex-shrink:0;line-height:var(--LH);}
+.tt-subj{font-size:14px;font-weight:700;display:inline-block;padding:2px 10px;border-radius:6px;line-height:calc(var(--LH) - 4px);}
+.tt-time{font-size:10px;color:var(--soft);margin-top:1px;}
+.custom-list{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
+.ctc{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;justify-content:space-between;align-items:center;min-height:calc(var(--LH)*2);}
+.ct-name{font-size:13px;font-weight:700;line-height:var(--LH);}
+.ct-days{font-size:10px;color:var(--soft);}
+.ctdel{background:none;border:none;color:var(--soft);font-size:15px;cursor:pointer;}
 
 /* YEARBOOK */
-.yr-hdr{padding:50px 18px 12px;font-size:24px;font-weight:700;}
-.yr-list{padding:0 14px;display:flex;flex-direction:column;gap:9px;}
-.mr{background:var(–card);border:1.5px solid var(–border);border-radius:var(–rs);padding:11px 13px;display:flex;gap:10px;align-items:center;cursor:pointer;}
-.mr.cur{border-color:var(–accent);background:linear-gradient(135deg,#fff5f8,#fff);}
-.mlbl{font-size:16px;font-weight:700;width:32px;flex-shrink:0;color:var(–soft);}
-.mr.cur .mlbl{color:var(–accent);}
+.yr-hdr{padding:50px 18px 8px;font-size:22px;font-weight:700;line-height:var(--LH);}
+.yr-list{padding:0 14px;display:flex;flex-direction:column;gap:8px;}
+.mr{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:9px 12px;display:flex;gap:10px;align-items:center;cursor:pointer;box-shadow:var(--shadow);border-left:4px solid var(--border);min-height:calc(var(--LH)*2);}
+.mr.cur{border-left-color:var(--accent);background:rgba(234,246,252,.92);}
+.mlbl{font-size:15px;font-weight:700;width:30px;flex-shrink:0;color:var(--soft);line-height:var(--LH);}
+.mr.cur .mlbl{color:var(--accent);}
 .msumm{flex:1;}
-.mmain{font-size:12px;font-weight:700;}
-.msub{font-size:10px;color:var(–soft);margin-top:1px;}
-.mphoto{width:50px;height:50px;border-radius:10px;background:var(–bg);border:1.5px dashed var(–border);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;cursor:pointer;position:relative;}
-.mphoto img{width:100%;height:100%;object-fit:cover;}
+.mmain{font-size:12px;font-weight:700;line-height:var(--LH);}
+.msub{font-size:10px;color:var(--soft);}
+.mphoto{width:52px;height:52px;border-radius:4px;background:rgba(240,247,252,.9);border:1px solid var(--border);overflow:visible;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;cursor:pointer;position:relative;box-shadow:2px 3px 6px rgba(90,172,205,.15);margin-top:6px;}
+.mphoto img{width:100%;height:100%;object-fit:cover;border-radius:3px;}
 .mphoto input{display:none;}
-.mphoto-ov{position:absolute;inset:0;background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:0;}
+.mphoto::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:55%;height:12px;background:rgba(90,172,205,.42);border-radius:2px;pointer-events:none;z-index:1;}
+.mr:nth-child(2n) .mphoto::before{background:rgba(107,191,142,.42);}
+.mr:nth-child(3n) .mphoto::before{background:rgba(240,201,106,.52);}
+.mphoto-ov{position:absolute;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:0;border-radius:3px;}
 .mphoto:active .mphoto-ov{opacity:1;}
-.mr-edit{background:none;border:none;font-size:13px;cursor:pointer;padding:4px;flex-shrink:0;}
+.mr-edit{background:none;border:none;font-size:13px;cursor:pointer;padding:4px;flex-shrink:0;color:var(--soft);}
 
 /* SETTINGS */
-.slist-s{padding:0 14px;display:flex;flex-direction:column;gap:7px;}
-.sit{background:var(–card);border:1.5px solid var(–border);border-radius:var(–rs);padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.si-icon{font-size:19px;width:28px;text-align:center;}
-.si-lbl{flex:1;font-size:13px;font-weight:700;}
-.si-arrow{color:var(–soft);font-size:12px;}
-.toggle{width:40px;height:24px;background:var(–border);border-radius:12px;position:relative;cursor:pointer;flex-shrink:0;}
-.toggle.on{background:var(–accent);}
-.toggle::after{content:’’;position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
-.toggle.on::after{left:19px;}
-
-/* DAY DETAIL */
-#screen-daydetail .sh{padding-top:52px;}
+.slist-s{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
+.sit{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;min-height:calc(var(--LH)*2);}
+.si-icon{font-size:18px;width:27px;text-align:center;}
+.si-lbl{flex:1;font-size:13px;font-weight:700;line-height:var(--LH);}
+.si-arrow{color:var(--soft);font-size:12px;}
+.toggle{width:40px;height:23px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;flex-shrink:0;transition:background .2s;}
+.toggle.on{background:var(--accent);}
+.toggle::after{content:'';position:absolute;width:17px;height:17px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+.toggle.on::after{left:20px;}
 
 /* MODALS */
-.moverlay{display:none;position:fixed;inset:0;background:rgba(61,44,44,.3);backdrop-filter:blur(4px);z-index:200;align-items:flex-end;justify-content:center;}
+.moverlay{display:none;position:fixed;inset:0;background:rgba(44,74,88,.3);backdrop-filter:blur(4px);z-index:200;align-items:flex-end;justify-content:center;}
 .moverlay.open{display:flex;}
-.modal{width:100%;max-width:480px;background:var(–card);border-radius:var(–r) var(–r) 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));max-height:85vh;overflow-y:auto;}
-.mhandle{width:32px;height:4px;background:var(–border);border-radius:2px;margin:0 auto 14px;}
-.mtitle{font-size:16px;font-weight:700;margin-bottom:13px;}
+.modal{width:100%;max-width:480px;background:var(--card-bg, #fff);border-radius:var(--r) var(--r) 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));max-height:85vh;overflow-y:auto;border-top:4px solid var(--accent2);}
+[data-theme="dark"] .modal{background:#22222e;}
+[data-theme="dark"] .fi{background:#1a1a26;border-color:#3a3a4a;color:#e0e0ec;}
+[data-theme="dark"] .btn-s{background:#1a1a26;border-color:#3a3a4a;color:#9090a8;}
+[data-theme="dark"] .moverlay{background:rgba(0,0,0,.5);}
+.mhandle{width:32px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 13px;}
+.mtitle{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--text);}
 .fg{margin-bottom:11px;}
-.fl{font-size:11px;font-weight:700;color:var(–soft);margin-bottom:5px;display:block;}
-.fi{width:100%;padding:9px 12px;border:1.5px solid var(–border);border-radius:var(–rs);background:var(–bg);font-family:inherit;font-size:13px;color:var(–text);outline:none;}
-.fi:focus{border-color:var(–accent);}
+.fl{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:5px;display:block;}
+.fi{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--rs);background:var(--bg);font-family:inherit;font-size:13px;color:var(--text);outline:none;}
+.fi:focus{border-color:var(--accent);}
 .frow{display:flex;gap:7px;}
-.btn-p{width:100%;padding:12px;background:var(–accent);border:none;border-radius:var(–rs);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;}
-.btn-s{width:100%;padding:10px;background:var(–bg);border:1.5px solid var(–border);border-radius:var(–rs);color:var(–soft);font-family:inherit;font-size:13px;cursor:pointer;margin-top:5px;}
+.btn-p{width:100%;padding:12px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;}
+.btn-s{width:100%;padding:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);color:var(--soft);font-family:inherit;font-size:13px;cursor:pointer;margin-top:5px;}
 
-/* subject colors */
-.c-pg{background:#fde8ee;color:#d4607e;}
-.c-word{background:#e8f4fd;color:#3a7fbf;}
-.c-manner{background:#e8fdf0;color:#2e9e5c;}
-.c-ai{background:#f0e8fd;color:#7a4fbf;}
-.c-pf{background:#fdf4e8;color:#bf8a30;}
-.c-db{background:#e8f8fd;color:#2a9bb5;}
-.c-design{background:#fde8f8;color:#bf40a0;}
-.c-job{background:#f8fde8;color:#7ab530;}
-.c-custom{background:#f0f0f0;color:#555;}
+.c-pg{background:#fde8ee;color:#c05070;}
+.c-word{background:#dff0fb;color:#2f7ab0;}
+.c-manner{background:#dff7ec;color:#2a9060;}
+.c-ai{background:#ede8fb;color:#6a50b8;}
+.c-pf{background:#fdf3e0;color:#b07820;}
+.c-db{background:#dcf3fb;color:#1e8aaa;}
+.c-design{background:#fbe8f8;color:#a830a0;}
+.c-job{background:#eef8dc;color:#6aa018;}
+.c-custom{background:#eef2f4;color:#4a6a78;}
 
-.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:#3d2c2c;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+#screen-daydetail .sh{padding-top:52px;}
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
-</style>
 
+/* ══ THEME: GRID（グリッド画像背景・シンプル） ══ */
+[data-theme="grid"]{
+  --bg:transparent;
+  --rule:transparent;
+  --border:rgba(180,180,180,.35);
+  --accent:#444;
+  --accent2:#888;
+  --accent-light:rgba(200,200,200,.25);
+  --text:#222;
+  --soft:#888;
+  --band-from:#fff;
+  --band-to:#f4f4f4;
+  --margin-line:transparent;
+  --nav-bg:rgba(255,255,255,.9);
+  --card-bg:rgba(255,255,255,.78);
+  --card-now:rgba(240,240,240,.85);
+  --imp-bg:rgba(255,255,255,.82);
+  --imp-border:rgba(180,180,180,.4);
+  --imp-top:#bbb;
+  --imp-text:#333;
+  --imp-label:#888;
+}
+[data-theme="grid"] body{
+  background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzOTAgODQ0IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBzbGljZSI+CiAgPHJlY3Qgd2lkdGg9IjM5MCIgaGVpZ2h0PSI4NDQiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTSAwLjAsMC45IEwgOS44LDEuNiBMIDE5LjUsMi4zIEwgMjkuMiwzLjAgTCAzOS4wLDMuNSBMIDQ4LjgsMy45IEwgNTguNSw0LjEgTCA2OC4yLDQuMiBMIDc4LjAsNC4yIEwgODcuOCw0LjAgTCA5Ny41LDMuNyBMIDEwNy4yLDMuMyBMIDExNy4wLDIuOCBMIDEyNi44LDIuMiBMIDEzNi41LDEuNiBMIDE0Ni4yLDEuMSBMIDE1Ni4wLDAuNSBMIDE2NS44LC0wLjAgTCAxNzUuNSwtMC40IEwgMTg1LjIsLTAuOCBMIDE5NS4wLC0xLjEgTCAyMDQuOCwtMS40IEwgMjE0LjUsLTEuNSBMIDIyNC4yLC0xLjcgTCAyMzQuMCwtMS44IEwgMjQzLjgsLTEuOSBMIDI1My41LC0yLjAgTCAyNjMuMiwtMi4xIEwgMjczLjAsLTIuMiBMIDI4Mi44LC0yLjMgTCAyOTIuNSwtMi40IEwgMzAyLjIsLTIuNiBMIDMxMi4wLC0yLjggTCAzMjEuOCwtMi45IEwgMzMxLjUsLTMuMCBMIDM0MS4yLC0zLjAgTCAzNTEuMCwtMy4wIEwgMzYwLjgsLTIuOSBMIDM3MC41LC0yLjcgTCAzODAuMiwtMi40IEwgMzkwLjAsLTEuOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDAuMCw0MS4yIEwgOS44LDQyLjQgTCAxOS41LDQzLjYgTCAyOS4yLDQ0LjUgTCAzOS4wLDQ1LjMgTCA0OC44LDQ1LjggTCA1OC41LDQ2LjAgTCA2OC4yLDQ2LjAgTCA3OC4wLDQ1LjYgTCA4Ny44LDQ1LjEgTCA5Ny41LDQ0LjMgTCAxMDcuMiw0My4zIEwgMTE3LjAsNDIuMyBMIDEyNi44LDQxLjEgTCAxMzYuNSw0MC4wIEwgMTQ2LjIsMzguOSBMIDE1Ni4wLDM3LjggTCAxNjUuOCwzNi45IEwgMTc1LjUsMzYuMSBMIDE4NS4yLDM1LjUgTCAxOTUuMCwzNS4wIEwgMjA0LjgsMzQuNyBMIDIxNC41LDM0LjQgTCAyMjQuMiwzNC4zIEwgMjM0LjAsMzQuMiBMIDI0My44LDM0LjIgTCAyNTMuNSwzNC4yIEwgMjYzLjIsMzQuMSBMIDI3My4wLDM0LjEgTCAyODIuOCwzNC4wIEwgMjkyLjUsMzMuOSBMIDMwMi4yLDMzLjggTCAzMTIuMCwzMy42IEwgMzIxLjgsMzMuNiBMIDMzMS41LDMzLjYgTCAzNDEuMiwzMy42IEwgMzUxLjAsMzMuOCBMIDM2MC44LDM0LjIgTCAzNzAuNSwzNC43IEwgMzgwLjIsMzUuNCBMIDM5MC4wLDM2LjMiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAwLjAsODIuMiBMIDkuOCw4My44IEwgMTkuNSw4NS4yIEwgMjkuMiw4Ni40IEwgMzkuMCw4Ny4xIEwgNDguOCw4Ny41IEwgNTguNSw4Ny41IEwgNjguMiw4Ny4xIEwgNzguMCw4Ni4zIEwgODcuOCw4NS4yIEwgOTcuNSw4My44IEwgMTA3LjIsODIuMiBMIDExNy4wLDgwLjQgTCAxMjYuOCw3OC43IEwgMTM2LjUsNzYuOSBMIDE0Ni4yLDc1LjMgTCAxNTYuMCw3My44IEwgMTY1LjgsNzIuNiBMIDE3NS41LDcxLjYgTCAxODUuMiw3MC44IEwgMTk1LjAsNzAuMiBMIDIwNC44LDY5LjkgTCAyMTQuNSw2OS44IEwgMjI0LjIsNjkuOCBMIDIzNC4wLDY5LjkgTCAyNDMuOCw3MC4xIEwgMjUzLjUsNzAuMyBMIDI2My4yLDcwLjQgTCAyNzMuMCw3MC41IEwgMjgyLjgsNzAuNiBMIDI5Mi41LDcwLjcgTCAzMDIuMiw3MC43IEwgMzEyLjAsNzAuOCBMIDMyMS44LDcwLjkgTCAzMzEuNSw3MS4xIEwgMzQxLjIsNzEuNCBMIDM1MS4wLDcxLjkgTCAzNjAuOCw3Mi41IEwgMzcwLjUsNzMuNCBMIDM4MC4yLDc0LjUgTCAzOTAuMCw3NS44IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDEyMy42IEwgOS44LDEyNS40IEwgMTkuNSwxMjYuOSBMIDI5LjIsMTI4LjAgTCAzOS4wLDEyOC42IEwgNDguOCwxMjguNyBMIDU4LjUsMTI4LjIgTCA2OC4yLDEyNy4yIEwgNzguMCwxMjUuOCBMIDg3LjgsMTI0LjAgTCA5Ny41LDEyMS45IEwgMTA3LjIsMTE5LjYgTCAxMTcuMCwxMTcuMiBMIDEyNi44LDExNC44IEwgMTM2LjUsMTEyLjUgTCAxNDYuMiwxMTAuNSBMIDE1Ni4wLDEwOC43IEwgMTY1LjgsMTA3LjIgTCAxNzUuNSwxMDYuMSBMIDE4NS4yLDEwNS40IEwgMTk1LjAsMTA1LjAgTCAyMDQuOCwxMDQuOCBMIDIxNC41LDEwNS4wIEwgMjI0LjIsMTA1LjMgTCAyMzQuMCwxMDUuNyBMIDI0My44LDEwNi4zIEwgMjUzLjUsMTA2LjggTCAyNjMuMiwxMDcuMyBMIDI3My4wLDEwNy43IEwgMjgyLjgsMTA4LjEgTCAyOTIuNSwxMDguNCBMIDMwMi4yLDEwOC43IEwgMzEyLjAsMTA5LjAgTCAzMjEuOCwxMDkuNCBMIDMzMS41LDEwOS44IEwgMzQxLjIsMTEwLjQgTCAzNTEuMCwxMTEuMiBMIDM2MC44LDExMi4yIEwgMzcwLjUsMTEzLjQgTCAzODAuMiwxMTQuOSBMIDM5MC4wLDExNi41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDE2NS4wIEwgOS44LDE2Ni44IEwgMTkuNSwxNjguMiBMIDI5LjIsMTY5LjAgTCAzOS4wLDE2OS4yIEwgNDguOCwxNjguOCBMIDU4LjUsMTY3LjggTCA2OC4yLDE2Ni4xIEwgNzguMCwxNjQuMCBMIDg3LjgsMTYxLjUgTCA5Ny41LDE1OC42IEwgMTA3LjIsMTU1LjYgTCAxMTcuMCwxNTIuNiBMIDEyNi44LDE0OS43IEwgMTM2LjUsMTQ3LjEgTCAxNDYuMiwxNDQuNyBMIDE1Ni4wLDE0Mi44IEwgMTY1LjgsMTQxLjMgTCAxNzUuNSwxNDAuMyBMIDE4NS4yLDEzOS44IEwgMTk1LjAsMTM5LjcgTCAyMDQuOCwxMzkuOSBMIDIxNC41LDE0MC41IEwgMjI0LjIsMTQxLjMgTCAyMzQuMCwxNDIuMiBMIDI0My44LDE0My4yIEwgMjUzLjUsMTQ0LjIgTCAyNjMuMiwxNDUuMSBMIDI3My4wLDE0Ni4wIEwgMjgyLjgsMTQ2LjcgTCAyOTIuNSwxNDcuNCBMIDMwMi4yLDE0OC4wIEwgMzEyLjAsMTQ4LjUgTCAzMjEuOCwxNDkuMiBMIDMzMS41LDE0OS45IEwgMzQxLjIsMTUwLjcgTCAzNTEuMCwxNTEuOCBMIDM2MC44LDE1My4wIEwgMzcwLjUsMTU0LjUgTCAzODAuMiwxNTYuMyBMIDM5MC4wLDE1OC4yIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDIwNi4wIEwgOS44LDIwNy43IEwgMTkuNSwyMDguNyBMIDI5LjIsMjA5LjEgTCAzOS4wLDIwOC44IEwgNDguOCwyMDcuOCBMIDU4LjUsMjA2LjAgTCA2OC4yLDIwMy43IEwgNzguMCwyMDAuOCBMIDg3LjgsMTk3LjYgTCA5Ny41LDE5NC4xIEwgMTA3LjIsMTkwLjUgTCAxMTcuMCwxODcuMCBMIDEyNi44LDE4My44IEwgMTM2LjUsMTgwLjkgTCAxNDYuMiwxNzguNSBMIDE1Ni4wLDE3Ni42IEwgMTY1LjgsMTc1LjMgTCAxNzUuNSwxNzQuNyBMIDE4NS4yLDE3NC41IEwgMTk1LjAsMTc0LjkgTCAyMDQuOCwxNzUuOCBMIDIxNC41LDE3Ni45IEwgMjI0LjIsMTc4LjMgTCAyMzQuMCwxNzkuOSBMIDI0My44LDE4MS40IEwgMjUzLjUsMTgyLjkgTCAyNjMuMiwxODQuMyBMIDI3My4wLDE4NS42IEwgMjgyLjgsMTg2LjcgTCAyOTIuNSwxODcuNyBMIDMwMi4yLDE4OC41IEwgMzEyLjAsMTg5LjQgTCAzMjEuOCwxOTAuMiBMIDMzMS41LDE5MS4xIEwgMzQxLjIsMTkyLjEgTCAzNTEuMCwxOTMuNCBMIDM2MC44LDE5NC44IEwgMzcwLjUsMTk2LjQgTCAzODAuMiwxOTguMyBMIDM5MC4wLDIwMC4zIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDI0Ni40IEwgOS44LDI0Ny43IEwgMTkuNSwyNDguMyBMIDI5LjIsMjQ4LjEgTCAzOS4wLDI0Ny4yIEwgNDguOCwyNDUuNSBMIDU4LjUsMjQzLjAgTCA2OC4yLDI0MC4wIEwgNzguMCwyMzYuNCBMIDg3LjgsMjMyLjUgTCA5Ny41LDIyOC41IEwgMTA3LjIsMjI0LjUgTCAxMTcuMCwyMjAuOCBMIDEyNi44LDIxNy40IEwgMTM2LjUsMjE0LjUgTCAxNDYuMiwyMTIuMyBMIDE1Ni4wLDIxMC43IEwgMTY1LjgsMjA5LjggTCAxNzUuNSwyMDkuNyBMIDE4NS4yLDIxMC4yIEwgMTk1LjAsMjExLjMgTCAyMDQuOCwyMTIuOCBMIDIxNC41LDIxNC42IEwgMjI0LjIsMjE2LjcgTCAyMzQuMCwyMTguOSBMIDI0My44LDIyMS4wIEwgMjUzLjUsMjIzLjEgTCAyNjMuMiwyMjQuOSBMIDI3My4wLDIyNi42IEwgMjgyLjgsMjI4LjAgTCAyOTIuNSwyMjkuMiBMIDMwMi4yLDIzMC4zIEwgMzEyLjAsMjMxLjMgTCAzMjEuOCwyMzIuMiBMIDMzMS41LDIzMy4yIEwgMzQxLjIsMjM0LjMgTCAzNTEuMCwyMzUuNSBMIDM2MC44LDIzNy4wIEwgMzcwLjUsMjM4LjYgTCAzODAuMiwyNDAuMyBMIDM5MC4wLDI0Mi4yIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDI4NS45IEwgOS44LDI4Ni44IEwgMTkuNSwyODYuOCBMIDI5LjIsMjg2LjAgTCAzOS4wLDI4NC40IEwgNDguOCwyODIuMCBMIDU4LjUsMjc4LjkgTCA2OC4yLDI3NS4yIEwgNzguMCwyNzEuMSBMIDg3LjgsMjY2LjggTCA5Ny41LDI2Mi40IEwgMTA3LjIsMjU4LjIgTCAxMTcuMCwyNTQuNCBMIDEyNi44LDI1MS4xIEwgMTM2LjUsMjQ4LjUgTCAxNDYuMiwyNDYuNiBMIDE1Ni4wLDI0NS42IEwgMTY1LjgsMjQ1LjMgTCAxNzUuNSwyNDUuOSBMIDE4NS4yLDI0Ny4xIEwgMTk1LjAsMjQ5LjAgTCAyMDQuOCwyNTEuMyBMIDIxNC41LDI1My45IEwgMjI0LjIsMjU2LjYgTCAyMzQuMCwyNTkuNCBMIDI0My44LDI2Mi4xIEwgMjUzLjUsMjY0LjYgTCAyNjMuMiwyNjYuOCBMIDI3My4wLDI2OC43IEwgMjgyLjgsMjcwLjQgTCAyOTIuNSwyNzEuNyBMIDMwMi4yLDI3Mi45IEwgMzEyLjAsMjczLjggTCAzMjEuOCwyNzQuNyBMIDMzMS41LDI3NS42IEwgMzQxLjIsMjc2LjYgTCAzNTEuMCwyNzcuNyBMIDM2MC44LDI3OS4wIEwgMzcwLjUsMjgwLjQgTCAzODAuMiwyODEuOSBMIDM5MC4wLDI4My41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDMyNC42IEwgOS44LDMyNC45IEwgMTkuNSwzMjQuMyBMIDI5LjIsMzIyLjkgTCAzOS4wLDMyMC42IEwgNDguOCwzMTcuNiBMIDU4LjUsMzEzLjkgTCA2OC4yLDMwOS43IEwgNzguMCwzMDUuMyBMIDg3LjgsMzAwLjcgTCA5Ny41LDI5Ni4yIEwgMTA3LjIsMjkyLjAgTCAxMTcuMCwyODguNCBMIDEyNi44LDI4NS41IEwgMTM2LjUsMjgzLjMgTCAxNDYuMiwyODIuMCBMIDE1Ni4wLDI4MS43IEwgMTY1LjgsMjgyLjIgTCAxNzUuNSwyODMuNiBMIDE4NS4yLDI4NS42IEwgMTk1LjAsMjg4LjMgTCAyMDQuOCwyOTEuMyBMIDIxNC41LDI5NC42IEwgMjI0LjIsMjk4LjAgTCAyMzQuMCwzMDEuMyBMIDI0My44LDMwNC41IEwgMjUzLjUsMzA3LjMgTCAyNjMuMiwzMDkuNyBMIDI3My4wLDMxMS44IEwgMjgyLjgsMzEzLjQgTCAyOTIuNSwzMTQuNyBMIDMwMi4yLDMxNS43IEwgMzEyLjAsMzE2LjYgTCAzMjEuOCwzMTcuMyBMIDMzMS41LDMxNy45IEwgMzQxLjIsMzE4LjYgTCAzNTEuMCwzMTkuNCBMIDM2MC44LDMyMC40IEwgMzcwLjUsMzIxLjQgTCAzODAuMiwzMjIuNiBMIDM5MC4wLDMyMy43IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDM2Mi40IEwgOS44LDM2Mi4xIEwgMTkuNSwzNjAuOSBMIDI5LjIsMzU4LjkgTCAzOS4wLDM1Ni4xIEwgNDguOCwzNTIuNiBMIDU4LjUsMzQ4LjUgTCA2OC4yLDM0NC4wIEwgNzguMCwzMzkuMyBMIDg3LjgsMzM0LjcgTCA5Ny41LDMzMC40IEwgMTA3LjIsMzI2LjUgTCAxMTcuMCwzMjMuMyBMIDEyNi44LDMyMC45IEwgMTM2LjUsMzE5LjQgTCAxNDYuMiwzMTguOCBMIDE1Ni4wLDMxOS4zIEwgMTY1LjgsMzIwLjcgTCAxNzUuNSwzMjIuOCBMIDE4NS4yLDMyNS43IEwgMTk1LjAsMzI5LjEgTCAyMDQuOCwzMzIuOSBMIDIxNC41LDMzNi44IEwgMjI0LjIsMzQwLjYgTCAyMzQuMCwzNDQuMyBMIDI0My44LDM0Ny43IEwgMjUzLjUsMzUwLjYgTCAyNjMuMiwzNTMuMSBMIDI3My4wLDM1NS4xIEwgMjgyLjgsMzU2LjYgTCAyOTIuNSwzNTcuNyBMIDMwMi4yLDM1OC40IEwgMzEyLjAsMzU4LjkgTCAzMjEuOCwzNTkuMiBMIDMzMS41LDM1OS41IEwgMzQxLjIsMzU5LjggTCAzNTEuMCwzNjAuMSBMIDM2MC44LDM2MC42IEwgMzcwLjUsMzYxLjIgTCAzODAuMiwzNjEuOCBMIDM5MC4wLDM2Mi40IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDM5OS40IEwgOS44LDM5OC42IEwgMTkuNSwzOTYuOSBMIDI5LjIsMzk0LjQgTCAzOS4wLDM5MS4yIEwgNDguOCwzODcuMyBMIDU4LjUsMzgzLjAgTCA2OC4yLDM3OC40IEwgNzguMCwzNzMuOCBMIDg3LjgsMzY5LjMgTCA5Ny41LDM2NS4zIEwgMTA3LjIsMzYxLjkgTCAxMTcuMCwzNTkuMyBMIDEyNi44LDM1Ny42IEwgMTM2LjUsMzU2LjkgTCAxNDYuMiwzNTcuMiBMIDE1Ni4wLDM1OC41IEwgMTY1LjgsMzYwLjcgTCAxNzUuNSwzNjMuNyBMIDE4NS4yLDM2Ny4zIEwgMTk1LjAsMzcxLjMgTCAyMDQuOCwzNzUuNiBMIDIxNC41LDM3OS45IEwgMjI0LjIsMzg0LjEgTCAyMzQuMCwzODcuOSBMIDI0My44LDM5MS4zIEwgMjUzLjUsMzk0LjIgTCAyNjMuMiwzOTYuNSBMIDI3My4wLDM5OC4yIEwgMjgyLjgsMzk5LjQgTCAyOTIuNSw0MDAuMCBMIDMwMi4yLDQwMC4zIEwgMzEyLjAsNDAwLjMgTCAzMjEuOCw0MDAuMSBMIDMzMS41LDM5OS45IEwgMzQxLjIsMzk5LjYgTCAzNTEuMCwzOTkuNSBMIDM2MC44LDM5OS40IEwgMzcwLjUsMzk5LjQgTCAzODAuMiwzOTkuNSBMIDM5MC4wLDM5OS42IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDQzNS45IEwgOS44LDQzNC42IEwgMTkuNSw0MzIuNSBMIDI5LjIsNDI5LjYgTCAzOS4wLDQyNi4xIEwgNDguOCw0MjIuMSBMIDU4LjUsNDE3LjcgTCA2OC4yLDQxMy4zIEwgNzguMCw0MDguOSBMIDg3LjgsNDA0LjkgTCA5Ny41LDQwMS40IEwgMTA3LjIsMzk4LjYgTCAxMTcuMCwzOTYuNyBMIDEyNi44LDM5NS44IEwgMTM2LjUsMzk1LjkgTCAxNDYuMiwzOTcuMCBMIDE1Ni4wLDM5OS4xIEwgMTY1LjgsNDAyLjEgTCAxNzUuNSw0MDUuOCBMIDE4NS4yLDQxMC4wIEwgMTk1LjAsNDE0LjUgTCAyMDQuOCw0MTkuMSBMIDIxNC41LDQyMy42IEwgMjI0LjIsNDI3LjggTCAyMzQuMCw0MzEuNiBMIDI0My44LDQzNC44IEwgMjUzLjUsNDM3LjQgTCAyNjMuMiw0MzkuMyBMIDI3My4wLDQ0MC41IEwgMjgyLjgsNDQxLjIgTCAyOTIuNSw0NDEuMyBMIDMwMi4yLDQ0MS4wIEwgMzEyLjAsNDQwLjQgTCAzMjEuOCw0MzkuNiBMIDMzMS41LDQzOC44IEwgMzQxLjIsNDM4LjAgTCAzNTEuMCw0MzcuMyBMIDM2MC44LDQzNi43IEwgMzcwLjUsNDM2LjIgTCAzODAuMiw0MzUuOCBMIDM5MC4wLDQzNS4zIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDQ3Mi4xIEwgOS44LDQ3MC40IEwgMTkuNSw0NjguMCBMIDI5LjIsNDY0LjkgTCAzOS4wLDQ2MS4zIEwgNDguOCw0NTcuMyBMIDU4LjUsNDUzLjEgTCA2OC4yLDQ0OC45IEwgNzguMCw0NDUuMCBMIDg3LjgsNDQxLjUgTCA5Ny41LDQzOC42IEwgMTA3LjIsNDM2LjYgTCAxMTcuMCw0MzUuNSBMIDEyNi44LDQzNS40IEwgMTM2LjUsNDM2LjMgTCAxNDYuMiw0MzguMiBMIDE1Ni4wLDQ0MS4wIEwgMTY1LjgsNDQ0LjYgTCAxNzUuNSw0NDguNyBMIDE4NS4yLDQ1My4zIEwgMTk1LjAsNDU4LjEgTCAyMDQuOCw0NjIuOCBMIDIxNC41LDQ2Ny4yIEwgMjI0LjIsNDcxLjMgTCAyMzQuMCw0NzQuNyBMIDI0My44LDQ3Ny41IEwgMjUzLjUsNDc5LjYgTCAyNjMuMiw0ODEuMCBMIDI3My4wLDQ4MS42IEwgMjgyLjgsNDgxLjYgTCAyOTIuNSw0ODEuMSBMIDMwMi4yLDQ4MC4yIEwgMzEyLjAsNDc5LjAgTCAzMjEuOCw0NzcuNiBMIDMzMS41LDQ3Ni4yIEwgMzQxLjIsNDc0LjkgTCAzNTEuMCw0NzMuNiBMIDM2MC44LDQ3Mi41IEwgMzcwLjUsNDcxLjYgTCAzODAuMiw0NzAuNyBMIDM5MC4wLDQ2OS45IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDUwOC4wIEwgOS44LDUwNi4xIEwgMTkuNSw1MDMuNSBMIDI5LjIsNTAwLjQgTCAzOS4wLDQ5Ni44IEwgNDguOCw0OTMuMCBMIDU4LjUsNDg5LjIgTCA2OC4yLDQ4NS41IEwgNzguMCw0ODIuMSBMIDg3LjgsNDc5LjIgTCA5Ny41LDQ3Ny4xIEwgMTA3LjIsNDc1LjggTCAxMTcuMCw0NzUuNSBMIDEyNi44LDQ3Ni4yIEwgMTM2LjUsNDc3LjggTCAxNDYuMiw0ODAuMyBMIDE1Ni4wLDQ4My43IEwgMTY1LjgsNDg3LjcgTCAxNzUuNSw0OTIuMSBMIDE4NS4yLDQ5Ni44IEwgMTk1LjAsNTAxLjUgTCAyMDQuOCw1MDYuMSBMIDIxNC41LDUxMC4zIEwgMjI0LjIsNTEzLjkgTCAyMzQuMCw1MTYuOSBMIDI0My44LDUxOS4xIEwgMjUzLjUsNTIwLjUgTCAyNjMuMiw1MjEuMiBMIDI3My4wLDUyMS4yIEwgMjgyLjgsNTIwLjUgTCAyOTIuNSw1MTkuMyBMIDMwMi4yLDUxNy44IEwgMzEyLjAsNTE2LjAgTCAzMjEuOCw1MTQuMSBMIDMzMS41LDUxMi4yIEwgMzQxLjIsNTEwLjQgTCAzNTEuMCw1MDguNyBMIDM2MC44LDUwNy4zIEwgMzcwLjUsNTA2LjAgTCAzODAuMiw1MDQuOSBMIDM5MC4wLDUwMy44IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDU0NC4wIEwgOS44LDU0MS45IEwgMTkuNSw1MzkuMyBMIDI5LjIsNTM2LjMgTCAzOS4wLDUzMy4wIEwgNDguOCw1MjkuNiBMIDU4LjUsNTI2LjEgTCA2OC4yLDUyMy4wIEwgNzguMCw1MjAuMiBMIDg3LjgsNTE4LjEgTCA5Ny41LDUxNi43IEwgMTA3LjIsNTE2LjIgTCAxMTcuMCw1MTYuNSBMIDEyNi44LDUxNy44IEwgMTM2LjUsNTIwLjAgTCAxNDYuMiw1MjMuMCBMIDE1Ni4wLDUyNi43IEwgMTY1LjgsNTMwLjkgTCAxNzUuNSw1MzUuNCBMIDE4NS4yLDUzOS45IEwgMTk1LjAsNTQ0LjQgTCAyMDQuOCw1NDguNiBMIDIxNC41LDU1Mi4yIEwgMjI0LjIsNTU1LjMgTCAyMzQuMCw1NTcuNiBMIDI0My44LDU1OS4xIEwgMjUzLjUsNTU5LjkgTCAyNjMuMiw1NTkuOCBMIDI3My4wLDU1OS4xIEwgMjgyLjgsNTU3LjggTCAyOTIuNSw1NTYuMCBMIDMwMi4yLDU1My45IEwgMzEyLjAsNTUxLjYgTCAzMjEuOCw1NDkuMyBMIDMzMS41LDU0Ny4wIEwgMzQxLjIsNTQ0LjkgTCAzNTEuMCw1NDMuMSBMIDM2MC44LDU0MS40IEwgMzcwLjUsNTQwLjAgTCAzODAuMiw1MzguNyBMIDM5MC4wLDUzNy42IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDU4MC4xIEwgOS44LDU3OC4xIEwgMTkuNSw1NzUuNiBMIDI5LjIsNTcyLjggTCAzOS4wLDU2OS44IEwgNDguOCw1NjYuOCBMIDU4LjUsNTY0LjAgTCA2OC4yLDU2MS40IEwgNzguMCw1NTkuMyBMIDg3LjgsNTU3LjkgTCA5Ny41LDU1Ny4yIEwgMTA3LjIsNTU3LjMgTCAxMTcuMCw1NTguMyBMIDEyNi44LDU2MC4wIEwgMTM2LjUsNTYyLjYgTCAxNDYuMiw1NjUuOCBMIDE1Ni4wLDU2OS42IEwgMTY1LjgsNTczLjcgTCAxNzUuNSw1NzguMCBMIDE4NS4yLDU4Mi4zIEwgMTk1LjAsNTg2LjMgTCAyMDQuOCw1ODkuOSBMIDIxNC41LDU5Mi45IEwgMjI0LjIsNTk1LjIgTCAyMzQuMCw1OTYuOCBMIDI0My44LDU5Ny42IEwgMjUzLjUsNTk3LjYgTCAyNjMuMiw1OTYuOSBMIDI3My4wLDU5NS41IEwgMjgyLjgsNTkzLjcgTCAyOTIuNSw1OTEuNCBMIDMwMi4yLDU4OC45IEwgMzEyLjAsNTg2LjMgTCAzMjEuOCw1ODMuNyBMIDMzMS41LDU4MS4zIEwgMzQxLjIsNTc5LjEgTCAzNTEuMCw1NzcuMSBMIDM2MC44LDU3NS40IEwgMzcwLjUsNTc0LjAgTCAzODAuMiw1NzIuOCBMIDM5MC4wLDU3MS44IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDYxNi41IEwgOS44LDYxNC42IEwgMTkuNSw2MTIuNCBMIDI5LjIsNjA5LjkgTCAzOS4wLDYwNy40IEwgNDguOCw2MDQuOSBMIDU4LjUsNjAyLjYgTCA2OC4yLDYwMC43IEwgNzguMCw1OTkuMiBMIDg3LjgsNTk4LjQgTCA5Ny41LDU5OC4zIEwgMTA3LjIsNTk4LjkgTCAxMTcuMCw2MDAuMyBMIDEyNi44LDYwMi40IEwgMTM2LjUsNjA1LjEgTCAxNDYuMiw2MDguNCBMIDE1Ni4wLDYxMi4wIEwgMTY1LjgsNjE1LjggTCAxNzUuNSw2MTkuNyBMIDE4NS4yLDYyMy40IEwgMTk1LjAsNjI2LjggTCAyMDQuOCw2MjkuNyBMIDIxNC41LDYzMi4wIEwgMjI0LjIsNjMzLjYgTCAyMzQuMCw2MzQuNSBMIDI0My44LDYzNC42IEwgMjUzLjUsNjMzLjkgTCAyNjMuMiw2MzIuNyBMIDI3My4wLDYzMC44IEwgMjgyLjgsNjI4LjUgTCAyOTIuNSw2MjYuMCBMIDMwMi4yLDYyMy4zIEwgMzEyLjAsNjIwLjUgTCAzMjEuOCw2MTcuOSBMIDMzMS41LDYxNS41IEwgMzQxLjIsNjEzLjMgTCAzNTEuMCw2MTEuNSBMIDM2MC44LDYwOS45IEwgMzcwLjUsNjA4LjcgTCAzODAuMiw2MDcuNyBMIDM5MC4wLDYwNi45IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDY1My4zIEwgOS44LDY1MS42IEwgMTkuNSw2NDkuNiBMIDI5LjIsNjQ3LjYgTCAzOS4wLDY0NS41IEwgNDguOCw2NDMuNiBMIDU4LjUsNjQxLjkgTCA2OC4yLDY0MC41IEwgNzguMCw2MzkuNyBMIDg3LjgsNjM5LjQgTCA5Ny41LDYzOS43IEwgMTA3LjIsNjQwLjYgTCAxMTcuMCw2NDIuMyBMIDEyNi44LDY0NC41IEwgMTM2LjUsNjQ3LjEgTCAxNDYuMiw2NTAuMiBMIDE1Ni4wLDY1My41IEwgMTY1LjgsNjU2LjkgTCAxNzUuNSw2NjAuMiBMIDE4NS4yLDY2My4zIEwgMTk1LjAsNjY2LjAgTCAyMDQuOCw2NjguMiBMIDIxNC41LDY2OS43IEwgMjI0LjIsNjcwLjYgTCAyMzQuMCw2NzAuOCBMIDI0My44LDY3MC4zIEwgMjUzLjUsNjY5LjIgTCAyNjMuMiw2NjcuNSBMIDI3My4wLDY2NS4zIEwgMjgyLjgsNjYyLjkgTCAyOTIuNSw2NjAuMiBMIDMwMi4yLDY1Ny41IEwgMzEyLjAsNjU0LjkgTCAzMjEuOCw2NTIuNCBMIDMzMS41LDY1MC4xIEwgMzQxLjIsNjQ4LjIgTCAzNTEuMCw2NDYuNiBMIDM2MC44LDY0NS40IEwgMzcwLjUsNjQ0LjQgTCAzODAuMiw2NDMuNyBMIDM5MC4wLDY0My4yIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDY5MC40IEwgOS44LDY4OS4wIEwgMTkuNSw2ODcuNCBMIDI5LjIsNjg1LjggTCAzOS4wLDY4NC4yIEwgNDguOCw2ODIuOCBMIDU4LjUsNjgxLjYgTCA2OC4yLDY4MC44IEwgNzguMCw2ODAuNCBMIDg3LjgsNjgwLjUgTCA5Ny41LDY4MS4xIEwgMTA3LjIsNjgyLjIgTCAxMTcuMCw2ODMuOSBMIDEyNi44LDY4Ni4wIEwgMTM2LjUsNjg4LjUgTCAxNDYuMiw2OTEuMiBMIDE1Ni4wLDY5NC4wIEwgMTY1LjgsNjk2LjkgTCAxNzUuNSw2OTkuNSBMIDE4NS4yLDcwMS45IEwgMTk1LjAsNzAzLjggTCAyMDQuOCw3MDUuMyBMIDIxNC41LDcwNi4yIEwgMjI0LjIsNzA2LjUgTCAyMzQuMCw3MDYuMSBMIDI0My44LDcwNS4yIEwgMjUzLjUsNzAzLjcgTCAyNjMuMiw3MDEuOSBMIDI3My4wLDY5OS42IEwgMjgyLjgsNjk3LjIgTCAyOTIuNSw2OTQuNyBMIDMwMi4yLDY5Mi4yIEwgMzEyLjAsNjg5LjggTCAzMjEuOCw2ODcuNiBMIDMzMS41LDY4NS43IEwgMzQxLjIsNjg0LjIgTCAzNTEuMCw2ODIuOSBMIDM2MC44LDY4Mi4wIEwgMzcwLjUsNjgxLjQgTCAzODAuMiw2ODEuMSBMIDM5MC4wLDY4MC45IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDcyOC4wIEwgOS44LDcyNi45IEwgMTkuNSw3MjUuNyBMIDI5LjIsNzI0LjUgTCAzOS4wLDcyMy40IEwgNDguOCw3MjIuNCBMIDU4LjUsNzIxLjcgTCA2OC4yLDcyMS4zIEwgNzguMCw3MjEuMiBMIDg3LjgsNzIxLjUgTCA5Ny41LDcyMi4zIEwgMTA3LjIsNzIzLjUgTCAxMTcuMCw3MjUuMCBMIDEyNi44LDcyNi45IEwgMTM2LjUsNzI5LjAgTCAxNDYuMiw3MzEuMiBMIDE1Ni4wLDczMy41IEwgMTY1LjgsNzM1LjYgTCAxNzUuNSw3MzcuNiBMIDE4NS4yLDczOS4zIEwgMTk1LjAsNzQwLjYgTCAyMDQuOCw3NDEuNCBMIDIxNC41LDc0MS43IEwgMjI0LjIsNzQxLjYgTCAyMzQuMCw3NDAuOSBMIDI0My44LDczOS43IEwgMjUzLjUsNzM4LjIgTCAyNjMuMiw3MzYuMyBMIDI3My4wLDczNC4yIEwgMjgyLjgsNzMyLjAgTCAyOTIuNSw3MjkuOCBMIDMwMi4yLDcyNy43IEwgMzEyLjAsNzI1LjcgTCAzMjEuOCw3MjQuMCBMIDMzMS41LDcyMi41IEwgMzQxLjIsNzIxLjQgTCAzNTEuMCw3MjAuNiBMIDM2MC44LDcyMC4xIEwgMzcwLjUsNzE5LjggTCAzODAuMiw3MTkuOCBMIDM5MC4wLDcxOS45IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDc2Ni4wIEwgOS44LDc2NS4yIEwgMTkuNSw3NjQuNCBMIDI5LjIsNzYzLjYgTCAzOS4wLDc2Mi45IEwgNDguOCw3NjIuMyBMIDU4LjUsNzYxLjkgTCA2OC4yLDc2MS44IEwgNzguMCw3NjEuOSBMIDg3LjgsNzYyLjMgTCA5Ny41LDc2My4xIEwgMTA3LjIsNzY0LjEgTCAxMTcuMCw3NjUuNCBMIDEyNi44LDc2Ni45IEwgMTM2LjUsNzY4LjUgTCAxNDYuMiw3NzAuMiBMIDE1Ni4wLDc3MS45IEwgMTY1LjgsNzczLjQgTCAxNzUuNSw3NzQuNyBMIDE4NS4yLDc3NS44IEwgMTk1LjAsNzc2LjUgTCAyMDQuOCw3NzYuOCBMIDIxNC41LDc3Ni44IEwgMjI0LjIsNzc2LjMgTCAyMzQuMCw3NzUuNSBMIDI0My44LDc3NC40IEwgMjUzLjUsNzcyLjkgTCAyNjMuMiw3NzEuMyBMIDI3My4wLDc2OS41IEwgMjgyLjgsNzY3LjcgTCAyOTIuNSw3NjYuMCBMIDMwMi4yLDc2NC4zIEwgMzEyLjAsNzYyLjkgTCAzMjEuOCw3NjEuNiBMIDMzMS41LDc2MC43IEwgMzQxLjIsNzYwLjAgTCAzNTEuMCw3NTkuNiBMIDM2MC44LDc1OS40IEwgMzcwLjUsNzU5LjQgTCAzODAuMiw3NTkuNiBMIDM5MC4wLDc2MC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDgwNC40IEwgOS44LDgwMy45IEwgMTkuNSw4MDMuNCBMIDI5LjIsODAyLjkgTCAzOS4wLDgwMi42IEwgNDguOCw4MDIuMyBMIDU4LjUsODAyLjEgTCA2OC4yLDgwMi4xIEwgNzguMCw4MDIuNCBMIDg3LjgsODAyLjggTCA5Ny41LDgwMy40IEwgMTA3LjIsODA0LjIgTCAxMTcuMCw4MDUuMSBMIDEyNi44LDgwNi4yIEwgMTM2LjUsODA3LjMgTCAxNDYuMiw4MDguNCBMIDE1Ni4wLDgwOS40IEwgMTY1LjgsODEwLjQgTCAxNzUuNSw4MTEuMSBMIDE4NS4yLDgxMS43IEwgMTk1LjAsODEyLjAgTCAyMDQuOCw4MTIuMCBMIDIxNC41LDgxMS44IEwgMjI0LjIsODExLjIgTCAyMzQuMCw4MTAuNSBMIDI0My44LDgwOS41IEwgMjUzLjUsODA4LjQgTCAyNjMuMiw4MDcuMiBMIDI3My4wLDgwNS45IEwgMjgyLjgsODA0LjYgTCAyOTIuNSw4MDMuNCBMIDMwMi4yLDgwMi4zIEwgMzEyLjAsODAxLjQgTCAzMjEuOCw4MDAuNiBMIDMzMS41LDgwMC4xIEwgMzQxLjIsNzk5LjggTCAzNTEuMCw3OTkuNiBMIDM2MC44LDc5OS43IEwgMzcwLjUsNzk5LjkgTCAzODAuMiw4MDAuMiBMIDM5MC4wLDgwMC43IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMC4wLDg0My4xIEwgOS44LDg0Mi45IEwgMTkuNSw4NDIuNyBMIDI5LjIsODQyLjUgTCAzOS4wLDg0Mi4zIEwgNDguOCw4NDIuMiBMIDU4LjUsODQyLjIgTCA2OC4yLDg0Mi4zIEwgNzguMCw4NDIuNSBMIDg3LjgsODQyLjcgTCA5Ny41LDg0My4xIEwgMTA3LjIsODQzLjYgTCAxMTcuMCw4NDQuMSBMIDEyNi44LDg0NC43IEwgMTM2LjUsODQ1LjMgTCAxNDYuMiw4NDUuOCBMIDE1Ni4wLDg0Ni4zIEwgMTY1LjgsODQ2LjggTCAxNzUuNSw4NDcuMSBMIDE4NS4yLDg0Ny4zIEwgMTk1LjAsODQ3LjQgTCAyMDQuOCw4NDcuMyBMIDIxNC41LDg0Ny4wIEwgMjI0LjIsODQ2LjYgTCAyMzQuMCw4NDYuMSBMIDI0My44LDg0NS41IEwgMjUzLjUsODQ0LjggTCAyNjMuMiw4NDQuMSBMIDI3My4wLDg0My40IEwgMjgyLjgsODQyLjcgTCAyOTIuNSw4NDIuMSBMIDMwMi4yLDg0MS41IEwgMzEyLjAsODQxLjEgTCAzMjEuOCw4NDAuOCBMIDMzMS41LDg0MC42IEwgMzQxLjIsODQwLjUgTCAzNTEuMCw4NDAuNSBMIDM2MC44LDg0MC42IEwgMzcwLjUsODQwLjkgTCAzODAuMiw4NDEuMiBMIDM5MC4wLDg0MS41IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMS4wLDAuMCBMIDEuNSwxNi45IEwgMi4wLDMzLjggTCAyLjQsNTAuNiBMIDIuOCw2Ny41IEwgMy4xLDg0LjQgTCAzLjMsMTAxLjMgTCAzLjUsMTE4LjIgTCAzLjYsMTM1LjAgTCAzLjcsMTUxLjkgTCAzLjcsMTY4LjggTCAzLjYsMTg1LjcgTCAzLjUsMjAyLjYgTCAzLjQsMjE5LjQgTCAzLjIsMjM2LjMgTCAzLjAsMjUzLjIgTCAyLjgsMjcwLjEgTCAyLjUsMjg3LjAgTCAyLjIsMzAzLjggTCAyLjAsMzIwLjcgTCAxLjcsMzM3LjYgTCAxLjQsMzU0LjUgTCAxLjIsMzcxLjQgTCAwLjksMzg4LjIgTCAwLjYsNDA1LjEgTCAwLjQsNDIyLjAgTCAwLjIsNDM4LjkgTCAtMC4wLDQ1NS44IEwgLTAuMiw0NzIuNiBMIC0wLjQsNDg5LjUgTCAtMC42LDUwNi40IEwgLTAuNyw1MjMuMyBMIC0wLjgsNTQwLjIgTCAtMC45LDU1Ny4wIEwgLTEuMCw1NzMuOSBMIC0xLjEsNTkwLjggTCAtMS4xLDYwNy43IEwgLTEuMiw2MjQuNiBMIC0xLjEsNjQxLjQgTCAtMS4xLDY1OC4zIEwgLTEuMSw2NzUuMiBMIC0xLjAsNjkyLjEgTCAtMC45LDcwOS4wIEwgLTAuNyw3MjUuOCBMIC0wLjUsNzQyLjcgTCAtMC40LDc1OS42IEwgLTAuMSw3NzYuNSBMIDAuMSw3OTMuNCBMIDAuMyw4MTAuMiBMIDAuNiw4MjcuMSBMIDAuOSw4NDQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDMzLjgsMC4wIEwgMzQuNiwxNi45IEwgMzUuMiwzMy44IEwgMzUuOCw1MC42IEwgMzYuMSw2Ny41IEwgMzYuNCw4NC40IEwgMzYuNSwxMDEuMyBMIDM2LjQsMTE4LjIgTCAzNi4yLDEzNS4wIEwgMzUuOSwxNTEuOSBMIDM1LjUsMTY4LjggTCAzNS4wLDE4NS43IEwgMzQuNCwyMDIuNiBMIDMzLjgsMjE5LjQgTCAzMy4xLDIzNi4zIEwgMzIuNCwyNTMuMiBMIDMxLjYsMjcwLjEgTCAzMC45LDI4Ny4wIEwgMzAuMiwzMDMuOCBMIDI5LjUsMzIwLjcgTCAyOC44LDMzNy42IEwgMjguMSwzNTQuNSBMIDI3LjYsMzcxLjQgTCAyNy4wLDM4OC4yIEwgMjYuNiw0MDUuMSBMIDI2LjIsNDIyLjAgTCAyNS44LDQzOC45IEwgMjUuNSw0NTUuOCBMIDI1LjMsNDcyLjYgTCAyNS4xLDQ4OS41IEwgMjUuMCw1MDYuNCBMIDI0LjksNTIzLjMgTCAyNC45LDU0MC4yIEwgMjQuOSw1NTcuMCBMIDI1LjAsNTczLjkgTCAyNS4xLDU5MC44IEwgMjUuMiw2MDcuNyBMIDI1LjQsNjI0LjYgTCAyNS42LDY0MS40IEwgMjUuOCw2NTguMyBMIDI2LjAsNjc1LjIgTCAyNi4zLDY5Mi4xIEwgMjYuNiw3MDkuMCBMIDI3LjAsNzI1LjggTCAyNy4zLDc0Mi43IEwgMjcuNyw3NTkuNiBMIDI4LjAsNzc2LjUgTCAyOC40LDc5My40IEwgMjguOCw4MTAuMiBMIDI5LjIsODI3LjEgTCAyOS41LDg0NC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gNjguNCwwLjAgTCA2OS4xLDE2LjkgTCA2OS41LDMzLjggTCA2OS43LDUwLjYgTCA2OS42LDY3LjUgTCA2OS4zLDg0LjQgTCA2OC44LDEwMS4zIEwgNjguMSwxMTguMiBMIDY3LjIsMTM1LjAgTCA2Ni4xLDE1MS45IEwgNjUuMCwxNjguOCBMIDYzLjcsMTg1LjcgTCA2Mi4zLDIwMi42IEwgNjAuOSwyMTkuNCBMIDU5LjUsMjM2LjMgTCA1OC4xLDI1My4yIEwgNTYuOCwyNzAuMSBMIDU1LjUsMjg3LjAgTCA1NC4zLDMwMy44IEwgNTMuMiwzMjAuNyBMIDUyLjIsMzM3LjYgTCA1MS40LDM1NC41IEwgNTAuNiwzNzEuNCBMIDUwLjEsMzg4LjIgTCA0OS42LDQwNS4xIEwgNDkuMyw0MjIuMCBMIDQ5LjEsNDM4LjkgTCA0OS4wLDQ1NS44IEwgNDkuMCw0NzIuNiBMIDQ5LjIsNDg5LjUgTCA0OS40LDUwNi40IEwgNDkuNyw1MjMuMyBMIDUwLjAsNTQwLjIgTCA1MC40LDU1Ny4wIEwgNTAuOSw1NzMuOSBMIDUxLjMsNTkwLjggTCA1MS44LDYwNy43IEwgNTIuNCw2MjQuNiBMIDUyLjksNjQxLjQgTCA1My40LDY1OC4zIEwgNTMuOSw2NzUuMiBMIDU0LjQsNjkyLjEgTCA1NC45LDcwOS4wIEwgNTUuNCw3MjUuOCBMIDU1LjksNzQyLjcgTCA1Ni4zLDc1OS42IEwgNTYuNyw3NzYuNSBMIDU3LjEsNzkzLjQgTCA1Ny40LDgxMC4yIEwgNTcuNyw4MjcuMSBMIDU4LjAsODQ0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAxMDEuNywwLjAgTCAxMDEuOCwxNi45IEwgMTAxLjUsMzMuOCBMIDEwMC44LDUwLjYgTCA5OS45LDY3LjUgTCA5OC43LDg0LjQgTCA5Ny4yLDEwMS4zIEwgOTUuNSwxMTguMiBMIDkzLjcsMTM1LjAgTCA5MS43LDE1MS45IEwgODkuNiwxNjguOCBMIDg3LjUsMTg1LjcgTCA4NS4zLDIwMi42IEwgODMuMiwyMTkuNCBMIDgxLjIsMjM2LjMgTCA3OS40LDI1My4yIEwgNzcuNiwyNzAuMSBMIDc2LjEsMjg3LjAgTCA3NC43LDMwMy44IEwgNzMuNiwzMjAuNyBMIDcyLjYsMzM3LjYgTCA3Mi4wLDM1NC41IEwgNzEuNSwzNzEuNCBMIDcxLjMsMzg4LjIgTCA3MS4zLDQwNS4xIEwgNzEuNCw0MjIuMCBMIDcxLjgsNDM4LjkgTCA3Mi4zLDQ1NS44IEwgNzMuMCw0NzIuNiBMIDczLjcsNDg5LjUgTCA3NC42LDUwNi40IEwgNzUuNSw1MjMuMyBMIDc2LjUsNTQwLjIgTCA3Ny41LDU1Ny4wIEwgNzguNSw1NzMuOSBMIDc5LjUsNTkwLjggTCA4MC40LDYwNy43IEwgODEuMyw2MjQuNiBMIDgyLjEsNjQxLjQgTCA4Mi45LDY1OC4zIEwgODMuNiw2NzUuMiBMIDg0LjMsNjkyLjEgTCA4NC44LDcwOS4wIEwgODUuMyw3MjUuOCBMIDg1LjcsNzQyLjcgTCA4Ni4xLDc1OS42IEwgODYuMyw3NzYuNSBMIDg2LjUsNzkzLjQgTCA4Ni42LDgxMC4yIEwgODYuNyw4MjcuMSBMIDg2LjYsODQ0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAxMzAuOCwwLjAgTCAxMjkuOSwxNi45IEwgMTI4LjYsMzMuOCBMIDEyNi45LDUwLjYgTCAxMjUuMCw2Ny41IEwgMTIyLjcsODQuNCBMIDEyMC4zLDEwMS4zIEwgMTE3LjcsMTE4LjIgTCAxMTUuMCwxMzUuMCBMIDExMi4yLDE1MS45IEwgMTA5LjQsMTY4LjggTCAxMDYuOCwxODUuNyBMIDEwNC4yLDIwMi42IEwgMTAxLjgsMjE5LjQgTCA5OS42LDIzNi4zIEwgOTcuNywyNTMuMiBMIDk2LjEsMjcwLjEgTCA5NC44LDI4Ny4wIEwgOTMuOCwzMDMuOCBMIDkzLjEsMzIwLjcgTCA5Mi44LDMzNy42IEwgOTIuOCwzNTQuNSBMIDkzLjEsMzcxLjQgTCA5My43LDM4OC4yIEwgOTQuNiw0MDUuMSBMIDk1LjYsNDIyLjAgTCA5Ni45LDQzOC45IEwgOTguNCw0NTUuOCBMIDk5LjksNDcyLjYgTCAxMDEuNSw0ODkuNSBMIDEwMy4yLDUwNi40IEwgMTA0LjksNTIzLjMgTCAxMDYuNSw1NDAuMiBMIDEwOC4xLDU1Ny4wIEwgMTA5LjYsNTczLjkgTCAxMTEuMCw1OTAuOCBMIDExMi4yLDYwNy43IEwgMTEzLjQsNjI0LjYgTCAxMTQuMyw2NDEuNCBMIDExNS4xLDY1OC4zIEwgMTE1LjgsNjc1LjIgTCAxMTYuMyw2OTIuMSBMIDExNi43LDcwOS4wIEwgMTE2LjksNzI1LjggTCAxMTcuMCw3NDIuNyBMIDExNy4wLDc1OS42IEwgMTE2LjksNzc2LjUgTCAxMTYuNyw3OTMuNCBMIDExNi40LDgxMC4yIEwgMTE2LjAsODI3LjEgTCAxMTUuNSw4NDQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDE1NS4wLDAuMCBMIDE1My4xLDE2LjkgTCAxNTAuOCwzMy44IEwgMTQ4LjMsNTAuNiBMIDE0NS40LDY3LjUgTCAxNDIuNCw4NC40IEwgMTM5LjMsMTAxLjMgTCAxMzYuMiwxMTguMiBMIDEzMy4wLDEzNS4wIEwgMTMwLjAsMTUxLjkgTCAxMjcuMSwxNjguOCBMIDEyNC40LDE4NS43IEwgMTIyLjAsMjAyLjYgTCAxMjAuMCwyMTkuNCBMIDExOC4yLDIzNi4zIEwgMTE2LjksMjUzLjIgTCAxMTYuMCwyNzAuMSBMIDExNS41LDI4Ny4wIEwgMTE1LjQsMzAzLjggTCAxMTUuNywzMjAuNyBMIDExNi41LDMzNy42IEwgMTE3LjYsMzU0LjUgTCAxMTkuMCwzNzEuNCBMIDEyMC43LDM4OC4yIEwgMTIyLjcsNDA1LjEgTCAxMjQuOCw0MjIuMCBMIDEyNy4xLDQzOC45IEwgMTI5LjUsNDU1LjggTCAxMzEuOSw0NzIuNiBMIDEzNC4zLDQ4OS41IEwgMTM2LjYsNTA2LjQgTCAxMzguOSw1MjMuMyBMIDE0MC45LDU0MC4yIEwgMTQyLjgsNTU3LjAgTCAxNDQuNSw1NzMuOSBMIDE0Ni4wLDU5MC44IEwgMTQ3LjIsNjA3LjcgTCAxNDguMiw2MjQuNiBMIDE0OC45LDY0MS40IEwgMTQ5LjQsNjU4LjMgTCAxNDkuNyw2NzUuMiBMIDE0OS43LDY5Mi4xIEwgMTQ5LjYsNzA5LjAgTCAxNDkuMiw3MjUuOCBMIDE0OC43LDc0Mi43IEwgMTQ4LjEsNzU5LjYgTCAxNDcuMyw3NzYuNSBMIDE0Ni41LDc5My40IEwgMTQ1LjcsODEwLjIgTCAxNDQuNyw4MjcuMSBMIDE0My44LDg0NC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMTc1LjksMC4wIEwgMTczLjMsMTYuOSBMIDE3MC40LDMzLjggTCAxNjcuNCw1MC42IEwgMTY0LjIsNjcuNSBMIDE2MC45LDg0LjQgTCAxNTcuNywxMDEuMyBMIDE1NC42LDExOC4yIEwgMTUxLjYsMTM1LjAgTCAxNDguOSwxNTEuOSBMIDE0Ni41LDE2OC44IEwgMTQ0LjUsMTg1LjcgTCAxNDIuOCwyMDIuNiBMIDE0MS42LDIxOS40IEwgMTQwLjksMjM2LjMgTCAxNDAuNiwyNTMuMiBMIDE0MC44LDI3MC4xIEwgMTQxLjUsMjg3LjAgTCAxNDIuNywzMDMuOCBMIDE0NC4yLDMyMC43IEwgMTQ2LjIsMzM3LjYgTCAxNDguNSwzNTQuNSBMIDE1MS4wLDM3MS40IEwgMTUzLjgsMzg4LjIgTCAxNTYuNyw0MDUuMSBMIDE1OS44LDQyMi4wIEwgMTYyLjgsNDM4LjkgTCAxNjUuOCw0NTUuOCBMIDE2OC43LDQ3Mi42IEwgMTcxLjUsNDg5LjUgTCAxNzQuMSw1MDYuNCBMIDE3Ni40LDUyMy4zIEwgMTc4LjQsNTQwLjIgTCAxODAuMSw1NTcuMCBMIDE4MS41LDU3My45IEwgMTgyLjUsNTkwLjggTCAxODMuMiw2MDcuNyBMIDE4My42LDYyNC42IEwgMTgzLjYsNjQxLjQgTCAxODMuNCw2NTguMyBMIDE4Mi44LDY3NS4yIEwgMTgyLjEsNjkyLjEgTCAxODEuMSw3MDkuMCBMIDE3OS45LDcyNS44IEwgMTc4LjYsNzQyLjcgTCAxNzcuMiw3NTkuNiBMIDE3NS44LDc3Ni41IEwgMTc0LjMsNzkzLjQgTCAxNzIuOSw4MTAuMiBMIDE3MS40LDgyNy4xIEwgMTcwLjEsODQ0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAxOTYuNSwwLjAgTCAxOTMuNiwxNi45IEwgMTkwLjYsMzMuOCBMIDE4Ny42LDUwLjYgTCAxODQuNiw2Ny41IEwgMTgxLjcsODQuNCBMIDE3OC45LDEwMS4zIEwgMTc2LjQsMTE4LjIgTCAxNzQuMiwxMzUuMCBMIDE3Mi4zLDE1MS45IEwgMTcwLjksMTY4LjggTCAxNjkuOSwxODUuNyBMIDE2OS4zLDIwMi42IEwgMTY5LjMsMjE5LjQgTCAxNjkuOCwyMzYuMyBMIDE3MC43LDI1My4yIEwgMTcyLjEsMjcwLjEgTCAxNzQuMCwyODcuMCBMIDE3Ni4zLDMwMy44IEwgMTc4LjksMzIwLjcgTCAxODEuOSwzMzcuNiBMIDE4NS4wLDM1NC41IEwgMTg4LjMsMzcxLjQgTCAxOTEuNywzODguMiBMIDE5NS4yLDQwNS4xIEwgMTk4LjUsNDIyLjAgTCAyMDEuOCw0MzguOSBMIDIwNC44LDQ1NS44IEwgMjA3LjYsNDcyLjYgTCAyMTAuMSw0ODkuNSBMIDIxMi4zLDUwNi40IEwgMjE0LjEsNTIzLjMgTCAyMTUuNSw1NDAuMiBMIDIxNi40LDU1Ny4wIEwgMjE3LjAsNTczLjkgTCAyMTcuMSw1OTAuOCBMIDIxNi44LDYwNy43IEwgMjE2LjIsNjI0LjYgTCAyMTUuMiw2NDEuNCBMIDIxMy45LDY1OC4zIEwgMjEyLjQsNjc1LjIgTCAyMTAuNyw2OTIuMSBMIDIwOC44LDcwOS4wIEwgMjA2LjgsNzI1LjggTCAyMDQuNyw3NDIuNyBMIDIwMi42LDc1OS42IEwgMjAwLjYsNzc2LjUgTCAxOTguNiw3OTMuNCBMIDE5Ni44LDgxMC4yIEwgMTk1LjEsODI3LjEgTCAxOTMuNSw4NDQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDIxOS4xLDAuMCBMIDIxNi41LDE2LjkgTCAyMTMuOSwzMy44IEwgMjExLjMsNTAuNiBMIDIwOC45LDY3LjUgTCAyMDYuNyw4NC40IEwgMjA0LjgsMTAxLjMgTCAyMDMuMiwxMTguMiBMIDIwMi4wLDEzNS4wIEwgMjAxLjIsMTUxLjkgTCAyMDAuOCwxNjguOCBMIDIwMS4wLDE4NS43IEwgMjAxLjUsMjAyLjYgTCAyMDIuNiwyMTkuNCBMIDIwNC4xLDIzNi4zIEwgMjA2LjEsMjUzLjIgTCAyMDguNCwyNzAuMSBMIDIxMS4xLDI4Ny4wIEwgMjE0LjEsMzAzLjggTCAyMTcuMywzMjAuNyBMIDIyMC42LDMzNy42IEwgMjI0LjAsMzU0LjUgTCAyMjcuNSwzNzEuNCBMIDIzMC45LDM4OC4yIEwgMjM0LjEsNDA1LjEgTCAyMzcuMSw0MjIuMCBMIDIzOS45LDQzOC45IEwgMjQyLjMsNDU1LjggTCAyNDQuNCw0NzIuNiBMIDI0Ni4wLDQ4OS41IEwgMjQ3LjIsNTA2LjQgTCAyNDguMCw1MjMuMyBMIDI0OC4zLDU0MC4yIEwgMjQ4LjEsNTU3LjAgTCAyNDcuNSw1NzMuOSBMIDI0Ni41LDU5MC44IEwgMjQ1LjEsNjA3LjcgTCAyNDMuNCw2MjQuNiBMIDI0MS40LDY0MS40IEwgMjM5LjEsNjU4LjMgTCAyMzYuNyw2NzUuMiBMIDIzNC4xLDY5Mi4xIEwgMjMxLjUsNzA5LjAgTCAyMjguOSw3MjUuOCBMIDIyNi40LDc0Mi43IEwgMjI0LjAsNzU5LjYgTCAyMjEuNyw3NzYuNSBMIDIxOS42LDc5My40IEwgMjE3LjgsODEwLjIgTCAyMTYuMiw4MjcuMSBMIDIxNC44LDg0NC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMjQ0LjcsMC4wIEwgMjQyLjcsMTYuOSBMIDI0MC43LDMzLjggTCAyMzguOCw1MC42IEwgMjM3LjMsNjcuNSBMIDIzNS45LDg0LjQgTCAyMzQuOSwxMDEuMyBMIDIzNC4zLDExOC4yIEwgMjM0LjAsMTM1LjAgTCAyMzQuMiwxNTEuOSBMIDIzNC43LDE2OC44IEwgMjM1LjcsMTg1LjcgTCAyMzcuMSwyMDIuNiBMIDIzOC45LDIxOS40IEwgMjQxLjAsMjM2LjMgTCAyNDMuNCwyNTMuMiBMIDI0Ni4xLDI3MC4xIEwgMjQ5LjAsMjg3LjAgTCAyNTIuMCwzMDMuOCBMIDI1NS4yLDMyMC43IEwgMjU4LjMsMzM3LjYgTCAyNjEuMywzNTQuNSBMIDI2NC4yLDM3MS40IEwgMjY3LjAsMzg4LjIgTCAyNjkuNCw0MDUuMSBMIDI3MS41LDQyMi4wIEwgMjczLjMsNDM4LjkgTCAyNzQuNyw0NTUuOCBMIDI3NS42LDQ3Mi42IEwgMjc2LjEsNDg5LjUgTCAyNzYuMSw1MDYuNCBMIDI3NS43LDUyMy4zIEwgMjc0LjgsNTQwLjIgTCAyNzMuNSw1NTcuMCBMIDI3MS44LDU3My45IEwgMjY5LjgsNTkwLjggTCAyNjcuNCw2MDcuNyBMIDI2NC45LDYyNC42IEwgMjYyLjIsNjQxLjQgTCAyNTkuMyw2NTguMyBMIDI1Ni40LDY3NS4yIEwgMjUzLjUsNjkyLjEgTCAyNTAuNyw3MDkuMCBMIDI0OC4wLDcyNS44IEwgMjQ1LjUsNzQyLjcgTCAyNDMuMyw3NTkuNiBMIDI0MS4zLDc3Ni41IEwgMjM5LjYsNzkzLjQgTCAyMzguMiw4MTAuMiBMIDIzNy4xLDgyNy4xIEwgMjM2LjQsODQ0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAyNzIuNSwwLjAgTCAyNzEuMSwxNi45IEwgMjY5LjgsMzMuOCBMIDI2OC44LDUwLjYgTCAyNjcuOSw2Ny41IEwgMjY3LjQsODQuNCBMIDI2Ny4yLDEwMS4zIEwgMjY3LjMsMTE4LjIgTCAyNjcuNywxMzUuMCBMIDI2OC41LDE1MS45IEwgMjY5LjUsMTY4LjggTCAyNzEuMCwxODUuNyBMIDI3Mi43LDIwMi42IEwgMjc0LjYsMjE5LjQgTCAyNzYuOCwyMzYuMyBMIDI3OS4yLDI1My4yIEwgMjgxLjYsMjcwLjEgTCAyODQuMiwyODcuMCBMIDI4Ni43LDMwMy44IEwgMjg5LjIsMzIwLjcgTCAyOTEuNiwzMzcuNiBMIDI5My44LDM1NC41IEwgMjk1LjgsMzcxLjQgTCAyOTcuNSwzODguMiBMIDI5OC44LDQwNS4xIEwgMjk5LjksNDIyLjAgTCAzMDAuNSw0MzguOSBMIDMwMC43LDQ1NS44IEwgMzAwLjUsNDcyLjYgTCAyOTkuOSw0ODkuNSBMIDI5OC45LDUwNi40IEwgMjk3LjUsNTIzLjMgTCAyOTUuNyw1NDAuMiBMIDI5My42LDU1Ny4wIEwgMjkxLjMsNTczLjkgTCAyODguNyw1OTAuOCBMIDI4Ni4wLDYwNy43IEwgMjgzLjIsNjI0LjYgTCAyODAuMyw2NDEuNCBMIDI3Ny41LDY1OC4zIEwgMjc0LjcsNjc1LjIgTCAyNzIuMSw2OTIuMSBMIDI2OS43LDcwOS4wIEwgMjY3LjUsNzI1LjggTCAyNjUuNiw3NDIuNyBMIDI2My45LDc1OS42IEwgMjYyLjcsNzc2LjUgTCAyNjEuNyw3OTMuNCBMIDI2MS4yLDgxMC4yIEwgMjYxLjAsODI3LjEgTCAyNjEuMSw4NDQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDMwMS4yLDAuMCBMIDMwMC40LDE2LjkgTCAyOTkuNywzMy44IEwgMjk5LjMsNTAuNiBMIDI5OS4xLDY3LjUgTCAyOTkuMSw4NC40IEwgMjk5LjMsMTAxLjMgTCAyOTkuOCwxMTguMiBMIDMwMC42LDEzNS4wIEwgMzAxLjYsMTUxLjkgTCAzMDIuOCwxNjguOCBMIDMwNC4yLDE4NS43IEwgMzA1LjgsMjAyLjYgTCAzMDcuNSwyMTkuNCBMIDMwOS4zLDIzNi4zIEwgMzExLjIsMjUzLjIgTCAzMTMuMSwyNzAuMSBMIDMxNC45LDI4Ny4wIEwgMzE2LjcsMzAzLjggTCAzMTguMywzMjAuNyBMIDMxOS43LDMzNy42IEwgMzIxLjAsMzU0LjUgTCAzMjEuOSwzNzEuNCBMIDMyMi42LDM4OC4yIEwgMzIzLjAsNDA1LjEgTCAzMjMuMCw0MjIuMCBMIDMyMi43LDQzOC45IEwgMzIyLjEsNDU1LjggTCAzMjEuMSw0NzIuNiBMIDMxOS44LDQ4OS41IEwgMzE4LjIsNTA2LjQgTCAzMTYuNCw1MjMuMyBMIDMxNC4zLDU0MC4yIEwgMzEyLjEsNTU3LjAgTCAzMDkuNyw1NzMuOSBMIDMwNy4yLDU5MC44IEwgMzA0LjcsNjA3LjcgTCAzMDIuMyw2MjQuNiBMIDI5OS45LDY0MS40IEwgMjk3LjYsNjU4LjMgTCAyOTUuNSw2NzUuMiBMIDI5My42LDY5Mi4xIEwgMjkyLjAsNzA5LjAgTCAyOTAuNyw3MjUuOCBMIDI4OS43LDc0Mi43IEwgMjg5LjAsNzU5LjYgTCAyODguNiw3NzYuNSBMIDI4OC42LDc5My40IEwgMjg4LjksODEwLjIgTCAyODkuNSw4MjcuMSBMIDI5MC40LDg0NC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+CjxwYXRoIGQ9Ik0gMzMwLjAsMC4wIEwgMzI5LjYsMTYuOSBMIDMyOS40LDMzLjggTCAzMjkuNCw1MC42IEwgMzI5LjUsNjcuNSBMIDMyOS44LDg0LjQgTCAzMzAuMywxMDEuMyBMIDMzMC45LDExOC4yIEwgMzMxLjcsMTM1LjAgTCAzMzIuNiwxNTEuOSBMIDMzMy42LDE2OC44IEwgMzM0LjcsMTg1LjcgTCAzMzUuOSwyMDIuNiBMIDMzNy4xLDIxOS40IEwgMzM4LjQsMjM2LjMgTCAzMzkuNiwyNTMuMiBMIDM0MC44LDI3MC4xIEwgMzQxLjgsMjg3LjAgTCAzNDIuOCwzMDMuOCBMIDM0My42LDMyMC43IEwgMzQ0LjIsMzM3LjYgTCAzNDQuNiwzNTQuNSBMIDM0NC44LDM3MS40IEwgMzQ0LjgsMzg4LjIgTCAzNDQuNSw0MDUuMSBMIDM0NC4wLDQyMi4wIEwgMzQzLjIsNDM4LjkgTCAzNDIuMiw0NTUuOCBMIDM0MS4wLDQ3Mi42IEwgMzM5LjYsNDg5LjUgTCAzMzguMCw1MDYuNCBMIDMzNi4zLDUyMy4zIEwgMzM0LjUsNTQwLjIgTCAzMzIuNyw1NTcuMCBMIDMzMC44LDU3My45IEwgMzI4LjksNTkwLjggTCAzMjcuMSw2MDcuNyBMIDMyNS40LDYyNC42IEwgMzIzLjgsNjQxLjQgTCAzMjIuNSw2NTguMyBMIDMyMS4zLDY3NS4yIEwgMzIwLjMsNjkyLjEgTCAzMTkuNyw3MDkuMCBMIDMxOS4yLDcyNS44IEwgMzE5LjEsNzQyLjcgTCAzMTkuMiw3NTkuNiBMIDMxOS42LDc3Ni41IEwgMzIwLjMsNzkzLjQgTCAzMjEuMiw4MTAuMiBMIDMyMi4zLDgyNy4xIEwgMzIzLjYsODQ0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNDAsMTQwLDE0MCwwLjU1KSIgc3Ryb2tlLXdpZHRoPSIwLjkiLz4KPHBhdGggZD0iTSAzNTguOCwwLjAgTCAzNTguOCwxNi45IEwgMzU4LjksMzMuOCBMIDM1OS4wLDUwLjYgTCAzNTkuMyw2Ny41IEwgMzU5LjcsODQuNCBMIDM2MC4xLDEwMS4zIEwgMzYwLjYsMTE4LjIgTCAzNjEuMiwxMzUuMCBMIDM2MS44LDE1MS45IEwgMzYyLjUsMTY4LjggTCAzNjMuMiwxODUuNyBMIDM2My45LDIwMi42IEwgMzY0LjYsMjE5LjQgTCAzNjUuMywyMzYuMyBMIDM2NS45LDI1My4yIEwgMzY2LjQsMjcwLjEgTCAzNjYuOSwyODcuMCBMIDM2Ny4yLDMwMy44IEwgMzY3LjUsMzIwLjcgTCAzNjcuNiwzMzcuNiBMIDM2Ny42LDM1NC41IEwgMzY3LjQsMzcxLjQgTCAzNjcuMCwzODguMiBMIDM2Ni42LDQwNS4xIEwgMzY1LjksNDIyLjAgTCAzNjUuMiw0MzguOSBMIDM2NC4zLDQ1NS44IEwgMzYzLjMsNDcyLjYgTCAzNjIuMiw0ODkuNSBMIDM2MS4xLDUwNi40IEwgMzU5LjksNTIzLjMgTCAzNTguNyw1NDAuMiBMIDM1Ny42LDU1Ny4wIEwgMzU2LjQsNTczLjkgTCAzNTUuNCw1OTAuOCBMIDM1NC40LDYwNy43IEwgMzUzLjYsNjI0LjYgTCAzNTIuOSw2NDEuNCBMIDM1Mi4zLDY1OC4zIEwgMzUyLjAsNjc1LjIgTCAzNTEuOCw2OTIuMSBMIDM1MS44LDcwOS4wIEwgMzUyLjAsNzI1LjggTCAzNTIuNCw3NDIuNyBMIDM1Mi45LDc1OS42IEwgMzUzLjYsNzc2LjUgTCAzNTQuNSw3OTMuNCBMIDM1NS42LDgxMC4yIEwgMzU2LjcsODI3LjEgTCAzNTcuOSw4NDQuMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE0MCwxNDAsMTQwLDAuNTUpIiBzdHJva2Utd2lkdGg9IjAuOSIvPgo8cGF0aCBkPSJNIDM4OC4xLDAuMCBMIDM4OC4yLDE2LjkgTCAzODguNCwzMy44IEwgMzg4LjUsNTAuNiBMIDM4OC43LDY3LjUgTCAzODkuMCw4NC40IEwgMzg5LjIsMTAxLjMgTCAzODkuNSwxMTguMiBMIDM4OS44LDEzNS4wIEwgMzkwLjEsMTUxLjkgTCAzOTAuNCwxNjguOCBMIDM5MC43LDE4NS43IEwgMzkxLjAsMjAyLjYgTCAzOTEuMywyMTkuNCBMIDM5MS41LDIzNi4zIEwgMzkxLjcsMjUzLjIgTCAzOTEuOSwyNzAuMSBMIDM5Mi4wLDI4Ny4wIEwgMzkyLjAsMzAzLjggTCAzOTIuMCwzMjAuNyBMIDM5Mi4wLDMzNy42IEwgMzkxLjgsMzU0LjUgTCAzOTEuNiwzNzEuNCBMIDM5MS4zLDM4OC4yIEwgMzkxLjAsNDA1LjEgTCAzOTAuNiw0MjIuMCBMIDM5MC4xLDQzOC45IEwgMzg5LjcsNDU1LjggTCAzODkuMSw0NzIuNiBMIDM4OC42LDQ4OS41IEwgMzg4LjEsNTA2LjQgTCAzODcuNSw1MjMuMyBMIDM4Ny4wLDU0MC4yIEwgMzg2LjYsNTU3LjAgTCAzODYuMSw1NzMuOSBMIDM4NS44LDU5MC44IEwgMzg1LjQsNjA3LjcgTCAzODUuMiw2MjQuNiBMIDM4NS4xLDY0MS40IEwgMzg1LjAsNjU4LjMgTCAzODUuMSw2NzUuMiBMIDM4NS4yLDY5Mi4xIEwgMzg1LjUsNzA5LjAgTCAzODUuOCw3MjUuOCBMIDM4Ni4yLDc0Mi43IEwgMzg2LjcsNzU5LjYgTCAzODcuMyw3NzYuNSBMIDM4Ny45LDc5My40IEwgMzg4LjYsODEwLjIgTCAzODkuMyw4MjcuMSBMIDM5MC4wLDg0NC4wIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTQwLDE0MCwxNDAsMC41NSkiIHN0cm9rZS13aWR0aD0iMC45Ii8+Cjwvc3ZnPg==");
+  background-size:cover;
+  background-position:center top;
+  background-attachment:fixed;
+  background-color:#fff;
+}
+[data-theme="grid"] body::before{display:none;}
+[data-theme="grid"] .screen-band{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(180,180,180,.3);
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+[data-theme="grid"] .screen-band::after{display:none;}
+[data-theme="grid"] .band-title{color:#222;}
+[data-theme="grid"] .band-btn{
+  background:rgba(0,0,0,.06);
+  border-color:rgba(0,0,0,.15);
+  color:#333;
+}
+[data-theme="grid"] .bnav{
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(16px);
+  border-top:1px solid rgba(180,180,180,.3);
+}
+[data-theme="grid"] .nb{color:#aaa;}
+[data-theme="grid"] .nb.active{color:#444;}
+[data-theme="grid"] .pc{border-left-color:rgba(180,180,180,.5);box-shadow:0 1px 8px rgba(0,0,0,.07);}
+[data-theme="grid"] .pc-now{border-left-color:#444;box-shadow:0 0 0 1.5px rgba(0,0,0,.12),0 2px 10px rgba(0,0,0,.08);}
+[data-theme="grid"] .pc-now .pn{background:#333;color:#fff;}
+[data-theme="grid"] .pn{background:rgba(200,200,200,.35);color:#444;}
+[data-theme="grid"] .evc{border-left-color:#888;}
+[data-theme="grid"] .dtab.active{background:#333;border-color:#333;color:#fff;}
+[data-theme="grid"] .imp-box{box-shadow:0 2px 8px rgba(0,0,0,.06);}
+[data-theme="grid"] .imp-item::before{color:#999;}
+[data-theme="grid"] .mr.cur{border-left-color:#444;background:rgba(255,255,255,.88);}
+[data-theme="grid"] .mr.cur .mlbl{color:#333;}
+[data-theme="grid"] .mphoto::before{background:rgba(100,100,100,.25)!important;}
+[data-theme="grid"] .pslot::before{background:rgba(100,100,100,.2)!important;}
+[data-theme="grid"] .pslot:nth-child(2n)::before{background:rgba(100,100,100,.25)!important;}
+[data-theme="grid"] .pslot:nth-child(3n)::before{background:rgba(100,100,100,.22)!important;}
+[data-theme="grid"] .pslot:nth-child(4n)::before{background:rgba(100,100,100,.2)!important;}
+[data-theme="grid"] .btn-p{background:#333;}
+[data-theme="grid"] .add-ev-btn{background:rgba(255,255,255,.7);}
+[data-theme="grid"] .modal{border-top-color:#ccc;}
+[data-theme="grid"] .cc.today{background:#333;color:#fff;}
+[data-theme="grid"] .cc.selected{background:rgba(0,0,0,.1);outline-color:#444;}
+[data-theme="grid"] .sec span{background:linear-gradient(transparent 45%,rgba(0,0,0,.08) 45%);}
+[data-theme="grid"] .today-bar{border-top-color:#bbb;}
+[data-theme="grid"] .ttc{border-left-color:rgba(150,150,150,.4);}
+.hbtn-light{width:34px;height:34px;border-radius:50%;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--accent);flex-shrink:0;}
+
+/* ── 2カラムレイアウト ── */
+.layout-cols{display:flex;gap:8px;padding:0 14px;margin-bottom:0;}
+.col-left{flex:0 0 44%;display:flex;flex-direction:column;gap:0;}
+.col-right{flex:1;display:flex;flex-direction:column;gap:12px;}
+.col-date-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--rs);border-top:3px solid var(--accent);
+  padding:8px 10px;box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.col-date-lbl{font-size:9px;color:var(--soft);}
+.col-date-big{font-size:16px;font-weight:700;line-height:var(--LH);}
+.col-badge{display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:700;margin-top:2px;}
+.col-ev-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  border-radius:0 var(--rs) var(--rs) 0;
+  padding:7px 9px;font-size:11px;box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.col-ev-title{font-size:10px;font-weight:700;color:var(--soft);margin-bottom:3px;}
+.col-ev-item{font-size:12px;font-weight:700;line-height:20px;}
+.col-ev-time{font-size:10px;color:var(--soft);}
+.col-transport{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-left:3px solid var(--accent2);
+  border-radius:0 var(--rs) var(--rs) 0;
+  padding:7px 9px;box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.col-tr-title{font-size:9px;color:var(--soft);font-weight:700;margin-bottom:2px;}
+.col-tr-input{width:100%;border:none;background:none;font-family:inherit;font-size:11px;color:var(--text);outline:none;line-height:1.5;}
+.col-tt-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--rs);padding:8px 9px;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+  flex:1;
+}
+.col-tt-title{font-size:9px;color:var(--soft);font-weight:700;margin-bottom:4px;border-bottom:1px solid var(--rule);padding-bottom:2px;}
+.col-period-row{display:flex;align-items:center;gap:5px;min-height:22px;}
+.col-period-num{font-size:11px;font-weight:700;color:var(--soft);width:16px;flex-shrink:0;}
+.col-period-subj{font-size:14px;font-weight:700;flex:1;line-height:1.4;}
+.col-period-now{color:var(--accent);font-weight:700;}
+.col-period-done{opacity:.38;}
+.col-now-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+
+/* ===== LAYOUT B — 2カラム（スケッチ風） ===== */
+.layout-b-wrap{display:none;padding:0 14px;gap:14px;}
+.layout-b-wrap.active{display:flex;}
+
+/* 左カラム — 時間割 */
+.col-left{
+  flex:0 0 44%;
+  background:var(--card-bg);
+  border-radius:var(--rs);
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  padding:16px 12px 16px 16px;
+  box-shadow:0 1px 6px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;gap:1px;
+}
+.col-left-title{
+  font-size:11px;font-weight:700;color:var(--soft);
+  margin-bottom:8px;letter-spacing:.5px;
+}
+.col-period{
+  display:flex;align-items:center;gap:6px;
+  min-height:36px;border-bottom:1px solid var(--rule);
+  padding:4px 0;
+}
+.col-period:last-child{border-bottom:none;}
+.col-period-num{font-size:9px;font-weight:700;color:var(--soft);width:12px;flex-shrink:0;}
+.col-period-subj{font-size:11px;font-weight:700;flex:1;line-height:22px;}
+.col-period-now{color:var(--accent);}
+.col-period-done{opacity:.38;}
+.col-now-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+
+/* 右カラム */
+.col-right{
+  flex:1;display:flex;flex-direction:column;gap:10px;
+}
+
+/* 日付ブロック */
+.col-date-box{
+  background:var(--card-bg);
+  border-radius:var(--rs);
+  border:1px solid var(--border);
+  border-top:4px solid var(--accent2);
+  padding:16px 14px;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.col-date-main{font-size:20px;font-weight:700;line-height:1.3;color:var(--text);}
+.col-date-sub{font-size:11px;color:var(--soft);margin-top:4px;}
+
+/* 予定ブロック */
+.col-ev-box{
+  background:var(--card-bg);
+  border-radius:var(--rs);
+  border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  padding:14px 14px;
+  flex:1;
+  min-height:100px;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.col-ev-title{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:6px;}
+.col-ev-item{font-size:14px;font-weight:700;line-height:1.6;color:var(--text);}
+.col-ev-time{font-size:11px;color:var(--soft);margin-top:2px;}
+
+/* 電車バスブロック */
+.col-transit-box{
+  background:var(--card-bg);
+  border-radius:var(--rs);
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  padding:14px 14px;
+  box-shadow:0 1px 6px rgba(0,0,0,.07);
+}
+.col-transit-title{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:5px;}
+.col-transit-time{font-size:15px;font-weight:700;color:var(--text);}
+
+/* メモ row */
+.col-memo-row{padding:0 14px;margin-top:18px;}
+.col-memo-wrap{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:var(--rs);
+  padding:12px 14px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.col-memo-lbl{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:6px;}
+.col-memo-in{
+  width:100%;border:none;background:transparent;
+  resize:none;font-family:inherit;font-size:12px;
+  color:var(--text);outline:none;
+  min-height:80px;line-height:var(--LH);padding:0;
+}
+
+/* 写真 row — レイアウトB共通 */
+.col-photo-row{padding:0 14px;display:flex;gap:8px;margin-top:8px;}
+
+/* ===== GALLERY ===== */
+.gal-folder-grid{
+  padding:0 14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.gal-folder{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:0;
+  cursor:pointer;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.gal-folder:active{opacity:.8;}
+/* フォルダプレビュー写真グリッド */
+.gal-folder-preview{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  aspect-ratio:1;
+  background:var(--bg);
+}
+.gal-folder-preview-cell{
+  background:var(--accent-light);
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  color:var(--soft);
+}
+.gal-folder-preview-cell img{width:100%;height:100%;object-fit:cover;}
+.gal-folder-preview-cell.empty{background:var(--bg);}
+/* マスキングテープ */
+.gal-folder::before{
+  content:'';
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:45%;height:11px;
+  background:rgba(90,172,205,.38);
+  border-radius:0 0 3px 3px;
+  z-index:2;pointer-events:none;
+}
+.gal-folder:nth-child(2n)::before{background:rgba(107,191,142,.38);}
+.gal-folder:nth-child(3n)::before{background:rgba(240,201,106,.5);}
+.gal-folder:nth-child(4n)::before{background:rgba(155,143,212,.38);}
+.gal-folder-name{
+  font-size:12px;font-weight:700;
+  padding:8px 10px 10px;
+  color:var(--text);
+  line-height:1.3;
+}
+/* ＋新規フォルダボタン */
+.gal-add-folder{
+  border:2px dashed var(--border);
+  background:transparent;
+  border-radius:var(--r);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  aspect-ratio:1;
+  cursor:pointer;
+  gap:6px;
+  color:var(--soft);
+  font-size:12px;
+  font-family:inherit;
+}
+.gal-add-folder::before{display:none;}
+.gal-add-icon{font-size:28px;color:var(--border);}
+
+/* フォルダ詳細ビュー */
+.gal-detail{display:none;padding:0 0 76px;}
+.gal-detail.active{display:block;}
+.gal-detail-header{
+  background:linear-gradient(135deg,var(--band-from),var(--band-to));
+  padding:calc(env(safe-area-inset-top,0px) + 44px) 18px 14px;
+  display:flex;align-items:flex-end;gap:10px;
+  position:relative;
+  box-shadow:0 3px 0 rgba(0,0,0,.1);
+}
+.gal-detail-back{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:15px;color:#fff;flex-shrink:0;
+}
+.gal-detail-title{flex:1;font-size:18px;font-weight:700;color:#fff;}
+.gal-detail-add{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;color:#fff;flex-shrink:0;
+}
+.gal-photo-grid{
+  padding:14px 14px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+}
+.gal-photo-cell{
+  aspect-ratio:1;
+  border-radius:8px;
+  overflow:hidden;
+  position:relative;
+  background:var(--accent-light);
+  cursor:pointer;
+  transition:transform .15s;
+}
+.gal-photo-cell img{width:100%;height:100%;object-fit:cover;}
+.gal-photo-del{
+  position:absolute;top:4px;right:4px;
+  background:rgba(0,0,0,.55);color:#fff;
+  border:none;border-radius:50%;
+  width:20px;height:20px;font-size:11px;
+  cursor:pointer;display:none;
+  align-items:center;justify-content:center;z-index:2;
+}
+.gal-photo-cell:hover .gal-photo-del,
+.gal-photo-cell:active .gal-photo-del{display:flex;}
+/* 選択モード */
+.gal-select-mode .gal-photo-cell{cursor:pointer;}
+.gal-select-mode .gal-photo-cell:active{transform:scale(.95);}
+.gal-select-check{
+  position:absolute;top:5px;left:5px;
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,.85);
+  border:2px solid rgba(255,255,255,.9);
+  display:none;align-items:center;justify-content:center;
+  font-size:13px;z-index:3;
+  box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+.gal-select-mode .gal-select-check{display:flex;}
+.gal-select-mode .gal-photo-del{display:none!important;}
+.gal-photo-cell.selected .gal-select-check{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.gal-photo-cell.selected img{opacity:.75;}
+/* 選択モードバー */
+.gal-select-bar{
+  display:none;
+  position:fixed;bottom:76px;left:0;right:0;
+  background:var(--accent);
+  color:#fff;
+  padding:12px 18px;
+  display:none;
+  align-items:center;justify-content:space-between;
+  z-index:150;
+  box-shadow:0 -2px 12px rgba(0,0,0,.15);
+}
+.gal-select-bar.active{display:flex;}
+.gal-select-count{font-size:14px;font-weight:700;}
+.gal-select-del-btn{
+  background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);
+  color:#fff;border-radius:20px;padding:6px 16px;
+  font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;
+}
+.gal-select-cancel-btn{
+  background:none;border:none;color:rgba(255,255,255,.8);
+  font-family:inherit;font-size:13px;cursor:pointer;
+}
+.gal-photo-add-cell{
+  aspect-ratio:1;border-radius:8px;
+  border:2px dashed var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:var(--border);cursor:pointer;
+  background:transparent;
+}
+/* 写真フルスクリーン */
+.gal-fullscreen{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:500;
+  align-items:center;justify-content:center;
+  flex-direction:column;
+}
+.gal-fullscreen.open{display:flex;}
+.gal-fullscreen img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:8px;}
+.gal-fullscreen-close{
+  position:absolute;top:50px;right:20px;
+  color:#fff;font-size:28px;cursor:pointer;
+  background:none;border:none;
+}
+</style>
 </head>
 <body>
 
-<!-- TODAY -->
 
+<!-- TODAY -->
 <div class="screen active" id="screen-today">
-  <div class="sh" style="padding-bottom:4px;">
-    <div class="st">📅 今日</div>
-    <div class="hbtn" onclick="openEvModal(null)">＋</div>
+  <div class="screen-band">
+    <div class="band-title"><span id="mo-today">📅</span> 今日</div>
+    <div style="display:flex;gap:6px;">
+      <div class="band-btn" id="layout-toggle-btn" onclick="toggleLayout()" title="レイアウト切替">⊞</div>
+      <div class="band-btn" onclick="openEvModal(null)">＋</div>
+    </div>
   </div>
+
+  <!-- ナビバー（両レイアウト共通） -->
   <div class="today-bar">
     <div class="tnav" onclick="navDay(-1)">‹</div>
     <div class="tcenter">
@@ -179,36 +761,79 @@ body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--t
     </div>
     <div class="tnav" onclick="navDay(1)">›</div>
   </div>
-  <div class="sec">✏️ 時間割</div>
-  <div class="slist" id="t-sched"></div>
-  <div style="height:12px"></div>
-  <div class="sec">📌 予定</div>
-  <div class="evlist" id="t-evs"></div>
-  <div style="height:12px"></div>
-  <div class="sec">📝 メモ・日記</div>
-  <div class="memo-wrap">
-    <div class="mlbl" id="t-mlbl">今日</div>
-    <textarea class="min" id="t-memo" placeholder="今日はどんな日だった？"></textarea>
+
+  <!-- ===== LAYOUT A（縦並び・デフォルト） ===== -->
+  <div id="layout-a">
+    <div style="height:6px"></div>
+    <div class="sec"><span><span id="mo-sec-tt">✏️</span> 時間割</span></div>
+    <div class="slist" id="t-sched"></div>
+    <div style="height:22px"></div>
+    <div class="sec"><span><span id="mo-sec-ev">📌</span> 予定</span></div>
+    <div class="evlist" id="t-evs"></div>
+    <div style="height:16px"></div>
+    <div class="sec"><span><span id="mo-sec-memo">📝</span> メモ・日記</span></div>
+    <div class="memo-wrap">
+      <div class="mlbl" id="t-mlbl">今日</div>
+      <textarea class="min" id="t-memo" placeholder="今日はどんな日だった？"></textarea>
+    </div>
+    <div style="height:28px"></div>
+    <div class="sec"><span><span id="mo-sec-photo">📷</span> 写真</span></div>
+    <div class="photo-row" id="t-photos"></div>
+    <div style="height:20px"></div>
   </div>
-  <div style="height:12px"></div>
-  <div class="sec">📷 写真</div>
-  <div class="photo-row" id="t-photos"></div>
-  <div style="height:6px"></div>
+
+  <!-- ===== LAYOUT B（2カラム・スケッチ風） ===== -->
+  <div id="layout-b" style="display:none;">
+    <div style="height:10px"></div>
+    <!-- 2カラムメイン -->
+    <div class="layout-b-wrap active">
+      <!-- 左：時間割 -->
+      <div class="col-left" id="b-sched"></div>
+      <!-- 右：日付・予定・電車 -->
+      <div class="col-right">
+        <div class="col-date-box">
+          <div class="col-date-main" id="b-date"></div>
+          <div class="col-date-sub" id="b-badge2"></div>
+        </div>
+        <div class="col-ev-box" id="b-evs"></div>
+        <div class="col-transit-box">
+          <div class="col-transit-title">🚃 電車・バス</div>
+          <textarea class="col-transit-time" id="b-transit"
+            style="width:100%;border:none;background:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--text);outline:none;resize:none;min-height:32px;line-height:1.5;"
+            placeholder="例：7:45発　快速"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- メモ -->
+    <div class="col-memo-row" style="margin-top:8px;">
+      <div class="col-memo-wrap">
+        <div class="col-memo-lbl" id="b-memo-lbl">📝 メモ・日記</div>
+        <textarea class="col-memo-in" id="b-memo" placeholder="今日はどんな日だった？"></textarea>
+      </div>
+    </div>
+
+    <!-- 写真 -->
+    <div style="height:14px"></div>
+    <div class="col-photo-row" id="b-photos"></div>
+    <div style="height:18px"></div>
+  </div>
 </div>
 
 <!-- CALENDAR -->
-
 <div class="screen" id="screen-calendar">
-  <div class="cal-top">
-    <div class="carrow" onclick="changeMonth(-1)">‹</div>
-    <div class="cal-month" id="cal-mtitle"></div>
-    <div class="carrow" onclick="changeMonth(1)">›</div>
+  <div class="screen-band" style="padding-bottom:10px;">
+    <div class="cal-top" style="padding:0;flex:1;justify-content:flex-start;gap:10px;">
+      <div class="band-btn" onclick="changeMonth(-1)" style="flex-shrink:0;">‹</div>
+      <div class="band-title" id="cal-mtitle" style="flex:1;text-align:center;"></div>
+      <div class="band-btn" onclick="changeMonth(1)" style="flex-shrink:0;">›</div>
+    </div>
   </div>
   <div class="cal-dh"><div style="color:#e08080">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div style="color:#8080e0">土</div></div>
   <div class="cal-grid" id="cal-grid"></div>
   <div class="imp-box">
     <div class="imp-hdr">
-      <div class="imp-ttl">⭐ 重要なこと</div>
+      <div class="imp-ttl"><span id="mo-imp">⭐</span> 重要なこと</div>
       <button class="imp-edit" onclick="openImpModal()">編集</button>
     </div>
     <div id="imp-list"></div>
@@ -219,36 +844,49 @@ body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--t
 </div>
 
 <!-- TIMETABLE -->
-
 <div class="screen" id="screen-timetable">
-  <div class="tt-top">
-    <div class="st">✏️ 時間割</div>
-    <div style="display:flex;gap:8px;">
-      <div class="hbtn" onclick="openModal('modal-edit-tt')" title="編集">✏️</div>
-      <div class="hbtn" onclick="openModal('modal-custom-tt')">＋</div>
+  <div class="screen-band">
+    <div class="band-title"><span id="mo-tt">✏️</span> 時間割</div>
+    <div style="display:flex;gap:7px;">
+      <div class="band-btn" onclick="openModal('modal-edit-tt')" id="mo-tt-btn">✏️</div>
+      <div class="band-btn" onclick="openModal('modal-custom-tt')">＋</div>
     </div>
   </div>
-  <div class="day-tabs" id="day-tabs"></div>
+  <div class="day-tabs" id="day-tabs" style="padding-top:6px;"></div>
   <div class="tt-grid" id="tt-grid"></div>
-  <div style="height:14px"></div>
-  <div class="sec">📋 カスタム時間割</div>
+  <div class="sec" style="margin-top:4px;"><span><span id="mo-custom">📋</span> カスタム時間割</span></div>
   <div class="custom-list" id="custom-list"></div>
   <div style="height:6px"></div>
 </div>
 
 <!-- YEARBOOK -->
-
 <div class="screen" id="screen-yearbook">
-  <div class="yr-hdr">2026年 💕</div>
+  <div class="screen-band">
+    <div class="band-title">📖 2026年 <span id="mo-year">💕</span></div>
+  </div>
   <div class="yr-list" id="yr-list"></div>
   <div style="height:6px"></div>
 </div>
 
 <!-- SETTINGS -->
-
 <div class="screen" id="screen-settings">
-  <div class="sh"><div class="st">⚙️ 設定</div></div>
+  <div class="screen-band">
+    <div class="band-title">⚙️ 設定 <span id="mo-set" style="font-size:14px;opacity:.7;"></span></div>
+  </div>
+  <!-- テーマ選択 -->
+  <div style="padding:0 14px 12px;">
+    <div style="font-size:11px;font-weight:700;color:var(--soft);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+      <span style="background:linear-gradient(transparent 45%,rgba(var(--accent),0.25) 45%);padding:0 2px;">🎨 テーマ</span>
+      <span style="flex:1;height:1px;background:var(--border);display:block;"></span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;" id="theme-grid"></div>
+  </div>
   <div class="slist-s">
+    <div class="sit" onclick="toggleLayout();showScreen('today',document.querySelectorAll('.nb')[0])">
+      <div class="si-icon">⊞</div>
+      <div class="si-lbl">今日タブのレイアウト切替</div>
+      <div style="font-size:11px;color:var(--accent);font-weight:700;" id="layout-indicator">縦並び / 2カラム</div>
+    </div>
     <div class="sit" onclick="openModal('modal-add-special')"><div class="si-icon">📅</div><div class="si-lbl">特別日・休校日を追加</div><div class="si-arrow">›</div></div>
     <div class="sit" onclick="openImpModal()"><div class="si-icon">⭐</div><div class="si-lbl">重要なことを編集</div><div class="si-arrow">›</div></div>
     <div class="sit" onclick="openModal('modal-edit-tt')"><div class="si-icon">✏️</div><div class="si-lbl">基本時間割を編集</div><div class="si-arrow">›</div></div>
@@ -266,32 +904,30 @@ body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--t
 </div>
 
 <!-- DAY DETAIL (from calendar) -->
-
 <div class="screen" id="screen-daydetail">
-  <div class="sh">
-    <div class="hbtn" onclick="backFromDay()">‹</div>
-    <div class="st" id="dd-title" style="font-size:16px;"></div>
-    <div class="hbtn" onclick="openEvModal(selDate)">＋</div>
+  <div class="screen-band">
+    <div class="band-btn" onclick="backFromDay()">‹</div>
+    <div class="band-title" id="dd-title" style="flex:1;text-align:center;font-size:15px;"></div>
+    <div class="band-btn" onclick="openEvModal(selDate)">＋</div>
   </div>
-  <div class="sec">✏️ 時間割</div>
+  <div class="sec"><span><span id="mo-dd-tt">✏️</span> 時間割</span></div>
   <div class="slist" id="dd-sched"></div>
-  <div style="height:12px"></div>
-  <div class="sec">📌 予定</div>
+  <div style="height:18px"></div>
+  <div class="sec"><span><span id="mo-dd-ev">📌</span> 予定</span></div>
   <div class="evlist" id="dd-evs"></div>
   <div style="height:12px"></div>
-  <div class="sec">📝 メモ・日記</div>
+  <div class="sec"><span><span id="mo-dd-memo">📝</span> メモ・日記</span></div>
   <div class="memo-wrap">
     <div class="mlbl" id="dd-mlbl"></div>
     <textarea class="min" id="dd-memo" placeholder="この日のメモ"></textarea>
   </div>
   <div style="height:12px"></div>
-  <div class="sec">📷 写真</div>
+  <div class="sec"><span><span id="mo-dd-photo">📷</span> 写真</span></div>
   <div class="photo-row" id="dd-photos"></div>
   <div style="height:6px"></div>
 </div>
 
 <!-- BOTTOM NAV -->
-
 <nav class="bnav">
   <button class="nb active" onclick="goScreen('today',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>今日
@@ -305,13 +941,15 @@ body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--t
   <button class="nb" onclick="goScreen('yearbook',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>年間
   </button>
+  <button class="nb" onclick="goScreen('gallery',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>写真
+  </button>
   <button class="nb" onclick="goScreen('settings',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>設定
   </button>
 </nav>
 
 <!-- MODALS -->
-
 <div class="moverlay" id="modal-add-event" onclick="closeOut(event,'modal-add-event')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -345,7 +983,7 @@ body{font-family:'Zen Maru Gothic',sans-serif;background:var(--bg);color:var(--t
 <div class="moverlay" id="modal-imp" onclick="closeOut(event,'modal-imp')">
   <div class="modal">
     <div class="mhandle"></div>
-    <div class="mtitle">⭐ 重要なことを編集</div>
+    <div class="mtitle" id="imp-modal-title">⭐ 重要なことを編集</div>
     <div class="fg"><label class="fl">1行1項目</label>
       <textarea class="fi" id="imp-input" style="min-height:90px;resize:none;" placeholder="スーツ！&#10;誕生日プレゼント"></textarea>
     </div>
@@ -445,15 +1083,119 @@ const DEFAULT_TT={
 };
 const DEFAULT_PT=[{s:'09:00',e:'10:30'},{s:'10:40',e:'12:10'},{s:'13:00',e:'14:30'},{s:'14:40',e:'16:10'},{s:'16:20',e:'17:50'}];
 
+// ===== INDEXED DB — 写真専用ストレージ =====
+const IDB_NAME='sapp_photos', IDB_VER=1, IDB_STORE='photos';
+let idb=null;
+
+function openIDB(){
+  return new Promise(function(resolve,reject){
+    if(idb){resolve(idb);return;}
+    var req=indexedDB.open(IDB_NAME,IDB_VER);
+    req.onupgradeneeded=function(e){
+      e.target.result.createObjectStore(IDB_STORE);
+    };
+    req.onsuccess=function(e){idb=e.target.result;resolve(idb);};
+    req.onerror=function(){reject(req.error);};
+  });
+}
+function idbSet(key,val){
+  return openIDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction(IDB_STORE,'readwrite');
+      tx.objectStore(IDB_STORE).put(val,key);
+      tx.oncomplete=function(){resolve();};
+      tx.onerror=function(){reject(tx.error);};
+    });
+  });
+}
+function idbGet(key){
+  return openIDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction(IDB_STORE,'readonly');
+      var req=tx.objectStore(IDB_STORE).get(key);
+      req.onsuccess=function(){resolve(req.result||null);};
+      req.onerror=function(){reject(req.error);};
+    });
+  });
+}
+function idbDel(key){
+  return openIDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction(IDB_STORE,'readwrite');
+      tx.objectStore(IDB_STORE).delete(key);
+      tx.oncomplete=resolve;
+      tx.onerror=function(){reject(tx.error);};
+    });
+  });
+}
+
+// ===== LOCAL STORAGE — 設定・テキストデータのみ =====
 function loadD(){
-  try{const d=localStorage.getItem('sapp3');if(d)return JSON.parse(d);}catch(e){}
+  try{var d=localStorage.getItem('sapp3');if(d)return JSON.parse(d);}catch(e){}
   return{tt:JSON.parse(JSON.stringify(DEFAULT_TT)),pt:JSON.parse(JSON.stringify(DEFAULT_PT)),
-    events:[],specials:[],memos:{},photos:{},mPhotos:{},
+    events:[],specials:[],memos:{},
     mSumm:{'2026-3':{main:'春休み🌸',sub:''},'2026-4':{main:'新学期スタート✨',sub:''},'2026-5':{main:'GW🎏',sub:''},'2026-6':{main:'主な予定',sub:''},'2026-7':{main:'主な予定',sub:''},'2026-8':{main:'夏休み🌻',sub:''}},
-    customs:[],important:['スーツ！','誕生日プレゼント']};
+    customs:[],
+    galFolders:[],
+    important:{'default':['スーツ！','誕生日プレゼント']}};
 }
 let D=loadD();
-function sv(){localStorage.setItem('sapp3',JSON.stringify(D));}
+// 古いlocalStorageの写真データを削除（IndexedDB移行後の残骸）
+(function(){
+  try {
+    var raw = localStorage.getItem('sapp3');
+    if(raw){
+      var parsed = JSON.parse(raw);
+      var changed = false;
+      // 古い photos/mPhotos キーを削除
+      if(parsed.photos){ delete parsed.photos; changed=true; }
+      if(parsed.mPhotos){ delete parsed.mPhotos; changed=true; }
+      // galFolders内のphotos配列も削除（IDBに移行済み）
+      if(parsed.galFolders){
+        parsed.galFolders.forEach(function(f){ if(f.photos){ delete f.photos; changed=true; } });
+      }
+      if(changed){
+        localStorage.setItem('sapp3', JSON.stringify(parsed));
+        D = parsed;
+      }
+    }
+  } catch(e){}
+})();
+// テキストデータだけ保存（写真はIndexedDB）
+function sv(){
+  var slim=Object.assign({},D);
+  // 写真データはlocalStorageに入れない
+  try{localStorage.setItem('sapp3',JSON.stringify(slim));}
+  catch(e){showToast('設定の保存に失敗しました');}
+}
+
+// ── 今日の写真 ──
+function savePhoto(dateStr,idx,dataUrl){
+  return idbSet('photo:'+dateStr+':'+idx, dataUrl);
+}
+function loadPhoto(dateStr,idx){
+  return idbGet('photo:'+dateStr+':'+idx);
+}
+function deletePhoto(dateStr,idx){
+  return idbDel('photo:'+dateStr+':'+idx);
+}
+// ── 月写真 ──
+function saveMonthPhoto(key,dataUrl){
+  return idbSet('mphoto:'+key, dataUrl);
+}
+function loadMonthPhoto(key){
+  return idbGet('mphoto:'+key);
+}
+// ── ギャラリー写真 ──
+function saveGalPhoto(folderIdx,photoIdx,dataUrl){
+  return idbSet('gal:'+folderIdx+':'+photoIdx, dataUrl);
+}
+function loadGalPhoto(folderIdx,photoIdx){
+  return idbGet('gal:'+folderIdx+':'+photoIdx);
+}
+function deleteGalPhoto(folderIdx,photoIdx){
+  return idbDel('gal:'+folderIdx+':'+photoIdx);
+}
 
 let vDate=new Date(),calY=new Date().getFullYear(),calM=new Date().getMonth(),selDate=null,prevScr='today',ttDay=null,editMKey=null,ctPCount=1;
 
@@ -466,11 +1208,31 @@ function goScreen(n,btn){
   if(n==='calendar')rCal();
   if(n==='timetable')rTT();
   if(n==='yearbook')rYr();
+  if(n==='gallery')rGallery();
 }
 
 function navDay(d){vDate=new Date(vDate);vDate.setDate(vDate.getDate()+d);rToday();}
 
+// ===== LAYOUT =====
+let currentLayout = localStorage.getItem('sapp3_layout') || 'a';
+
+function toggleLayout(){
+  currentLayout = currentLayout === 'a' ? 'b' : 'a';
+  localStorage.setItem('sapp3_layout', currentLayout);
+  applyLayout();
+  rToday();
+}
+
+function applyLayout(){
+  const isB = currentLayout === 'b';
+  document.getElementById('layout-a').style.display = isB ? 'none' : 'block';
+  document.getElementById('layout-b').style.display = isB ? 'block' : 'none';
+  const btn = document.getElementById('layout-toggle-btn');
+  if(btn) btn.textContent = isB ? '☰' : '⊞';
+}
+
 function rToday(){
+  applyLayout();
   const ds=toS(vDate),dn=DN[vDate.getDay()],isT=ds===toS(new Date());
   document.getElementById('td-lbl').textContent=`${vDate.getFullYear()}年${vDate.getMonth()+1}月${vDate.getDate()}日`;
   document.getElementById('td-big').textContent=`${isT?'今日 ':''}${vDate.getDate()}日（${dn}）`;
@@ -481,12 +1243,97 @@ function rToday(){
   rEvs('t-evs',ds,true,()=>rToday());
   rMemo('t-memo',ds);
   rPhotos('t-photos',ds);
+
+  // Layout B rendering
+  if(currentLayout==='b') rTodayB(ds,dn,sp,vDate);
 }
 
+function rTodayB(ds,dn,sp,dateObj){
+  const now=new Date();
+  const nm=now.getHours()*60+now.getMinutes();
+  const isT=ds===toS(new Date());
+
+  // 日付
+  const dateEl=document.getElementById('b-date');
+  if(dateEl) dateEl.textContent=dateObj.getDate()+'日（'+dn+'）';
+  const badge2=document.getElementById('b-badge2');
+  if(badge2) badge2.textContent=sp?(spI(sp.type)+' '+sp.name):(dateObj.getFullYear()+'/'+( dateObj.getMonth()+1)+'/'+dateObj.getDate());
+
+  // 左カラム時間割
+  const bsched=document.getElementById('b-sched');
+  if(bsched){
+    bsched.innerHTML='<div class="col-left-title">TIME TABLE</div>';
+    const periods=D.tt[dn];
+    if(!periods||(sp&&sp.type==='holiday')){
+      bsched.innerHTML+='<div style="font-size:11px;color:var(--soft);padding:4px 0;">授業なし</div>';
+    } else {
+      periods.forEach(function(p,i){
+        const t=D.pt[i]||{s:'',e:''};
+        const sm=tM(t.s),em=tM(t.e);
+        const isN=isT&&nm>=sm&&nm<em;
+        const isDone=isT&&nm>=em;
+        const row=document.createElement('div');
+        row.className='col-period';
+        var subjClass='col-period-subj';
+        if(isN) subjClass+=' col-period-now';
+        if(isDone) subjClass+=' col-period-done';
+        var dot=isN?'<span class="col-now-dot"></span>':'';
+        row.innerHTML='<span class="col-period-num">'+(i+1)+'</span><span class="'+subjClass+'">'+p.s+'</span>'+dot;
+        bsched.appendChild(row);
+      });
+    }
+    var times=D.pt;
+    if(times&&times.length){
+      var tRow=document.createElement('div');
+      tRow.style.cssText='font-size:9px;color:var(--soft);margin-top:5px;border-top:1px solid var(--rule);padding-top:4px;';
+      tRow.textContent=times[0].s+' ～ '+times[times.length-1].e;
+      bsched.appendChild(tRow);
+    }
+  }
+
+  // 右カラム予定
+  const bevs=document.getElementById('b-evs');
+  if(bevs){
+    bevs.innerHTML='<div class="col-ev-title">TODAY&#39;S PLAN</div>';
+    const evs=D.events.filter(function(e){return e.date===ds;});
+    if(!evs.length){
+      var noev=document.createElement('div');
+      noev.style.cssText='font-size:11px;color:var(--soft);';
+      noev.textContent='予定なし';
+      bevs.appendChild(noev);
+    } else {
+      evs.forEach(function(ev){
+        var e=document.createElement('div');
+        var timeStr=ev.start?(ev.start+(ev.end?' - '+ev.end:'')):'';
+        e.innerHTML='<div class="col-ev-item">'+ev.name+'</div>'+(timeStr?'<div class="col-ev-time">'+timeStr+'</div>':'');
+        bevs.appendChild(e);
+      });
+    }
+  }
+
+  // 電車バス
+  const tr=document.getElementById('b-transit');
+  if(tr){
+    tr.value=D.memos[ds+'_transit']||'';
+    tr.oninput=function(){D.memos[ds+'_transit']=tr.value;sv();};
+  }
+
+  // メモ
+  const bm=document.getElementById('b-memo');
+  if(bm){
+    var lbl=document.getElementById('b-memo-lbl');
+    if(lbl) lbl.textContent='📝 '+(isT?'今日':'メモ・日記');
+    bm.value=D.memos[ds]||'';
+    bm.oninput=function(){D.memos[ds]=bm.value;sv();};
+  }
+
+  // 写真
+  rPhotos('b-photos',ds);
+}
 function rSched(elId,ds,dn,sp){
   const el=document.getElementById(elId);el.innerHTML='';
   const periods=D.tt[dn];const now=new Date();const nm=now.getHours()*60+now.getMinutes();const isT=ds===toS(new Date());
-  if(!periods||sp?.type==='holiday'){el.innerHTML='<div style="padding:8px 4px;color:var(--soft);font-size:13px;">📭 授業なし</div>';return;}
+  if(!periods||(sp&&sp.type==='holiday')){el.innerHTML='<div style="padding:8px 4px;color:var(--soft);font-size:13px;">📭 授業なし</div>';return;}
   periods.forEach((p,i)=>{
     const t=D.pt[i]||{s:'',e:''};const sm=tM(t.s),em=tM(t.e);
     const isN=isT&&nm>=sm&&nm<em,isDone=isT&&nm>=em;
@@ -514,26 +1361,63 @@ function rMemo(elId,ds){
 }
 
 function rPhotos(cont,ds){
-  const el=document.getElementById(cont);el.innerHTML='';
-  const photos=D.photos[ds]||[];
-  for(let i=0;i<4;i++){
-    const slot=document.createElement('div');slot.className='pslot';
-    const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
-    inp.onchange=e=>hPhoto(e.target,ds,i,cont);
-    if(photos[i]){
-      const img=document.createElement('img');img.src=photos[i];
-      const del=document.createElement('button');del.className='pdel';del.textContent='×';
-      del.onclick=e=>{e.stopPropagation();D.photos[ds][i]=null;sv();rPhotos(cont,ds);};
-      slot.appendChild(img);slot.appendChild(del);
-    }else{const pp=document.createElement('span');pp.className='pp';pp.textContent='＋';slot.appendChild(pp);}
-    slot.appendChild(inp);slot.onclick=()=>inp.click();
-    el.appendChild(slot);
-  }
+  var el=document.getElementById(cont);
+  if(!el)return;
+  el.innerHTML='';
+  // 4スロット分をIndexedDBから非同期読み込み
+  var promises=[];
+  for(var ii=0;ii<4;ii++){promises.push(loadPhoto(ds,ii));}
+  Promise.all(promises).then(function(srcs){
+    el.innerHTML='';
+    for(var i=0;i<4;i++){
+      (function(idx,src){
+        var slot=document.createElement('div');slot.className='pslot';
+        var inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+        inp.onchange=(function(i2,c2){return function(){hPhoto(this,ds,i2,c2);};})(idx,cont);
+        slot.appendChild(inp);
+        if(src){
+          var img=document.createElement('img');img.src=src;
+          slot.appendChild(img);
+          var del=document.createElement('button');del.className='pdel';del.textContent='×';
+          del.addEventListener('click',(function(i2){return function(e){
+            e.stopPropagation();e.preventDefault();
+            deletePhoto(ds,i2).then(function(){rPhotos(cont,ds);});
+          };})(idx));
+          slot.appendChild(del);
+          slot.addEventListener('click',function(e){if(e.target.classList.contains('pdel'))return;inp.click();});
+        }else{
+          var pp=document.createElement('span');pp.className='pp';pp.textContent='＋';slot.appendChild(pp);
+          slot.addEventListener('click',function(){inp.click();});
+        }
+        el.appendChild(slot);
+      })(i,srcs[i]);
+    }
+  });
 }
 
 function hPhoto(inp,ds,i,cont){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();r.onload=e=>{if(!D.photos[ds])D.photos[ds]=[];D.photos[ds][i]=e.target.result;sv();rPhotos(cont,ds);};r.readAsDataURL(f);
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var MAX=1200,w=img.width,h=img.height;
+      if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}
+      else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+      var canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      var compressed=canvas.toDataURL('image/jpeg',0.85);
+      savePhoto(ds,i,compressed).then(function(){
+        rPhotos(cont,ds);
+        showToast('写真を保存しました');
+      }).catch(function(err){
+        showToast('保存に失敗しました: '+err);
+      });
+    };
+    img.src=e.target.result;
+  };
+  r.readAsDataURL(f);
 }
 
 function delEv(idx){D.events.splice(idx,1);sv();rToday();if(selDate)rDD(selDate);}
@@ -543,8 +1427,8 @@ function rCal(){
   document.getElementById('cal-mtitle').textContent=`${calY}年 ${MN[calM]}`;
   const grid=document.getElementById('cal-grid');grid.innerHTML='';
   const tds=toS(new Date());const first=new Date(calY,calM,1).getDay();const days=new Date(calY,calM+1,0).getDate();
-  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cc';grid.appendChild(e);}
-  for(let d=1;d<=days;d++){
+  for(var i=0;i<first;i++){const e=document.createElement('div');e.className='cc';grid.appendChild(e);}
+  for(var d=1;d<=days;d++){
     const ds=`${calY}-${p2(calM+1)}-${p2(d)}`;const dow=new Date(calY,calM,d).getDay();
     const e=document.createElement('div');let cls='cc';
     if(ds===tds)cls+=' today';else if(ds===selDate)cls+=' selected';
@@ -553,8 +1437,15 @@ function rCal(){
     if(D.events.some(ev=>ev.date===ds))cls+=' has-event';
     e.className=cls;e.textContent=d;e.onclick=()=>calSel(ds);grid.appendChild(e);
   }
+  const now=new Date();const impKey=`${calY}-${calM+1}`;
+  const impItems=D.important[impKey]||D.important['default']||[];
   const il=document.getElementById('imp-list');il.innerHTML='';
-  D.important.forEach(item=>{const d=document.createElement('div');d.className='imp-item';d.textContent=item;il.appendChild(d);});
+  il.innerHTML=`<div style="font-size:10px;color:var(--soft);margin-bottom:5px;">${calY}年${calM+1}月</div>`;
+  if(impItems.length===0){
+    const d=document.createElement('div');d.className='imp-item';d.textContent='（なし）';d.style.color='var(--soft)';il.appendChild(d);
+  } else {
+    impItems.forEach(item=>{const d=document.createElement('div');d.className='imp-item';d.textContent=item;il.appendChild(d);});
+  }
   if(selDate)rCalDetail(selDate);
 }
 
@@ -570,7 +1461,7 @@ function rCalDetail(ds){
   const evs=D.events.filter(e=>e.date===ds);
   const periods=D.tt[dn];const memo=D.memos[ds];
   let h=`<div class="cd-hdr"><span>${dt.getMonth()+1}月${dt.getDate()}日（${dn}）${sp?` <span style="font-size:10px;color:var(--accent);">${spI(sp.type)} ${sp.name}</span>`:''}</span><button class="cd-goto" onclick="goDayDetail('${ds}')">詳細 ›</button></div>`;
-  if(sp?.type==='holiday')h+='<div style="color:var(--soft);font-size:12px;">休校日</div>';
+  if((sp&&sp.type==='holiday'))h+='<div style="color:var(--soft);font-size:12px;">休校日</div>';
   else if(periods){periods.forEach((p,i)=>{h+=`<div class="cd-row"><div class="cd-num ${p.c}">${i+1}</div><div>${p.s}</div></div>`;});}
   if(evs.length){h+='<div style="border-top:1px solid var(--border);padding-top:6px;margin-top:5px;">';evs.forEach(ev=>{h+=`<div style="font-size:12px;margin-bottom:3px;">📌 ${ev.name} ${ev.start||''}${ev.end?' - '+ev.end:''}</div>`;});h+='</div>';}
   if(memo)h+=`<div style="margin-top:6px;font-size:11px;color:var(--soft);border-top:1px solid var(--border);padding-top:6px;">📝 ${memo}</div>`;
@@ -644,8 +1535,11 @@ function rYr(){
     const mphoto=document.createElement('div');mphoto.className='mphoto';
     const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
     inp.onchange=e=>hMPhoto(e.target,key);
-    if(D.mPhotos[key]){const img=document.createElement('img');img.src=D.mPhotos[key];mphoto.appendChild(img);}
-    else{mphoto.textContent='📷';}
+    // IDBから月写真を非同期ロード
+    mphoto.textContent='📷';
+    loadMonthPhoto(key).then(function(src){
+      if(src){mphoto.innerHTML='';var img=document.createElement('img');img.src=src;mphoto.appendChild(img);var ov2=document.createElement('div');ov2.className='mphoto-ov';ov2.textContent='✏️';mphoto.appendChild(ov2);mphoto.appendChild(inp);}
+    });
     const ov=document.createElement('div');ov.className='mphoto-ov';ov.textContent='✏️';
     mphoto.appendChild(ov);mphoto.appendChild(inp);
     mphoto.onclick=e=>{e.stopPropagation();inp.click();};
@@ -661,8 +1555,25 @@ function rYr(){
 }
 
 function hMPhoto(inp,key){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();r.onload=e=>{D.mPhotos[key]=e.target.result;sv();rYr();};r.readAsDataURL(f);
+  var f=inp.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var MAX=800,w=img.width,h=img.height;
+      if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}
+      else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+      var canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      var compressed=canvas.toDataURL('image/jpeg',0.85);
+      saveMonthPhoto(key,compressed).then(function(){
+        rYr();
+      }).catch(function(){showToast('保存に失敗しました');});
+    };
+    img.src=e.target.result;
+  };
+  r.readAsDataURL(f);
 }
 
 function openMEdit(key,m,yr){
@@ -703,16 +1614,23 @@ function addSpecial(){
   document.getElementById('sp-name').value='';
 }
 
-function openImpModal(){document.getElementById('imp-input').value=D.important.join('\n');openModal('modal-imp');}
+function openImpModal(){
+  const key=`${calY}-${calM+1}`;
+  const items=D.important[key]||D.important['default']||[];
+  document.getElementById('imp-input').value=items.join('\n');
+  document.getElementById('imp-modal-title').textContent=`⭐ ${calY}年${calM+1}月の重要なこと`;
+  openModal('modal-imp');
+}
 function saveImportant(){
-  D.important=document.getElementById('imp-input').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const key=`${calY}-${calM+1}`;
+  D.important[key]=document.getElementById('imp-input').value.split('\n').map(s=>s.trim()).filter(Boolean);
   sv();closeModal('modal-imp');rCal();showToast('保存しました');
 }
 
 function loadTTFields(){
   const day=document.getElementById('tt-day').value;
   const periods=D.tt[day]||[];const el=document.getElementById('tt-fields');el.innerHTML='';
-  for(let i=0;i<5;i++){
+  for(var i=0;i<5;i++){
     const p=periods[i]||{s:'',c:'c-custom'};
     const d=document.createElement('div');d.className='fg';
     d.innerHTML=`<label class="fl">${i+1}限目</label><input type="text" class="fi tt-inp" value="${p.s==='　'?'':p.s}" placeholder="科目名（空欄で空き）">`;
@@ -734,7 +1652,8 @@ function loadPTFields(){
   });
 }
 function savePT(){
-  const ss=[...document.querySelectorAll('.pt-s')],es=[...document.querySelectorAll('.pt-e')];
+  const modal=document.getElementById('modal-period-times');
+  const ss=[...modal.querySelectorAll('.pt-s')],es=[...modal.querySelectorAll('.pt-e')];
   D.pt=ss.map((s,i)=>({s:s.value,e:es[i].value}));
   sv();closeModal('modal-period-times');rTT();showToast('時間を更新しました');rToday();
 }
@@ -770,10 +1689,588 @@ function p2(n){return String(n).padStart(2,'0');}
 function tM(t){if(!t)return 0;const[h,m]=t.split(':').map(Number);return h*60+m;}
 function spI(type){return{holiday:'🚫',special:'⭐',exam:'📝',event:'🎉'}[type]||'📌';}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function clearData(){if(confirm('全データをリセットしますか？')){localStorage.removeItem('sapp3');D=loadD();rToday();showToast('リセットしました');}}
+function clearData(){
+  if(!confirm('全データをリセットしますか？写真もすべて削除されます')) return;
+  openIDB().then(function(db){
+    var tx=db.transaction('photos','readwrite');
+    tx.objectStore('photos').clear();
+    tx.oncomplete=function(){
+      localStorage.removeItem('sapp3');
+      D=loadD();rToday();showToast('リセットしました');
+    };
+  });
+}
 
 rToday();
+
+// ===== THEMES =====
+const THEMES = [
+  {
+    id:'blue', label:'水色', emoji:'💙',
+    preview:['#5aaccd','#f0f7fc','#cce8f4'],
+    desc:'爽やか・ノーマル',
+    motifs:{
+      today:'🐬', year:'🩵', set:'❄️',
+      tt:'🐳', custom:'🫐',
+      secTt:'🐟', secEv:'💧', secMemo:'🌧️', secPhoto:'❄️',
+      imp:'🩵', noPhoto:'🐳',
+      deco:['🐬','💧','❄️','🩵','🐟'],
+    }
+  },
+  {
+    id:'orange', label:'オレンジ', emoji:'🧡',
+    preview:['#f07030','#fff8f0','#fdddb0'],
+    desc:'元気・カラフル',
+    motifs:{
+      today:'🍊', year:'🧡', set:'🦊',
+      tt:'🏀', custom:'🧶',
+      secTt:'📙', secEv:'🟠', secMemo:'🍔', secPhoto:'📸',
+      imp:'🧡', noPhoto:'🎃',
+      deco:['🍊','🧡','🦀','🏀','🎃'],
+    }
+  },
+  {
+    id:'pink', label:'ピンク', emoji:'🩷',
+    preview:['#e8709a','#fef2f6','#f8d4e4'],
+    desc:'かわいい・淡め',
+    motifs:{
+      today:'🌷', year:'💗', set:'🎀',
+      tt:'🩰', custom:'🎀',
+      secTt:'💖', secEv:'🌷', secMemo:'💝', secPhoto:'🎟',
+      imp:'💗', noPhoto:'🦩',
+      deco:['💓','💗','🎀','🌷','🩰'],
+    }
+  },
+  {
+    id:'dark', label:'ダーク', emoji:'🖤',
+    preview:['#c8c8d8','#1a1a1e','#2a2a32'],
+    desc:'シック・モノクロ',
+    motifs:{
+      today:'🎧', year:'🤍', set:'💻',
+      tt:'📷', custom:'🐾',
+      secTt:'💻', secEv:'🐾', secMemo:'📷', secPhoto:'🎧',
+      imp:'🖤', noPhoto:'🐈‍⬛',
+      deco:['🖤','💻','🎧','🐾','⛸️'],
+    }
+  },
+  {
+    id:'grid', label:'グリッド', emoji:'🕸️',
+    preview:['#444','#fff','#ddd'],
+    desc:'シンプル・モダン',
+    motifs:{
+      today:'✦', year:'◇', set:'○',
+      tt:'▷', custom:'□',
+      secTt:'▸', secEv:'◆', secMemo:'✎', secPhoto:'◻',
+      imp:'◈', noPhoto:'◻',
+      deco:['✦','◇','▷','◈'],
+    }
+  },
+];
+
+// テーマ別モチーフを適用するID→motifキーのマップ
+const MOTIF_MAP = {
+  'mo-today':    'today',
+  'mo-tt':       'tt',
+  'mo-tt-btn':   'tt',
+  'mo-year':     'year',
+  'mo-set':      'set',
+  'mo-sec-tt':   'secTt',
+  'mo-sec-ev':   'secEv',
+  'mo-sec-memo': 'secMemo',
+  'mo-sec-photo':'secPhoto',
+  'mo-dd-tt':    'secTt',
+  'mo-dd-ev':    'secEv',
+  'mo-dd-memo':  'secMemo',
+  'mo-dd-photo': 'secPhoto',
+  'mo-imp':      'imp',
+  'mo-gal':      'secPhoto',
+  'mo-custom':   'custom',
+};
+
+function initThemes() {
+  const saved = localStorage.getItem('sapp3_theme') || 'blue';
+  applyTheme(saved, false);
+  renderThemeGrid();
+  applyLayout();
+  applySpecialThemeEffects(saved);
+}
+
+function applyTheme(id, save) {
+  if(save===undefined) save=true;
+  document.documentElement.setAttribute('data-theme', id);
+  if(save){ localStorage.setItem('sapp3_theme', id); }
+  applyMotifs(id);
+  renderThemeGrid();
+}
+
+function applyMotifs(id) {
+  const theme = THEMES.find(t => t.id === id);
+  if(!theme) return;
+  const m = theme.motifs;
+  Object.entries(MOTIF_MAP).forEach(([elId, key]) => {
+    const el = document.getElementById(elId);
+    if(el && m[key]) el.textContent = m[key];
+  });
+  // 年間タブの「写真なし」アイコンも反映（mphotoのtextContent）
+  document.querySelectorAll('.mphoto').forEach(el => {
+    if(!el.querySelector('img')) el.childNodes.forEach(n => {
+      if(n.nodeType === 3) n.textContent = m.noPhoto;
+    });
+  });
+}
+
+function renderThemeGrid() {
+  const el = document.getElementById('theme-grid');
+  if(!el) return;
+  const cur = document.documentElement.getAttribute('data-theme') || 'blue';
+  el.innerHTML = '';
+  THEMES.forEach(t => {
+    const isActive = t.id === cur;
+    const btn = document.createElement('button');
+    const isGrid = t.id === 'grid';
+    btn.style.cssText = [
+      'display:flex;align-items:center;gap:10px;width:100%;',
+      'padding:11px 14px;border-radius:14px;',
+      'background:' + (isActive ? (isGrid ? 'linear-gradient(135deg,#555,#333)' : t.preview[0]) : 'var(--card-bg)') + ';',
+      'border:2px solid ' + (isActive ? (isGrid ? '#444' : t.preview[0]) : 'var(--border)') + ';',
+      'cursor:pointer;font-family:inherit;text-align:left;',
+      'transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,.10);',
+    ].join('');
+
+    // デコ絵文字ミニ表示
+    const decoWrap = document.createElement('div');
+    decoWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:1px;width:38px;flex-shrink:0;';
+    (t.motifs.deco||[]).slice(0,4).forEach(em => {
+      const s = document.createElement('span');
+      s.style.cssText = 'font-size:14px;width:18px;text-align:center;line-height:18px;';
+      s.textContent = em;
+      decoWrap.appendChild(s);
+    });
+
+    const info = document.createElement('div');
+    info.style.cssText = 'flex:1;';
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size:13px;font-weight:700;color:' + (isActive ? '#fff' : 'var(--text)') + ';';
+    lbl.textContent = t.emoji + ' ' + t.label;
+    const desc = document.createElement('div');
+    desc.style.cssText = 'font-size:10px;color:' + (isActive ? 'rgba(255,255,255,.8)' : 'var(--soft)') + ';margin-top:2px;';
+    desc.textContent = t.desc;
+    info.appendChild(lbl); info.appendChild(desc);
+
+    // カラードット or グリッドプレビュー
+    const dots = document.createElement('div');
+    if(t.id === 'grid') {
+      dots.style.cssText = 'width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid rgba(0,0,0,.15);background:#fff;display:flex;align-items:center;justify-content:center;';
+      dots.innerHTML = '<svg width="28" height="28" viewBox="0 0 28 28"><path d="M0 7h28M0 14h28M0 21h28M7 0v28M14 0v28M21 0v28" stroke="#aaa" stroke-width="0.8" fill="none"/></svg>';
+    } else {
+      dots.style.cssText = 'display:flex;flex-direction:column;gap:3px;flex-shrink:0;';
+      t.preview.forEach(c => {
+        const d = document.createElement('div');
+        d.style.cssText = `width:10px;height:10px;border-radius:50%;background:${c};border:1px solid rgba(0,0,0,.12);`;
+        dots.appendChild(d);
+      });
+    }
+
+    btn.appendChild(decoWrap); btn.appendChild(info); btn.appendChild(dots);
+    btn.onclick = () => { applyTheme(t.id, true); };
+    el.appendChild(btn);
+  });
+}
+
+
+// ===== GALLERY =====
+let galCurrentFolder = null;
+
+function rGallery(){
+  var theme=THEMES.find(function(t){return t.id===(document.documentElement.getAttribute('data-theme')||'blue');});
+  var moEl=document.getElementById('mo-gal');
+  if(moEl&&theme) moEl.textContent=theme.motifs.secPhoto||'📷';
+
+  var grid=document.getElementById('gal-folder-grid');
+  if(!grid) return;
+  grid.innerHTML='<div style="color:var(--soft);font-size:12px;padding:8px 0;">読み込み中...</div>';
+
+  var folders=D.galFolders||[];
+  // フォルダごとに先頭4枚のプレビューをIDBから取得
+  var folderPromises=folders.map(function(folder,idx){
+    var count=folder.photoCount||0;
+    var previewIdxs=[0,1,2,3].filter(function(i){return i<count;});
+    var ps=previewIdxs.map(function(pi){return loadGalPhoto(idx,pi);});
+    return Promise.all(ps).then(function(srcs){return {folder:folder,idx:idx,srcs:srcs};});
+  });
+
+  Promise.all(folderPromises).then(function(results){
+    grid.innerHTML='';
+    results.forEach(function(res){
+      var folder=res.folder,idx=res.idx,srcs=res.srcs;
+      var div=document.createElement('div');
+      div.className='gal-folder';
+      var previewHtml='<div class="gal-folder-preview">';
+      for(var i=0;i<4;i++){
+        if(srcs[i]){
+          previewHtml+='<div class="gal-folder-preview-cell"><img src="'+srcs[i]+'" loading="lazy"></div>';
+        } else {
+          previewHtml+='<div class="gal-folder-preview-cell empty"></div>';
+        }
+      }
+      previewHtml+='</div>';
+      var count=folder.photoCount||0;
+      div.innerHTML=previewHtml+
+        '<div class="gal-folder-name">'+folder.name+
+        ' <span style="color:var(--soft);font-weight:400;font-size:10px;">('+count+'枚)</span></div>';
+      div.onclick=(function(i){return function(){openGalFolder(i);};})(idx);
+      div.oncontextmenu=(function(i){return function(e){e.preventDefault();openRenameFolderModal(i);};})(idx);
+      var pressTimer;
+      div.addEventListener('touchstart',(function(i){return function(){pressTimer=setTimeout(function(){openRenameFolderModal(i);},600);};})(idx));
+      div.addEventListener('touchend',function(){clearTimeout(pressTimer);});
+      div.addEventListener('touchmove',function(){clearTimeout(pressTimer);});
+      grid.appendChild(div);
+    });
+    // ＋ボタン
+    var addBtn=document.createElement('button');
+    addBtn.className='gal-folder gal-add-folder';
+    addBtn.innerHTML='<div class="gal-add-icon">＋</div><div>フォルダを追加</div>';
+    addBtn.onclick=openNewFolderModal;
+    grid.appendChild(addBtn);
+  });
+}
+
+function openGalFolder(idx){
+  galCurrentFolder = idx;
+  const folder = D.galFolders[idx];
+  document.getElementById('gal-list-view').style.display = 'none';
+  var det = document.getElementById('gal-detail-view');
+  det.classList.add('active');
+  document.getElementById('gal-detail-title').textContent = folder.name;
+  renderGalPhotos(idx);
+}
+
+function closeGalDetail(){
+  galCurrentFolder = null;
+  document.getElementById('gal-list-view').style.display = 'block';
+  var det = document.getElementById('gal-detail-view');
+  det.classList.remove('active');
+  rGallery();
+}
+
+var galSelectMode = false;
+var galSelectedPIs = [];
+
+function toggleSelectMode(){
+  if(galSelectMode){ exitSelectMode(); }
+  else{ enterSelectMode(); }
+}
+
+function enterSelectMode(){
+  galSelectMode = true;
+  galSelectedPIs = [];
+  var grid = document.getElementById('gal-photo-grid');
+  if(grid) grid.classList.add('gal-select-mode');
+  var bar = document.getElementById('gal-select-bar');
+  if(bar) bar.classList.add('active');
+  var btn = document.getElementById('gal-select-btn');
+  if(btn) btn.textContent = '✕';
+  updateSelectCount();
+}
+
+function exitSelectMode(){
+  galSelectMode = false;
+  galSelectedPIs = [];
+  var grid = document.getElementById('gal-photo-grid');
+  if(grid) grid.classList.remove('gal-select-mode');
+  var bar = document.getElementById('gal-select-bar');
+  if(bar) bar.classList.remove('active');
+  var btn = document.getElementById('gal-select-btn');
+  if(btn) btn.textContent = '☑';
+  // 選択状態をリセット
+  document.querySelectorAll('.gal-photo-cell.selected').forEach(function(el){
+    el.classList.remove('selected');
+  });
+}
+
+function updateSelectCount(){
+  var el = document.getElementById('gal-select-count');
+  if(el) el.textContent = galSelectedPIs.length + '枚選択中';
+}
+
+function deleteSelectedPhotos(){
+  if(galSelectedPIs.length === 0){ showToast('写真を選んでください'); return; }
+  if(!confirm(galSelectedPIs.length + '枚の写真を削除しますか？')) return;
+  var idx = galCurrentFolder;
+  var delPs = galSelectedPIs.map(function(pi){ return deleteGalPhoto(idx, pi); });
+  Promise.all(delPs).then(function(){
+    exitSelectMode();
+    renderGalPhotos(idx);
+    showToast(delPs.length + '枚削除しました');
+  });
+}
+
+function renderGalPhotos(idx){
+  var grid=document.getElementById('gal-photo-grid');
+  if(!grid) return;
+  var wasSelectMode = galSelectMode;
+  exitSelectMode();
+  grid.innerHTML='<div style="color:var(--soft);font-size:12px;padding:8px;">読み込み中...</div>';
+  var folder=D.galFolders[idx];
+  var count=folder.photoCount||0;
+  if(count===0){
+    grid.innerHTML='';
+    var addCell=document.createElement('div');
+    addCell.className='gal-photo-add-cell';
+    addCell.textContent='＋';
+    addCell.onclick=triggerGalPhotoAdd;
+    grid.appendChild(addCell);
+    return;
+  }
+  var promises=[];
+  for(var ii=0;ii<count;ii++){
+    promises.push((function(pi){return loadGalPhoto(idx,pi).then(function(src){return {pi:pi,src:src};});})(ii));
+  }
+  Promise.all(promises).then(function(results){
+    grid.innerHTML='';
+    results.forEach(function(res){
+      if(!res.src) return;
+      var cell=document.createElement('div');
+      cell.className='gal-photo-cell';
+
+      // チェックマーク（選択モード用）
+      var check=document.createElement('div');
+      check.className='gal-select-check';
+      check.textContent='✓';
+      cell.appendChild(check);
+
+      var img=document.createElement('img');
+      img.src=res.src; img.loading='lazy';
+
+      var del=document.createElement('button');
+      del.className='gal-photo-del'; del.textContent='×';
+
+      (function(pi2,src2,cellEl){
+        // タップ：通常→フルスクリーン、選択モード→選択トグル
+        cellEl.onclick=function(e){
+          if(galSelectMode){
+            var piIdx=galSelectedPIs.indexOf(pi2);
+            if(piIdx>=0){
+              galSelectedPIs.splice(piIdx,1);
+              cellEl.classList.remove('selected');
+            } else {
+              galSelectedPIs.push(pi2);
+              cellEl.classList.add('selected');
+            }
+            updateSelectCount();
+            return;
+          }
+          openFullscreen(src2);
+        };
+        // 長押し→選択モードへ
+        var pressTimer;
+        cellEl.addEventListener('touchstart',function(){
+          pressTimer=setTimeout(function(){
+            if(!galSelectMode) enterSelectMode();
+            galSelectedPIs.push(pi2);
+            cellEl.classList.add('selected');
+            updateSelectCount();
+          },500);
+        });
+        cellEl.addEventListener('touchend',function(){clearTimeout(pressTimer);});
+        cellEl.addEventListener('touchmove',function(){clearTimeout(pressTimer);});
+
+        del.onclick=function(e){
+          e.stopPropagation();
+          if(!confirm('この写真を削除しますか？')) return;
+          deleteGalPhoto(idx,pi2).then(function(){
+            renderGalPhotos(idx);
+          });
+        };
+      })(res.pi,res.src,cell);
+
+      cell.appendChild(img);
+      cell.appendChild(del);
+      grid.appendChild(cell);
+    });
+    var addCell=document.createElement('div');
+    addCell.className='gal-photo-add-cell';
+    addCell.textContent='＋';
+    addCell.onclick=triggerGalPhotoAdd;
+    grid.appendChild(addCell);
+  });
+}
+
+function triggerGalPhotoAdd(){
+  document.getElementById('gal-photo-input').click();
+}
+
+function handleGalPhotos(inp){
+  if(galCurrentFolder===null) return;
+  var files=Array.from(inp.files);
+  var folderIdx=galCurrentFolder;
+  var folder=D.galFolders[folderIdx];
+  if(!folder.photoCount) folder.photoCount=folder.photoCount||0;
+  var startIdx=folder.photoCount||0;
+  var done=0;
+  files.forEach(function(file,fi){
+    var r=new FileReader();
+    r.onload=function(e){
+      var img=new Image();
+      img.onload=function(){
+        var MAX=1200,w=img.width,h=img.height;
+        if(w>h){if(w>MAX){h=Math.round(h*MAX/w);w=MAX;}}
+        else{if(h>MAX){w=Math.round(w*MAX/h);h=MAX;}}
+        var canvas=document.createElement('canvas');
+        canvas.width=w;canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        var compressed=canvas.toDataURL('image/jpeg',0.85);
+        var photoIdx=startIdx+fi;
+        saveGalPhoto(folderIdx,photoIdx,compressed).then(function(){
+          done++;
+          // フォルダのphotoCountを更新
+          if(photoIdx>=folder.photoCount) folder.photoCount=photoIdx+1;
+          sv();
+          if(done===files.length){
+            renderGalPhotos(folderIdx);
+            showToast(files.length+'枚保存しました');
+          }
+        }).catch(function(){showToast('保存に失敗しました');});
+      };
+      img.src=e.target.result;
+    };
+    r.readAsDataURL(file);
+  });
+  inp.value='';
+}
+
+function openNewFolderModal(){
+  document.getElementById('new-folder-name').value='';
+  openModal('modal-new-folder');
+}
+
+function createFolder(){
+  var name = document.getElementById('new-folder-name').value.trim();
+  if(!name){ showToast('名前を入力してね'); return; }
+  if(!D.galFolders) D.galFolders=[];
+  D.galFolders.push({name:name, photos:[]});
+  sv(); closeModal('modal-new-folder');
+  rGallery(); showToast('フォルダを作成しました');
+}
+
+var renameFolderIdx = null;
+function openRenameFolderModal(idx){
+  renameFolderIdx = idx;
+  document.getElementById('rename-folder-input').value = D.galFolders[idx].name;
+  openModal('modal-rename-folder');
+}
+
+function renameFolder(){
+  var name = document.getElementById('rename-folder-input').value.trim();
+  if(!name){ showToast('名前を入力してね'); return; }
+  D.galFolders[renameFolderIdx].name = name;
+  sv(); closeModal('modal-rename-folder');
+  rGallery(); showToast('名前を変更しました');
+}
+
+function deleteFolder(){
+  if(!confirm('このフォルダを削除しますか？写真もすべて削除されます')) return;
+  var idx=renameFolderIdx;
+  var count=D.galFolders[idx].photoCount||0;
+  // IDBから写真を全削除
+  var delPs=[];
+  for(var ii=0;ii<count;ii++){delPs.push(deleteGalPhoto(idx,ii));}
+  Promise.all(delPs).then(function(){
+    D.galFolders.splice(idx,1);
+    sv(); closeModal('modal-rename-folder');
+    rGallery(); showToast('削除しました');
+  });
+}
+
+function openFullscreen(src){
+  document.getElementById('gal-fullscreen-img').src = src;
+  document.getElementById('gal-fullscreen').classList.add('open');
+}
+
+function closeFullscreen(){
+  document.getElementById('gal-fullscreen').classList.remove('open');
+  document.getElementById('gal-fullscreen-img').src='';
+}
+
+
+
+
+
+
+
+
+initThemes();
 </script>
+
+<!-- GALLERY SCREEN -->
+<div class="screen" id="screen-gallery">
+  <!-- フォルダ一覧 -->
+  <div id="gal-list-view">
+    <div class="screen-band">
+      <div class="band-title"><span id="mo-gal">📷</span> 写真</div>
+      <div class="band-btn" onclick="openNewFolderModal()">＋</div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="gal-folder-grid" id="gal-folder-grid"></div>
+    <div style="height:20px"></div>
+  </div>
+
+  <!-- フォルダ詳細 -->
+  <div class="gal-detail" id="gal-detail-view">
+    <div class="gal-detail-header">
+      <div class="gal-detail-back" onclick="closeGalDetail()">‹</div>
+      <div class="gal-detail-title" id="gal-detail-title">フォルダ名</div>
+      <div style="display:flex;gap:6px;">
+        <div class="gal-detail-add" id="gal-select-btn" onclick="toggleSelectMode()" title="選択">☑</div>
+        <div class="gal-detail-add" onclick="triggerGalPhotoAdd()">＋</div>
+      </div>
+    </div>
+    <div style="height:6px"></div>
+    <div class="gal-photo-grid" id="gal-photo-grid"></div>
+    <input type="file" id="gal-photo-input" accept="image/*" multiple style="display:none" onchange="handleGalPhotos(this)">
+  <!-- 選択モードバー -->
+  <div class="gal-select-bar" id="gal-select-bar">
+    <button class="gal-select-cancel-btn" onclick="exitSelectMode()">キャンセル</button>
+    <div class="gal-select-count" id="gal-select-count">0枚選択</div>
+    <button class="gal-select-del-btn" onclick="deleteSelectedPhotos()">削除</button>
+  </div>
+  </div>
+</div>
+
+<!-- フォルダ作成モーダル -->
+<div class="moverlay" id="modal-new-folder" onclick="closeOut(event,'modal-new-folder')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle">📁 新しいフォルダ</div>
+    <div class="fg">
+      <label class="fl">フォルダ名</label>
+      <input type="text" class="fi" id="new-folder-name" placeholder="例：お気に入り、今日あそび">
+    </div>
+    <button class="btn-p" onclick="createFolder()">作成する</button>
+    <button class="btn-s" onclick="closeModal('modal-new-folder')">キャンセル</button>
+  </div>
+</div>
+
+<!-- フォルダ名変更モーダル -->
+<div class="moverlay" id="modal-rename-folder" onclick="closeOut(event,'modal-rename-folder')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle">✏️ フォルダ名を変更</div>
+    <div class="fg">
+      <label class="fl">新しい名前</label>
+      <input type="text" class="fi" id="rename-folder-input" placeholder="フォルダ名">
+    </div>
+    <button class="btn-p" onclick="renameFolder()">変更する</button>
+    <button class="btn-s" style="color:#e07a7a;border-color:#e07a7a;" onclick="deleteFolder()">このフォルダを削除</button>
+    <button class="btn-s" onclick="closeModal('modal-rename-folder')">キャンセル</button>
+  </div>
+</div>
+
+<!-- 写真フルスクリーン -->
+<div class="gal-fullscreen" id="gal-fullscreen" onclick="closeFullscreen()">
+  <button class="gal-fullscreen-close" onclick="closeFullscreen()">✕</button>
+  <img id="gal-fullscreen-img" src="" alt="">
+</div>
 
 </body>
 </html>
