@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>わたしの時間割</title>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* THEMES */
 :root,[data-theme="blue"]{
@@ -49,12 +49,233 @@
   --card-bg:rgba(30,30,38,.92);--card-now:rgba(44,44,58,.95);
   --imp-bg:rgba(28,28,38,.95);--imp-border:#3a3a4a;--imp-top:#505062;--imp-text:#b0b0c8;--imp-label:#8888a8;
 }
-[data-theme="dark"] .cc.sun{color:#f08080!important;}
-[data-theme="dark"] .cc.sat{color:#a090e0!important;}
+[data-theme="dark"] .cc.sun .cc-num{color:#f08080!important;}
+[data-theme="dark"] .cc.sat .cc-num{color:#a090e0!important;}
 [data-theme="dark"] .bnav{border-top-color:#3a3a44;}
 [data-theme="dark"] .imp-item{color:var(--imp-text);}
 [data-theme="dark"] .imp-item::before{color:var(--imp-label);}
 [data-theme="dark"] .imp-ttl{color:var(--imp-label);}
+/* ══ THEME: CHALK（チョーク黒板・青地手書き） ══ */
+[data-theme="chalk"]{
+  --bg:#1a3a8f;
+  --rule:rgba(255,255,255,.18);
+  --border:rgba(255,255,255,.35);
+  --accent:#e8f0ff;
+  --accent2:#b0c8ff;
+  --accent-light:rgba(255,255,255,.12);
+  --text:#f0f4ff;
+  --soft:rgba(200,215,255,.65);
+  --band-from:#1228a0;
+  --band-to:#1a3aad;
+  --margin-line:rgba(255,255,255,.15);
+  --nav-bg:rgba(18,40,160,.96);
+  --card-bg:rgba(255,255,255,.13);
+  --card-now:rgba(255,255,255,.22);
+  --imp-bg:rgba(255,255,255,.12);
+  --imp-border:rgba(255,255,255,.3);
+  --imp-top:rgba(255,255,255,.4);
+  --imp-text:#e8f0ff;
+  --imp-label:rgba(200,220,255,.8);
+  --red:#ff9090;
+  --green:#90ffca;
+  --yellow:#ffe890;
+  --purple:#d0b0ff;
+}
+
+/* チョーク手書きフォント */
+[data-theme="chalk"] body,
+[data-theme="chalk"] .band-title,
+[data-theme="chalk"] .psub,
+[data-theme="chalk"] .evn,
+[data-theme="chalk"] .td-big,
+[data-theme="chalk"] .cal-month,
+[data-theme="chalk"] .tt-subj,
+[data-theme="chalk"] .sec span,
+[data-theme="chalk"] .mlbl,
+[data-theme="chalk"] .imp-item,
+[data-theme="chalk"] button,
+[data-theme="chalk"] .nb,
+[data-theme="chalk"] .dtab {
+  font-family:'Caveat','Zen Maru Gothic',sans-serif;
+}
+
+/* 背景：青地 + 手書きSVGグリッド（JSで生成） */
+[data-theme="chalk"] body {
+  background-color:#1a3a8f;
+  /* SVGグリッドはJS側でセット */
+}
+
+/* 手書きっぽい揺れを全カードに */
+[data-theme="chalk"] .pc,
+[data-theme="chalk"] .evc,
+[data-theme="chalk"] .col-date-box,
+[data-theme="chalk"] .col-ev-box,
+[data-theme="chalk"] .col-transit-box,
+[data-theme="chalk"] .col-memo-wrap {
+  border-radius:4px 8px 6px 10px / 8px 4px 10px 6px;
+}
+[data-theme="chalk"] .today-bar {
+  border-radius:6px 4px 8px 5px / 5px 8px 4px 7px;
+}
+[data-theme="chalk"] .memo-wrap {
+  border-radius:5px 8px 4px 9px / 8px 5px 9px 4px;
+}
+
+/* カード：白い紙が貼られてるような半透明 */
+[data-theme="chalk"] .pc,
+[data-theme="chalk"] .evc,
+[data-theme="chalk"] .today-bar,
+[data-theme="chalk"] .memo-wrap,
+[data-theme="chalk"] .pslot,
+[data-theme="chalk"] .ttc,
+[data-theme="chalk"] .ctc,
+[data-theme="chalk"] .mr,
+[data-theme="chalk"] .cd,
+[data-theme="chalk"] .sit,
+[data-theme="chalk"] .col-left,
+[data-theme="chalk"] .col-date-box,
+[data-theme="chalk"] .col-ev-box,
+[data-theme="chalk"] .col-transit-box,
+[data-theme="chalk"] .col-memo-wrap,
+[data-theme="chalk"] .gal-folder,
+[data-theme="chalk"] .gal-photo-add-cell {
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.38);
+  /* チョークで描いた角丸っぽく - SVGフィルタで少しにじませる */
+  box-shadow:0 2px 0 rgba(255,255,255,.1), 2px 0 0 rgba(255,255,255,.08);
+}
+
+/* 今の授業 */
+[data-theme="chalk"] .pc-now {
+  background:rgba(255,255,255,.28)!important;
+  border-left-color:#90ffca!important;
+  box-shadow:0 0 12px rgba(144,255,202,.25)!important;
+}
+[data-theme="chalk"] .pc-now .pn {
+  background:#90ffca;
+  color:#1a3a8f;
+}
+[data-theme="chalk"] .pn {
+  background:rgba(255,255,255,.2);
+  color:#f0f4ff;
+}
+
+/* ヘッダーバンド */
+[data-theme="chalk"] .screen-band {
+  background:rgba(18,28,120,.85);
+  border-bottom:2px solid rgba(255,255,255,.3);
+  box-shadow:0 2px 0 rgba(255,255,255,.1);
+}
+[data-theme="chalk"] .screen-band::after {
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.3) 0 14px,transparent 14px 18px);
+}
+[data-theme="chalk"] .band-btn {
+  background:rgba(255,255,255,.15);
+  border-color:rgba(255,255,255,.4);
+  color:#f0f4ff;
+}
+
+/* ナビ */
+[data-theme="chalk"] .bnav {
+  background:rgba(16,30,130,.97);
+  border-top:2px solid rgba(255,255,255,.25);
+}
+[data-theme="chalk"] .nb { color:rgba(180,200,255,.55); }
+[data-theme="chalk"] .nb.active { color:#f0f4ff; }
+
+/* セクションラベル */
+[data-theme="chalk"] .sec span {
+  background:linear-gradient(transparent 45%, rgba(255,255,255,.2) 45%);
+  color:#f0f4ff;
+}
+[data-theme="chalk"] .sec::after { background:rgba(255,255,255,.25); }
+
+/* 日付バー */
+[data-theme="chalk"] .today-bar {
+  border-top:3px solid rgba(255,255,255,.5);
+}
+[data-theme="chalk"] .tnav {
+  background:rgba(255,255,255,.15);
+  border-color:rgba(255,255,255,.3);
+  color:#f0f4ff;
+}
+
+/* 予定の左線 */
+[data-theme="chalk"] .evc { border-left-color:#90ffca; }
+
+/* メモの罫線 */
+[data-theme="chalk"] .min {
+  background-image:linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px);
+  background-size:100% var(--LH);
+  color:#f0f4ff;
+}
+
+/* テープ */
+[data-theme="chalk"] .pslot::before { background:rgba(255,255,255,.25)!important; }
+[data-theme="chalk"] .pslot:nth-child(2n)::before { background:rgba(144,255,202,.3)!important; }
+[data-theme="chalk"] .pslot:nth-child(3n)::before { background:rgba(255,232,144,.35)!important; }
+[data-theme="chalk"] .pslot:nth-child(4n)::before { background:rgba(208,176,255,.3)!important; }
+[data-theme="chalk"] .mphoto::before { background:rgba(255,255,255,.28)!important; }
+
+/* カレンダー */
+[data-theme="chalk"] .cc.today { background:#f0f4ff; border-color:#6080f0; }
+[data-theme="chalk"] .cc.today .cc-num { color:#1a3a8f; }
+[data-theme="chalk"] .cc.selected { background:rgba(255,255,255,.25); outline-color:rgba(255,255,255,.6); }
+[data-theme="chalk"] .cc.sun { color:#ff9090; }
+[data-theme="chalk"] .cc.sat { color:#b0c8ff; }
+[data-theme="chalk"] .cal-dh { color:rgba(200,215,255,.7); }
+[data-theme="chalk"] .cc.has-event::after { background:#90ffca; }
+
+/* 付箋 */
+[data-theme="chalk"] .imp-box {
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.28);
+}
+
+/* 時間割タブ */
+[data-theme="chalk"] .dtab { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:rgba(200,215,255,.7); }
+[data-theme="chalk"] .dtab.active { background:rgba(255,255,255,.9); border-color:#fff; color:#1a3a8f; }
+
+/* 年間 */
+[data-theme="chalk"] .mr.cur { border-left-color:#f0f4ff; background:rgba(255,255,255,.22); }
+[data-theme="chalk"] .mr.cur .mlbl { color:#f0f4ff; }
+
+/* ボタン */
+[data-theme="chalk"] .btn-p { background:rgba(255,255,255,.9); color:#1a3a8f; }
+[data-theme="chalk"] .btn-s { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:rgba(200,220,255,.8); }
+[data-theme="chalk"] .add-ev-btn { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:rgba(200,220,255,.7); }
+
+/* モーダル */
+[data-theme="chalk"] .modal {
+  background:#1a3abd;
+  border-top-color:rgba(255,255,255,.4);
+}
+[data-theme="chalk"] .fi {
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.25);
+  color:#f0f4ff;
+}
+[data-theme="chalk"] .fi:focus { border-color:rgba(255,255,255,.7); }
+[data-theme="chalk"] .fl { color:rgba(200,220,255,.7); }
+[data-theme="chalk"] .mtitle { color:#f0f4ff; }
+[data-theme="chalk"] select.fi option { background:#1a3abd; }
+
+/* 科目色（チョーク風パステル） */
+[data-theme="chalk"] .c-pg { background:rgba(255,160,180,.25); color:#ffb0c8; }
+[data-theme="chalk"] .c-word { background:rgba(144,200,255,.25); color:#90c8ff; }
+[data-theme="chalk"] .c-manner { background:rgba(144,255,200,.25); color:#90ffc8; }
+[data-theme="chalk"] .c-ai { background:rgba(200,160,255,.25); color:#c8a0ff; }
+[data-theme="chalk"] .c-pf { background:rgba(255,220,144,.25); color:#ffd890; }
+[data-theme="chalk"] .c-db { background:rgba(144,220,255,.25); color:#90dcff; }
+[data-theme="chalk"] .c-design { background:rgba(255,160,240,.25); color:#ffa0f0; }
+[data-theme="chalk"] .c-job { background:rgba(180,255,144,.25); color:#b4ff90; }
+[data-theme="chalk"] .c-custom { background:rgba(255,255,255,.15); color:#d0dcff; }
+
+/* ギャラリー */
+[data-theme="chalk"] .gal-folder-preview { background:rgba(255,255,255,.08); }
+[data-theme="chalk"] .gal-photo-add-cell { border-color:rgba(255,255,255,.3); color:rgba(200,220,255,.5); }
+[data-theme="chalk"] .gal-folder-name { color:#f0f4ff; }
+
 :root{
   --red:#e07a7a;--green:#6bbf8e;--yellow:#f0c96a;--purple:#9b8fd4;
   --r:14px;--rs:10px;--shadow:0 2px 12px rgba(0,0,0,.10);--LH:28px;
@@ -229,16 +450,65 @@ body::before{
 .cal-top{padding:50px 14px 6px;display:flex;align-items:center;justify-content:center;gap:12px;}
 .cal-month{font-size:21px;font-weight:700;line-height:var(--LH);}
 .carrow{width:30px;height:30px;border-radius:50%;background:var(--card-bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--accent);}
-.cal-dh{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px;text-align:center;font-size:10px;color:var(--soft);font-weight:700;line-height:var(--LH);}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0 10px;gap:2px;}
-.cc{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer;font-size:12px;position:relative;}
-.cc.today{background:var(--accent);color:#fff;font-weight:700;}
-.cc.selected{background:var(--accent-light);color:var(--text);font-weight:700;outline:2px solid var(--accent);outline-offset:0;}
-.cc.has-event::after{content:'';position:absolute;bottom:2px;width:3px;height:3px;border-radius:50%;background:var(--green);}
-.cc.today.has-event::after{background:#fff;}
-.cc.sp-day::before{content:'★';position:absolute;top:-1px;right:-1px;font-size:7px;color:var(--yellow);}
-.cc.sun{color:var(--red);}
-.cc.sat{color:var(--purple);}
+.cal-dh{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  padding:0 4px;text-align:center;
+  font-size:11px;color:var(--soft);font-weight:700;
+  margin-bottom:3px;
+}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  padding:0 6px;gap:3px;
+  grid-auto-rows:minmax(52px,auto);
+}
+.cc{
+  min-height:52px;
+  display:flex;flex-direction:column;align-items:center;
+  border-radius:10px;cursor:pointer;
+  font-size:12px;position:relative;
+  padding:4px 2px 3px;
+  background:transparent;
+  border:none;
+  gap:2px;
+}
+.cc:active{opacity:.7;}
+.cc.empty{pointer-events:none;background:transparent;}
+/* 日付数字 — 丸バッジ */
+.cc-num{
+  width:26px;height:26px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  flex-shrink:0;
+}
+/* 予定ラベル */
+.cc-ev{
+  display:block;
+  font-size:8px;font-weight:700;
+  background:rgba(244,167,185,.2);
+  color:var(--text);
+  border-radius:4px;
+  padding:1px 3px;
+  width:100%;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  line-height:1.5;
+}
+.cc-photo{display:none;}
+/* 今日 */
+.cc.today .cc-num{background:var(--accent);color:#fff;}
+/* 選択 */
+.cc.selected .cc-num{background:var(--accent-light);outline:2px solid var(--accent);outline-offset:0;}
+/* 特別日 */
+.cc.sp-day .cc-num::after{content:'★';position:absolute;top:-1px;right:-1px;font-size:7px;color:var(--yellow);}
+/* 曜日色 */
+.cc.sun .cc-num{color:var(--red);}
+.cc.sat .cc-num{color:var(--purple);}
+.cc.today.sun .cc-num,.cc.today.sat .cc-num{color:#fff;}
+/* 予定ラベルのテーマ別色 */
+[data-theme="orange"] .cc-ev{background:rgba(240,112,48,.15);color:var(--text);}
+[data-theme="pink"] .cc-ev{background:rgba(232,112,154,.15);color:var(--text);}
+[data-theme="dark"] .cc-ev{background:rgba(200,200,216,.12);color:var(--text);}
+[data-theme="grid"] .cc-ev{background:rgba(100,100,100,.12);color:var(--text);}
 
 /* 付箋 */
 .imp-box{margin:8px 14px 0;background:var(--imp-bg);border:1px solid var(--imp-border);border-radius:var(--rs);padding:8px 12px;position:relative;box-shadow:2px 3px 0 rgba(0,0,0,.08);}
@@ -407,8 +677,10 @@ body::before{
 [data-theme="grid"] .btn-p{background:#333;}
 [data-theme="grid"] .add-ev-btn{background:rgba(255,255,255,.7);}
 [data-theme="grid"] .modal{border-top-color:#ccc;}
-[data-theme="grid"] .cc.today{background:#333;color:#fff;}
-[data-theme="grid"] .cc.selected{background:rgba(0,0,0,.1);outline-color:#444;}
+[data-theme="grid"] .cc{background:rgba(255,255,255,.72);}
+[data-theme="grid"] .cc.today{background:rgba(60,60,60,.85);border-color:#444;}
+[data-theme="grid"] .cc.today .cc-num{color:#fff;}
+[data-theme="grid"] .cc.selected{outline:2.5px solid #444;outline-offset:-1px;}
 [data-theme="grid"] .sec span{background:linear-gradient(transparent 45%,rgba(0,0,0,.08) 45%);}
 [data-theme="grid"] .today-bar{border-top-color:#bbb;}
 [data-theme="grid"] .ttc{border-left-color:rgba(150,150,150,.4);}
@@ -736,6 +1008,102 @@ body::before{
   color:#fff;font-size:28px;cursor:pointer;
   background:none;border:none;
 }
+
+/* ===== カレンダータブ切り替え ===== */
+.cal-tab-bar{
+  display:flex;gap:0;padding:0 14px 10px;
+}
+.cal-tab{
+  flex:1;padding:8px 0;text-align:center;
+  font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);
+  background:var(--card-bg);color:var(--soft);
+  cursor:pointer;font-family:inherit;
+}
+.cal-tab:first-child{border-radius:var(--rs) 0 0 var(--rs);}
+.cal-tab:last-child{border-radius:0 var(--rs) var(--rs) 0;border-left:none;}
+.cal-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* シフトビューのセル */
+.cc.shift-mode{
+  border-radius:0;
+  border:none;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:transparent;
+  padding:3px 4px;
+  min-height:72px;
+  align-items:flex-start;
+}
+.cc.shift-mode .cc-num{
+  font-size:11px;font-weight:700;
+  width:auto;height:auto;
+  border-radius:0;
+  background:transparent;
+}
+.cc.shift-mode.today .cc-num{
+  color:var(--accent);
+  background:transparent;
+}
+.cc.shift-mode.today{background:rgba(90,172,205,.06);}
+.cc-shift{
+  display:none;
+  flex-direction:column;gap:1px;
+  margin-top:2px;width:100%;
+}
+.cc.shift-mode .cc-shift{display:flex;}
+.cc.shift-mode .cc-ev{display:none;}
+.cc-shift-time{
+  font-size:10px;font-weight:700;
+  color:var(--text);line-height:1.5;
+  text-align:right;
+}
+.cc-shift-edit{
+  font-size:8px;color:var(--soft);
+  text-align:center;margin-top:1px;
+}
+/* シフトビューのグリッド：左端に曜日ヘッダーなし・通常グリッドを使う */
+.shift-mode-grid{
+  border-top:1px solid var(--border);
+  border-left:1px solid var(--border);
+}
+/* シフト入力モーダル */
+.shift-time-input{
+  font-size:16px;font-weight:700;
+  padding:10px 12px;
+  border:1.5px solid var(--border);
+  border-radius:var(--rs);
+  background:var(--bg);
+  font-family:inherit;color:var(--text);
+  width:100%;outline:none;
+}
+.shift-time-input:focus{border-color:var(--accent);}
+
+/* テンプレートボタン */
+.tpl-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.tpl-btn{
+  padding:6px 12px;border-radius:20px;
+  border:1.5px solid var(--border);
+  background:var(--card-bg);
+  font-family:inherit;font-size:12px;font-weight:700;
+  color:var(--text);cursor:pointer;
+  display:flex;align-items:center;gap:4px;
+}
+.tpl-btn:active{background:var(--accent-light);}
+.tpl-del{color:var(--soft);font-size:11px;margin-left:2px;}
+
+/* 複数日選択グリッド */
+.copy-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px;}
+.copy-cal-dh{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:9px;color:var(--soft);font-weight:700;margin-bottom:2px;}
+.copy-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:6px;font-size:11px;font-weight:700;
+  border:1.5px solid var(--border);background:var(--card-bg);
+  cursor:pointer;color:var(--text);
+}
+.copy-day.selected{background:var(--accent);border-color:var(--accent);color:#fff;}
+.copy-day.has-shift{border-color:var(--green);}
+.copy-day.empty{background:transparent;border-color:transparent;pointer-events:none;}
 </style>
 </head>
 <body>
@@ -829,7 +1197,12 @@ body::before{
       <div class="band-btn" onclick="changeMonth(1)" style="flex-shrink:0;">›</div>
     </div>
   </div>
-  <div class="cal-dh"><div style="color:#e08080">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div style="color:#8080e0">土</div></div>
+  <!-- カレンダータブ -->
+  <div class="cal-tab-bar">
+    <button class="cal-tab active" id="tab-plan" onclick="switchCalTab('plan')">📌 予定</button>
+    <button class="cal-tab" id="tab-shift" onclick="switchCalTab('shift')">🕐 シフト</button>
+  </div>
+  <div class="cal-dh" id="cal-dh"><div style="color:#e08080">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div style="color:#8080e0">土</div></div>
   <div class="cal-grid" id="cal-grid"></div>
   <div class="imp-box">
     <div class="imp-hdr">
@@ -890,7 +1263,7 @@ body::before{
     <div class="sit" onclick="openModal('modal-add-special')"><div class="si-icon">📅</div><div class="si-lbl">特別日・休校日を追加</div><div class="si-arrow">›</div></div>
     <div class="sit" onclick="openImpModal()"><div class="si-icon">⭐</div><div class="si-lbl">重要なことを編集</div><div class="si-arrow">›</div></div>
     <div class="sit" onclick="openModal('modal-edit-tt')"><div class="si-icon">✏️</div><div class="si-lbl">基本時間割を編集</div><div class="si-arrow">›</div></div>
-    <div class="sit" onclick="openModal('modal-period-times')"><div class="si-icon">🕐</div><div class="si-lbl">時限の時間を設定</div><div class="si-arrow">›</div></div>
+    <div class="sit" onclick="openModal('modal-period-times')"><div class="si-icon">🕐</div><div class="si-lbl" style="flex:1"><div>時限の時間を一括設定</div><div style="font-size:10px;color:var(--soft);margin-top:1px;">※時間割編集でも個別設定できます</div></div><div class="si-arrow">›</div></div>
     <div class="sit"><div class="si-icon">🔔</div><div class="si-lbl">リマインド通知</div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
     <div class="sit" onclick="openModal('modal-shortcut')"><div class="si-icon">📱</div><div class="si-lbl">ウィジェット・通知の設定方法</div><div class="si-arrow">›</div></div>
     <div class="sit" onclick="clearData()"><div class="si-icon">🗑️</div><div class="si-lbl" style="color:#e08080;">データをリセット</div><div class="si-arrow" style="color:#e08080;">›</div></div>
@@ -1009,6 +1382,14 @@ body::before{
   <div class="modal">
     <div class="mhandle"></div>
     <div class="mtitle">🕐 時限の時間を設定</div>
+    <div class="fg"><label class="fl">曜日</label>
+      <select class="fi" id="pt-day" onchange="loadPTFields()">
+        <option>月</option><option>火</option><option>水</option><option>木</option><option>金</option>
+      </select>
+    </div>
+    <div style="margin-bottom:8px;">
+      <button onclick="copyPTToAll()" style="font-size:11px;color:var(--soft);background:none;border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:inherit;cursor:pointer;">この設定を全曜日にコピー</button>
+    </div>
     <div id="pt-fields"></div>
     <button class="btn-p" onclick="savePT()">保存する</button>
     <button class="btn-s" onclick="closeModal('modal-period-times')">キャンセル</button>
@@ -1081,7 +1462,14 @@ const DEFAULT_TT={
   木:[{s:'DB',c:'c-db'},{s:'DB',c:'c-db'},{s:'ポートフォリオ',c:'c-pf'},{s:'ポートフォリオ',c:'c-pf'},{s:'マナー',c:'c-manner'}],
   金:[{s:'Word',c:'c-word'},{s:'Word',c:'c-word'},{s:'ポートフォリオ',c:'c-pf'},{s:'デザイン',c:'c-design'},{s:'デザイン',c:'c-design'}],
 };
-const DEFAULT_PT=[{s:'09:00',e:'10:30'},{s:'10:40',e:'12:10'},{s:'13:00',e:'14:30'},{s:'14:40',e:'16:10'},{s:'16:20',e:'17:50'}];
+const DEFAULT_PT_DAY=[{s:'09:00',e:'10:30'},{s:'10:40',e:'12:10'},{s:'13:00',e:'14:30'},{s:'14:40',e:'16:10'},{s:'16:20',e:'17:50'}];
+const DEFAULT_PT={
+  月:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
+  火:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
+  水:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
+  木:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
+  金:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
+};
 
 // ===== INDEXED DB — 写真専用ストレージ =====
 const IDB_NAME='sapp_photos', IDB_VER=1, IDB_STORE='photos';
@@ -1135,7 +1523,7 @@ function loadD(){
   return{tt:JSON.parse(JSON.stringify(DEFAULT_TT)),pt:JSON.parse(JSON.stringify(DEFAULT_PT)),
     events:[],specials:[],memos:{},
     mSumm:{'2026-3':{main:'春休み🌸',sub:''},'2026-4':{main:'新学期スタート✨',sub:''},'2026-5':{main:'GW🎏',sub:''},'2026-6':{main:'主な予定',sub:''},'2026-7':{main:'主な予定',sub:''},'2026-8':{main:'夏休み🌻',sub:''}},
-    customs:[],
+    customs:[],shifts:{},shiftTemplates:[],
     galFolders:[],
     important:{'default':['スーツ！','誕生日プレゼント']}};
 }
@@ -1282,7 +1670,7 @@ function rTodayB(ds,dn,sp,dateObj){
         bsched.appendChild(row);
       });
     }
-    var times=D.pt;
+    var times=Array.isArray(D.pt)?D.pt:(D.pt[dn]||DEFAULT_PT_DAY);
     if(times&&times.length){
       var tRow=document.createElement('div');
       tRow.style.cssText='font-size:9px;color:var(--soft);margin-top:5px;border-top:1px solid var(--rule);padding-top:4px;';
@@ -1334,8 +1722,9 @@ function rSched(elId,ds,dn,sp){
   const el=document.getElementById(elId);el.innerHTML='';
   const periods=D.tt[dn];const now=new Date();const nm=now.getHours()*60+now.getMinutes();const isT=ds===toS(new Date());
   if(!periods||(sp&&sp.type==='holiday')){el.innerHTML='<div style="padding:8px 4px;color:var(--soft);font-size:13px;">📭 授業なし</div>';return;}
+  const ptDay=Array.isArray(D.pt)?D.pt:(D.pt[dn]||DEFAULT_PT_DAY);
   periods.forEach((p,i)=>{
-    const t=D.pt[i]||{s:'',e:''};const sm=tM(t.s),em=tM(t.e);
+    const t=ptDay[i]||{s:'',e:''};const sm=tM(t.s),em=tM(t.e);
     const isN=isT&&nm>=sm&&nm<em,isDone=isT&&nm>=em;
     const c=document.createElement('div');c.className='pc'+(isN?' pc-now':'')+(isDone?' pc-done':'');
     c.innerHTML=`<div class="pn ${isN?'':p.c}">${i+1}</div><div><div class="psub">${p.s}</div><div class="ptm">${t.s}${t.e?' - '+t.e:''}${isN?' ← 今ここ！':''}</div></div>`;
@@ -1424,29 +1813,95 @@ function delEv(idx){D.events.splice(idx,1);sv();rToday();if(selDate)rDD(selDate)
 
 // CALENDAR
 function rCal(){
-  document.getElementById('cal-mtitle').textContent=`${calY}年 ${MN[calM]}`;
-  const grid=document.getElementById('cal-grid');grid.innerHTML='';
-  const tds=toS(new Date());const first=new Date(calY,calM,1).getDay();const days=new Date(calY,calM+1,0).getDate();
-  for(var i=0;i<first;i++){const e=document.createElement('div');e.className='cc';grid.appendChild(e);}
-  for(var d=1;d<=days;d++){
-    const ds=`${calY}-${p2(calM+1)}-${p2(d)}`;const dow=new Date(calY,calM,d).getDay();
-    const e=document.createElement('div');let cls='cc';
-    if(ds===tds)cls+=' today';else if(ds===selDate)cls+=' selected';
-    if(dow===0)cls+=' sun';if(dow===6)cls+=' sat';
-    if(D.specials.find(s=>s.date===ds))cls+=' sp-day';
-    if(D.events.some(ev=>ev.date===ds))cls+=' has-event';
-    e.className=cls;e.textContent=d;e.onclick=()=>calSel(ds);grid.appendChild(e);
+  document.getElementById('cal-mtitle').textContent = calY+'年 '+MN[calM];
+  var grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  var tds = toS(new Date());
+  var first = new Date(calY,calM,1).getDay();
+  var days  = new Date(calY,calM+1,0).getDate();
+  var isShift = calTab === 'shift';
+
+  // シフトモード時はグリッドにクラス追加
+  grid.className = isShift ? 'cal-grid shift-mode-grid' : 'cal-grid';
+
+  // 空白セル
+  for(var i=0;i<first;i++){
+    var empty=document.createElement('div');
+    empty.className = isShift ? 'cc shift-mode empty' : 'cc empty';
+    grid.appendChild(empty);
   }
-  const now=new Date();const impKey=`${calY}-${calM+1}`;
-  const impItems=D.important[impKey]||D.important['default']||[];
-  const il=document.getElementById('imp-list');il.innerHTML='';
-  il.innerHTML=`<div style="font-size:10px;color:var(--soft);margin-bottom:5px;">${calY}年${calM+1}月</div>`;
+
+  for(var dd=1;dd<=days;dd++){
+    (function(d){
+      var ds = calY+'-'+p2(calM+1)+'-'+p2(d);
+      var dow = new Date(calY,calM,d).getDay();
+      var cell = document.createElement('div');
+      var cls = isShift ? 'cc shift-mode' : 'cc';
+      if(ds===tds) cls+=' today';
+      if(!isShift && ds===selDate) cls+=' selected';
+      if(dow===0) cls+=' sun';
+      if(dow===6) cls+=' sat';
+      if(D.specials.find(function(s){return s.date===ds;})) cls+=' sp-day';
+      cell.className = cls;
+
+      // 日付数字
+      var numEl = document.createElement('div');
+      numEl.className = 'cc-num';
+      numEl.textContent = d;
+      cell.appendChild(numEl);
+
+      if(isShift){
+        // シフトモード：出退勤時刻を表示、タップで入力
+        var shift = D.shifts ? D.shifts[ds] : null;
+        var shiftEl = document.createElement('div');
+        shiftEl.className = 'cc-shift';
+        if(shift && (shift.start||shift.end)){
+          if(shift.start){
+            var s1=document.createElement('div');s1.className='cc-shift-time';s1.textContent=shift.start;shiftEl.appendChild(s1);
+          }
+          if(shift.end){
+            var s2=document.createElement('div');s2.className='cc-shift-time';s2.textContent=shift.end;shiftEl.appendChild(s2);
+          }
+        } else {
+          var hint=document.createElement('div');hint.className='cc-shift-edit';hint.textContent='＋';shiftEl.appendChild(hint);
+        }
+        cell.appendChild(shiftEl);
+        cell.onclick=(function(ds2){return function(){openShiftModal(ds2);};})(ds);
+      } else {
+        // 予定モード：予定ラベル表示
+        var evs = D.events.filter(function(ev){return ev.date===ds;});
+        var sp  = D.specials.find(function(s){return s.date===ds;});
+        var evText = '';
+        if(sp) evText = sp.name;
+        else if(evs.length) evText = evs[0].name;
+        if(evText){
+          var evEl = document.createElement('div');evEl.className='cc-ev';
+          evEl.textContent = evText.length>5?evText.slice(0,5):evText;
+          cell.appendChild(evEl);
+          var ev2 = sp?(evs.length?evs[0].name:''):(evs.length>1?evs[1].name:'');
+          if(ev2){
+            var evEl2=document.createElement('div');evEl2.className='cc-ev';
+            evEl2.textContent=ev2.length>5?ev2.slice(0,5):ev2;
+            cell.appendChild(evEl2);
+          }
+        }
+        cell.onclick=(function(ds2){return function(){calSel(ds2);};})(ds);
+      }
+      grid.appendChild(cell);
+    })(dd);
+  }
+
+  // 重要なこと
+  var impKey = calY+'-'+(calM+1);
+  var impItems = D.important[impKey]||D.important['default']||[];
+  var il = document.getElementById('imp-list');
+  il.innerHTML = '<div style="font-size:10px;color:var(--soft);margin-bottom:5px;">'+calY+'年'+(calM+1)+'月</div>';
   if(impItems.length===0){
-    const d=document.createElement('div');d.className='imp-item';d.textContent='（なし）';d.style.color='var(--soft)';il.appendChild(d);
+    var noItem=document.createElement('div');noItem.className='imp-item';noItem.textContent='（なし）';noItem.style.color='var(--soft)';il.appendChild(noItem);
   } else {
-    impItems.forEach(item=>{const d=document.createElement('div');d.className='imp-item';d.textContent=item;il.appendChild(d);});
+    impItems.forEach(function(item){var d2=document.createElement('div');d2.className='imp-item';d2.textContent=item;il.appendChild(d2);});
   }
-  if(selDate)rCalDetail(selDate);
+  if(selDate) rCalDetail(selDate);
 }
 
 function calSel(ds){
@@ -1456,16 +1911,51 @@ function calSel(ds){
 }
 
 function rCalDetail(ds){
-  const dt=new Date(ds+'T00:00:00'),dn=DN[dt.getDay()];
-  const sp=D.specials.find(s=>s.date===ds);
-  const evs=D.events.filter(e=>e.date===ds);
-  const periods=D.tt[dn];const memo=D.memos[ds];
-  let h=`<div class="cd-hdr"><span>${dt.getMonth()+1}月${dt.getDate()}日（${dn}）${sp?` <span style="font-size:10px;color:var(--accent);">${spI(sp.type)} ${sp.name}</span>`:''}</span><button class="cd-goto" onclick="goDayDetail('${ds}')">詳細 ›</button></div>`;
-  if((sp&&sp.type==='holiday'))h+='<div style="color:var(--soft);font-size:12px;">休校日</div>';
-  else if(periods){periods.forEach((p,i)=>{h+=`<div class="cd-row"><div class="cd-num ${p.c}">${i+1}</div><div>${p.s}</div></div>`;});}
-  if(evs.length){h+='<div style="border-top:1px solid var(--border);padding-top:6px;margin-top:5px;">';evs.forEach(ev=>{h+=`<div style="font-size:12px;margin-bottom:3px;">📌 ${ev.name} ${ev.start||''}${ev.end?' - '+ev.end:''}</div>`;});h+='</div>';}
-  if(memo)h+=`<div style="margin-top:6px;font-size:11px;color:var(--soft);border-top:1px solid var(--border);padding-top:6px;">📝 ${memo}</div>`;
+  var dt=new Date(ds+'T00:00:00'),dn=DN[dt.getDay()];
+  var sp=D.specials.find(function(s){return s.date===ds;});
+  var evs=D.events.filter(function(e){return e.date===ds;});
+  var periods=D.tt[dn];var memo=D.memos[ds];
+  var spHtml=sp?' <span style="font-size:10px;color:var(--accent);">'+spI(sp.type)+' '+sp.name+'</span>':'';
+  var h='<div class="cd-hdr"><span>'+(dt.getMonth()+1)+'月'+dt.getDate()+'日（'+dn+'）'+spHtml+'</span>'
+      +'<button class="cd-goto" onclick="goDayDetail(\"'+ds+'\")">詳細 ›</button></div>';
+  if(sp&&sp.type==='holiday'){
+    h+='<div style="color:var(--soft);font-size:12px;">休校日</div>';
+  } else if(periods){
+    periods.forEach(function(p,i){
+      h+='<div class="cd-row"><div class="cd-num '+p.c+'">'+(i+1)+'</div><div>'+p.s+'</div></div>';
+    });
+  }
+  if(evs.length){
+    h+='<div style="border-top:1px solid var(--border);padding-top:6px;margin-top:5px;">';
+    evs.forEach(function(ev){
+      h+='<div style="font-size:12px;margin-bottom:3px;">📌 '+ev.name+' '+(ev.start||'')+(ev.end?' - '+ev.end:'')+'</div>';
+    });
+    h+='</div>';
+  }
+  if(memo) h+='<div style="margin-top:6px;font-size:11px;color:var(--soft);border-top:1px solid var(--border);padding-top:6px;">📝 '+memo+'</div>';
+
+  // 写真を横並びで表示
+  var photoPart='<div id="cd-photos-row" style="display:flex;gap:5px;margin-top:8px;border-top:1px solid var(--border);padding-top:8px;"></div>';
+  h += photoPart;
   document.getElementById('cd').innerHTML=h;
+
+  // IDBから写真ロード
+  var photoRow=document.getElementById('cd-photos-row');
+  var photoPromises=[loadPhoto(ds,0),loadPhoto(ds,1),loadPhoto(ds,2),loadPhoto(ds,3)];
+  Promise.all(photoPromises).then(function(srcs){
+    var hasPhoto=false;
+    srcs.forEach(function(src){
+      if(!src) return;
+      hasPhoto=true;
+      var wrap=document.createElement('div');
+      wrap.style.cssText='width:56px;height:56px;border-radius:8px;overflow:hidden;flex-shrink:0;cursor:pointer;';
+      var img=document.createElement('img');
+      img.src=src;img.style.cssText='width:100%;height:100%;object-fit:cover;';
+      img.onclick=function(){goDayDetail(ds);};
+      wrap.appendChild(img);photoRow.appendChild(wrap);
+    });
+    if(!hasPhoto) photoRow.style.display='none';
+  });
 }
 
 function goDayDetail(ds){
@@ -1504,7 +1994,8 @@ function rTT(){
   });
   const grid=document.getElementById('tt-grid');grid.innerHTML='';
   (D.tt[ttDay]||[]).forEach((p,i)=>{
-    const t=D.pt[i]||{s:'',e:''};
+    const pt_day2=Array.isArray(D.pt)?D.pt:(D.pt[ttDay]||DEFAULT_PT_DAY);
+    const t=pt_day2[i]||{s:'',e:''};
     const c=document.createElement('div');c.className='ttc';
     c.innerHTML=`<div class="tt-num">${i+1}</div><div><div class="tt-subj ${p.c}">${p.s}</div><div class="tt-time">${t.s}${t.e?' - '+t.e:''}</div></div>`;
     grid.appendChild(c);
@@ -1629,33 +2120,81 @@ function saveImportant(){
 
 function loadTTFields(){
   const day=document.getElementById('tt-day').value;
-  const periods=D.tt[day]||[];const el=document.getElementById('tt-fields');el.innerHTML='';
+  const periods=D.tt[day]||[];
+  const el=document.getElementById('tt-fields');el.innerHTML='';
+  // ptがオブジェクトなら曜日別、配列なら全共通
+  const ptArr=Array.isArray(D.pt)?D.pt:(D.pt[day]||DEFAULT_PT_DAY);
   for(var i=0;i<5;i++){
     const p=periods[i]||{s:'',c:'c-custom'};
-    const d=document.createElement('div');d.className='fg';
-    d.innerHTML=`<label class="fl">${i+1}限目</label><input type="text" class="fi tt-inp" value="${p.s==='　'?'':p.s}" placeholder="科目名（空欄で空き）">`;
+    const t=ptArr[i]||{s:'',e:''};
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:8px;';
+    d.innerHTML=
+      '<div style="font-size:11px;font-weight:700;color:var(--soft);margin-bottom:6px;">'+(i+1)+'限目</div>'+
+      '<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">'+
+        '<input type="text" class="fi tt-inp" value="'+(p.s==='　'?'':p.s)+'" placeholder="科目名（空欄で空き）" style="flex:1;font-size:13px;">'+
+      '</div>'+
+      '<div style="display:flex;gap:6px;align-items:center;">'+
+        '<span style="font-size:10px;color:var(--soft);flex-shrink:0;">⏰</span>'+
+        '<input type="time" class="fi tt-ts" value="'+t.s+'" style="flex:1;font-size:12px;">'+
+        '<span style="font-size:10px;color:var(--soft);">〜</span>'+
+        '<input type="time" class="fi tt-te" value="'+t.e+'" style="flex:1;font-size:12px;">'+
+      '</div>';
     el.appendChild(d);
   }
 }
 function saveTT(){
   const day=document.getElementById('tt-day').value;
-  D.tt[day]=[...document.querySelectorAll('.tt-inp')].map(inp=>{const s=inp.value.trim();return{s:s||'　',c:SC[s]||'c-custom'};});
-  sv();closeModal('modal-edit-tt');rTT();showToast(`${day}曜の時間割を更新しました`);rToday();
+  const modal=document.getElementById('modal-edit-tt');
+  const inps=modal.querySelectorAll('.tt-inp');
+  const tss=modal.querySelectorAll('.tt-ts');
+  const tes=modal.querySelectorAll('.tt-te');
+
+  // 科目を保存
+  D.tt[day]=[...inps].map(inp=>{const s=inp.value.trim();return{s:s||'　',c:SC[s]||'c-custom'};});
+
+  // 時限を曜日別で保存
+  if(Array.isArray(D.pt)){
+    // 旧フォーマット（配列）→ 曜日別オブジェクトに変換
+    const arr=D.pt;
+    D.pt={月:JSON.parse(JSON.stringify(arr)),火:JSON.parse(JSON.stringify(arr)),水:JSON.parse(JSON.stringify(arr)),木:JSON.parse(JSON.stringify(arr)),金:JSON.parse(JSON.stringify(arr))};
+  }
+  D.pt[day]=[...tss].map((ts,i)=>({s:ts.value,e:tes[i].value}));
+
+  sv();closeModal('modal-edit-tt');rTT();showToast(day+'曜の時間割を更新しました');rToday();
 }
 
 function loadPTFields(){
+  const day=document.getElementById('pt-day')?document.getElementById('pt-day').value:'月';
   const el=document.getElementById('pt-fields');el.innerHTML='';
-  D.pt.forEach((t,i)=>{
+  const ptArr=Array.isArray(D.pt)?D.pt:(D.pt[day]||DEFAULT_PT_DAY);
+  ptArr.forEach((t,i)=>{
     const d=document.createElement('div');d.className='fg';
-    d.innerHTML=`<label class="fl">${i+1}限</label><div class="frow"><input type="time" class="fi pt-s" value="${t.s}" style="flex:1"><input type="time" class="fi pt-e" value="${t.e}" style="flex:1"></div>`;
+    d.innerHTML='<label class="fl">'+(i+1)+'限</label><div class="frow"><input type="time" class="fi pt-s" value="'+t.s+'" style="flex:1"><input type="time" class="fi pt-e" value="'+t.e+'" style="flex:1"></div>';
     el.appendChild(d);
   });
 }
 function savePT(){
   const modal=document.getElementById('modal-period-times');
+  const day=document.getElementById('pt-day')?document.getElementById('pt-day').value:'月';
   const ss=[...modal.querySelectorAll('.pt-s')],es=[...modal.querySelectorAll('.pt-e')];
-  D.pt=ss.map((s,i)=>({s:s.value,e:es[i].value}));
-  sv();closeModal('modal-period-times');rTT();showToast('時間を更新しました');rToday();
+  // ptがまだ配列ならオブジェクトに変換
+  if(Array.isArray(D.pt)){
+    const arr=D.pt;
+    D.pt={月:JSON.parse(JSON.stringify(arr)),火:JSON.parse(JSON.stringify(arr)),水:JSON.parse(JSON.stringify(arr)),木:JSON.parse(JSON.stringify(arr)),金:JSON.parse(JSON.stringify(arr))};
+  }
+  D.pt[day]=ss.map((s,i)=>({s:s.value,e:es[i].value}));
+  sv();closeModal('modal-period-times');rTT();showToast(day+'曜の時間を更新しました');rToday();
+}
+
+function copyPTToAll(){
+  const modal=document.getElementById('modal-period-times');
+  const day=document.getElementById('pt-day')?document.getElementById('pt-day').value:'月';
+  const ss=[...modal.querySelectorAll('.pt-s')],es=[...modal.querySelectorAll('.pt-e')];
+  const arr=ss.map((s,i)=>({s:s.value,e:es[i].value}));
+  if(Array.isArray(D.pt)){D.pt={};}
+  ['月','火','水','木','金'].forEach(d=>{D.pt[d]=JSON.parse(JSON.stringify(arr));});
+  sv();showToast('全曜日にコピーしました');
 }
 
 let _ctPCount=1;
@@ -1765,6 +2304,18 @@ const THEMES = [
       deco:['✦','◇','▷','◈'],
     }
   },
+  {
+    id:'chalk', label:'チョーク', emoji:'🖍️',
+    preview:['#f0f4ff','#1a3a8f','rgba(255,255,255,.25)'],
+    desc:'青黒板・手書き風',
+    motifs:{
+      today:'☆', year:'✩', set:'⊹',
+      tt:'△', custom:'◇',
+      secTt:'▲', secEv:'✩', secMemo:'✍', secPhoto:'☆',
+      imp:'✦', noPhoto:'□',
+      deco:['☆','✩','△','◇'],
+    }
+  },
 ];
 
 // テーマ別モチーフを適用するID→motifキーのマップ
@@ -1800,7 +2351,41 @@ function applyTheme(id, save) {
   document.documentElement.setAttribute('data-theme', id);
   if(save){ localStorage.setItem('sapp3_theme', id); }
   applyMotifs(id);
+  applyChalkGrid(id);
   renderThemeGrid();
+}
+
+function applyChalkGrid(id) {
+  if(id !== 'chalk') {
+    document.body.style.backgroundImage = '';
+    document.body.style.backgroundSize = '';
+    document.body.style.backgroundRepeat = '';
+    return;
+  }
+  var W=390, H=1120, lines=[], cols=14, rows=40;
+  var cw=W/cols, rh=H/rows;
+  function jit(v,seed){ return (Math.sin(v*0.38+seed)*1.6)+(Math.cos(v*0.73+seed*1.7)*0.8); }
+  for(var r=0;r<=rows;r++){
+    var y=r*rh; var pts=[];
+    for(var s=0;s<=20;s++){
+      var x=s*W/20;
+      pts.push((s===0?'M':'L')+x.toFixed(1)+','+(y+jit(x*0.05,r*0.55)*0.65).toFixed(1));
+    }
+    lines.push('<path d="'+pts.join(' ')+'" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.85" stroke-linecap="round"/>');
+  }
+  for(var col=0;col<=cols;col++){
+    var x2=col*cw; var pts2=[];
+    for(var s2=0;s2<=30;s2++){
+      var y2=s2*H/30;
+      pts2.push((s2===0?'M':'L')+(x2+jit(y2*0.05,col*0.82)*0.65).toFixed(1)+','+y2.toFixed(1));
+    }
+    lines.push('<path d="'+pts2.join(' ')+'" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.85" stroke-linecap="round"/>');
+  }
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'"><rect width="'+W+'" height="'+H+'" fill="#1a3a8f"/>'+lines.join('')+'</svg>';
+  var b64=btoa(unescape(encodeURIComponent(svg)));
+  document.body.style.backgroundImage='url("data:image/svg+xml;base64,'+b64+'")';
+  document.body.style.backgroundSize=W+'px '+H+'px';
+  document.body.style.backgroundRepeat='repeat-y';
 }
 
 function applyMotifs(id) {
@@ -2199,6 +2784,146 @@ function closeFullscreen(){
 
 
 
+
+// ===== カレンダー タブ =====
+var calTab = 'plan';
+var shiftEditDate = null;
+var copySelectedDays = [];
+
+function switchCalTab(tab){
+  calTab = tab;
+  document.getElementById('tab-plan').classList.toggle('active', tab==='plan');
+  document.getElementById('tab-shift').classList.toggle('active', tab==='shift');
+  rCal();
+}
+
+function openShiftModal(ds){
+  shiftEditDate = ds;
+  copySelectedDays = [];
+  var dt = new Date(ds+'T00:00:00');
+  document.getElementById('shift-modal-title').textContent =
+    (dt.getMonth()+1)+'月'+dt.getDate()+'日のシフト';
+  var shift = D.shifts ? D.shifts[ds] : null;
+  document.getElementById('shift-start').value = shift ? (shift.start||'') : '';
+  document.getElementById('shift-end').value   = shift ? (shift.end||'') : '';
+  renderTemplates();
+  renderCopyCal();
+  openModal('modal-shift');
+}
+
+// ── テンプレート ──
+function renderTemplates(){
+  var list = document.getElementById('tpl-list');
+  if(!list) return;
+  var tpls = D.shiftTemplates || [];
+  list.innerHTML = '';
+  if(!tpls.length){
+    list.innerHTML = '<div style="font-size:11px;color:var(--soft);">まだ保存されていません</div>';
+    return;
+  }
+  tpls.forEach(function(tpl, i){
+    var btn = document.createElement('button');
+    btn.className = 'tpl-btn';
+    var label = tpl.start + (tpl.end ? ' - ' + tpl.end : '');
+    btn.innerHTML = label + '<span class="tpl-del" onclick="deleteTpl(event,'+i+')">×</span>';
+    btn.onclick = function(e){
+      if(e.target.classList.contains('tpl-del')) return;
+      document.getElementById('shift-start').value = tpl.start;
+      document.getElementById('shift-end').value   = tpl.end;
+    };
+    list.appendChild(btn);
+  });
+}
+
+function saveAsTemplate(){
+  var s = document.getElementById('shift-start').value;
+  var e = document.getElementById('shift-end').value;
+  if(!s && !e){ showToast('時刻を入力してください'); return; }
+  if(!D.shiftTemplates) D.shiftTemplates = [];
+  // 重複チェック
+  var exists = D.shiftTemplates.some(function(t){ return t.start===s && t.end===e; });
+  if(exists){ showToast('同じテンプレートが既にあります'); return; }
+  D.shiftTemplates.push({start:s, end:e});
+  sv(); renderTemplates();
+  showToast('テンプレートに保存しました');
+}
+
+function deleteTpl(e, i){
+  e.stopPropagation();
+  D.shiftTemplates.splice(i,1);
+  sv(); renderTemplates();
+}
+
+// ── 複数日コピー ──
+function renderCopyCal(){
+  var grid = document.getElementById('copy-cal');
+  if(!grid) return;
+  grid.innerHTML = '';
+  var first = new Date(calY, calM, 1).getDay();
+  var days  = new Date(calY, calM+1, 0).getDate();
+  for(var i=0;i<first;i++){
+    var emp=document.createElement('div');emp.className='copy-day empty';grid.appendChild(emp);
+  }
+  for(var dd=1;dd<=days;dd++){
+    (function(d){
+      var ds = calY+'-'+p2(calM+1)+'-'+p2(d);
+      if(ds === shiftEditDate) return; // 編集中の日はスキップ
+      var el = document.createElement('div');
+      el.className = 'copy-day';
+      if(D.shifts && D.shifts[ds]) el.classList.add('has-shift');
+      if(copySelectedDays.indexOf(ds)>=0) el.classList.add('selected');
+      el.textContent = d;
+      el.onclick = function(){
+        var idx = copySelectedDays.indexOf(ds);
+        if(idx>=0){ copySelectedDays.splice(idx,1); el.classList.remove('selected'); }
+        else{ copySelectedDays.push(ds); el.classList.add('selected'); }
+      };
+      grid.appendChild(el);
+    })(dd);
+  }
+}
+
+function clearCopyDays(){
+  copySelectedDays = [];
+  document.querySelectorAll('.copy-day.selected').forEach(function(el){
+    el.classList.remove('selected');
+  });
+}
+
+// ── 保存・削除 ──
+function saveShift(){
+  if(!shiftEditDate) return;
+  if(!D.shifts) D.shifts = {};
+  var s = document.getElementById('shift-start').value;
+  var e = document.getElementById('shift-end').value;
+  if(!s && !e){ deleteShift(); return; }
+  var data = {start:s, end:e};
+  // 編集中の日に保存
+  D.shifts[shiftEditDate] = data;
+  // 選択した日にもコピー
+  copySelectedDays.forEach(function(ds){
+    D.shifts[ds] = {start:s, end:e};
+  });
+  sv();
+  closeModal('modal-shift');
+  rCal();
+  var msg = copySelectedDays.length > 0
+    ? '保存しました（計'+(copySelectedDays.length+1)+'日）'
+    : 'シフトを保存しました';
+  showToast(msg);
+  copySelectedDays = [];
+}
+
+function deleteShift(){
+  if(!shiftEditDate) return;
+  if(D.shifts) delete D.shifts[shiftEditDate];
+  sv();
+  closeModal('modal-shift');
+  rCal();
+  showToast('削除しました');
+  copySelectedDays = [];
+}
+
 initThemes();
 </script>
 
@@ -2270,6 +2995,48 @@ initThemes();
 <div class="gal-fullscreen" id="gal-fullscreen" onclick="closeFullscreen()">
   <button class="gal-fullscreen-close" onclick="closeFullscreen()">✕</button>
   <img id="gal-fullscreen-img" src="" alt="">
+</div>
+
+
+<!-- シフト入力モーダル -->
+<div class="moverlay" id="modal-shift" onclick="closeOut(event,'modal-shift')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle" id="shift-modal-title">シフトを入力</div>
+
+    <!-- テンプレート -->
+    <div class="fg">
+      <label class="fl">⚡ テンプレートから選ぶ</label>
+      <div class="tpl-list" id="tpl-list"></div>
+      <button onclick="saveAsTemplate()" style="font-size:11px;color:var(--accent);background:none;border:1.5px dashed var(--border);border-radius:8px;padding:5px 10px;font-family:inherit;cursor:pointer;width:100%;margin-top:4px;">
+        ＋ 現在の時間をテンプレートに保存
+      </button>
+    </div>
+
+    <!-- 時刻入力 -->
+    <div class="fg">
+      <label class="fl">出勤時刻</label>
+      <input type="time" class="shift-time-input" id="shift-start">
+    </div>
+    <div class="fg">
+      <label class="fl">退勤時刻</label>
+      <input type="time" class="shift-time-input" id="shift-end">
+    </div>
+
+    <!-- 複数日コピー -->
+    <div class="fg">
+      <label class="fl" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>📅 この時間を他の日にもコピー</span>
+        <button onclick="clearCopyDays()" style="font-size:10px;color:var(--soft);background:none;border:none;cursor:pointer;">クリア</button>
+      </label>
+      <div class="copy-cal-dh"><div style="color:#e08080">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div style="color:#8080e0">土</div></div>
+      <div class="copy-cal" id="copy-cal"></div>
+    </div>
+
+    <button class="btn-p" onclick="saveShift()">この日＋選択した日に保存</button>
+    <button class="btn-s" style="color:#e07a7a;" onclick="deleteShift()">この日のシフトを削除</button>
+    <button class="btn-s" onclick="closeModal('modal-shift')">キャンセル</button>
+  </div>
 </div>
 
 </body>
