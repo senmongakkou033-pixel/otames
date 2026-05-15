@@ -81,7 +81,7 @@
   --yellow:#ffe890;
   --purple:#d0b0ff;
 }
-
+ 
 /* チョーク手書きフォント */
 [data-theme="chalk"] body,
 [data-theme="chalk"] .band-title,
@@ -98,13 +98,13 @@
 [data-theme="chalk"] .dtab {
   font-family:'Caveat','Zen Maru Gothic',sans-serif;
 }
-
+ 
 /* 背景：青地 + 手書きSVGグリッド（JSで生成） */
 [data-theme="chalk"] body {
   background-color:#1a3a8f;
   /* SVGグリッドはJS側でセット */
 }
-
+ 
 /* 手書きっぽい揺れを全カードに */
 [data-theme="chalk"] .pc,
 [data-theme="chalk"] .evc,
@@ -120,7 +120,7 @@
 [data-theme="chalk"] .memo-wrap {
   border-radius:5px 8px 4px 9px / 8px 5px 9px 4px;
 }
-
+ 
 /* カード：白い紙が貼られてるような半透明 */
 [data-theme="chalk"] .pc,
 [data-theme="chalk"] .evc,
@@ -144,7 +144,7 @@
   /* チョークで描いた角丸っぽく - SVGフィルタで少しにじませる */
   box-shadow:0 2px 0 rgba(255,255,255,.1), 2px 0 0 rgba(255,255,255,.08);
 }
-
+ 
 /* 今の授業 */
 [data-theme="chalk"] .pc-now {
   background:rgba(255,255,255,.28)!important;
@@ -159,7 +159,7 @@
   background:rgba(255,255,255,.2);
   color:#f0f4ff;
 }
-
+ 
 /* ヘッダーバンド */
 [data-theme="chalk"] .screen-band {
   background:rgba(18,28,120,.85);
@@ -174,7 +174,7 @@
   border-color:rgba(255,255,255,.4);
   color:#f0f4ff;
 }
-
+ 
 /* ナビ */
 [data-theme="chalk"] .bnav {
   background:rgba(16,30,130,.97);
@@ -182,14 +182,14 @@
 }
 [data-theme="chalk"] .nb { color:rgba(180,200,255,.55); }
 [data-theme="chalk"] .nb.active { color:#f0f4ff; }
-
+ 
 /* セクションラベル */
 [data-theme="chalk"] .sec span {
   background:linear-gradient(transparent 45%, rgba(255,255,255,.2) 45%);
   color:#f0f4ff;
 }
 [data-theme="chalk"] .sec::after { background:rgba(255,255,255,.25); }
-
+ 
 /* 日付バー */
 [data-theme="chalk"] .today-bar {
   border-top:3px solid rgba(255,255,255,.5);
@@ -199,24 +199,24 @@
   border-color:rgba(255,255,255,.3);
   color:#f0f4ff;
 }
-
+ 
 /* 予定の左線 */
 [data-theme="chalk"] .evc { border-left-color:#90ffca; }
-
+ 
 /* メモの罫線 */
 [data-theme="chalk"] .min {
   background-image:linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px);
   background-size:100% var(--LH);
   color:#f0f4ff;
 }
-
+ 
 /* テープ */
 [data-theme="chalk"] .pslot::before { background:rgba(255,255,255,.25)!important; }
 [data-theme="chalk"] .pslot:nth-child(2n)::before { background:rgba(144,255,202,.3)!important; }
 [data-theme="chalk"] .pslot:nth-child(3n)::before { background:rgba(255,232,144,.35)!important; }
 [data-theme="chalk"] .pslot:nth-child(4n)::before { background:rgba(208,176,255,.3)!important; }
 [data-theme="chalk"] .mphoto::before { background:rgba(255,255,255,.28)!important; }
-
+ 
 /* カレンダー */
 [data-theme="chalk"] .cc.today { background:#f0f4ff; border-color:#6080f0; }
 [data-theme="chalk"] .cc.today .cc-num { color:#1a3a8f; }
@@ -225,26 +225,26 @@
 [data-theme="chalk"] .cc.sat { color:#b0c8ff; }
 [data-theme="chalk"] .cal-dh { color:rgba(200,215,255,.7); }
 [data-theme="chalk"] .cc.has-event::after { background:#90ffca; }
-
+ 
 /* 付箋 */
 [data-theme="chalk"] .imp-box {
   background:rgba(255,255,255,.13);
   border-color:rgba(255,255,255,.28);
 }
-
+ 
 /* 時間割タブ */
 [data-theme="chalk"] .dtab { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:rgba(200,215,255,.7); }
 [data-theme="chalk"] .dtab.active { background:rgba(255,255,255,.9); border-color:#fff; color:#1a3a8f; }
-
+ 
 /* 年間 */
 [data-theme="chalk"] .mr.cur { border-left-color:#f0f4ff; background:rgba(255,255,255,.22); }
 [data-theme="chalk"] .mr.cur .mlbl { color:#f0f4ff; }
-
+ 
 /* ボタン */
 [data-theme="chalk"] .btn-p { background:rgba(255,255,255,.9); color:#1a3a8f; }
 [data-theme="chalk"] .btn-s { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:rgba(200,220,255,.8); }
 [data-theme="chalk"] .add-ev-btn { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:rgba(200,220,255,.7); }
-
+ 
 /* モーダル */
 [data-theme="chalk"] .modal {
   background:#1a3abd;
@@ -259,7 +259,7 @@
 [data-theme="chalk"] .fl { color:rgba(200,220,255,.7); }
 [data-theme="chalk"] .mtitle { color:#f0f4ff; }
 [data-theme="chalk"] select.fi option { background:#1a3abd; }
-
+ 
 /* 科目色（チョーク風パステル） */
 [data-theme="chalk"] .c-pg { background:rgba(255,160,180,.25); color:#ffb0c8; }
 [data-theme="chalk"] .c-word { background:rgba(144,200,255,.25); color:#90c8ff; }
@@ -270,18 +270,18 @@
 [data-theme="chalk"] .c-design { background:rgba(255,160,240,.25); color:#ffa0f0; }
 [data-theme="chalk"] .c-job { background:rgba(180,255,144,.25); color:#b4ff90; }
 [data-theme="chalk"] .c-custom { background:rgba(255,255,255,.15); color:#d0dcff; }
-
+ 
 /* ギャラリー */
 [data-theme="chalk"] .gal-folder-preview { background:rgba(255,255,255,.08); }
 [data-theme="chalk"] .gal-photo-add-cell { border-color:rgba(255,255,255,.3); color:rgba(200,220,255,.5); }
 [data-theme="chalk"] .gal-folder-name { color:#f0f4ff; }
-
+ 
 :root{
   --red:#e07a7a;--green:#6bbf8e;--yellow:#f0c96a;--purple:#9b8fd4;
   --r:14px;--rs:10px;--shadow:0 2px 12px rgba(0,0,0,.10);--LH:28px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-
+ 
 body{
   font-family:'Zen Maru Gothic',sans-serif;
   color:var(--text);
@@ -296,17 +296,17 @@ body::before{
   content:'';position:fixed;left:22px;top:0;bottom:0;
   width:1.5px;background:var(--margin-line);z-index:0;pointer-events:none;
 }
-
+ 
 /* NAV */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(14px);border-top:2px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 0 7px;gap:2px;border:none;background:none;cursor:pointer;font-family:inherit;color:var(--soft);font-size:9px;transition:color .2s;}
 .nb.active{color:var(--accent);}
 .nb svg{width:21px;height:21px;}
-
+ 
 /* SCREEN — グリッドの先頭をヘッダー下に合わせるため padding-top を LH の倍数に */
 .screen{display:none;padding:0 0 76px;min-height:100vh;position:relative;z-index:1;}
 .screen.active{display:block;}
-
+ 
 /* HEADER BAND — 高さを LH の倍数に固定して罫線がずれない */
 .screen-band{
   background:linear-gradient(135deg,var(--band-from),var(--band-to));
@@ -323,7 +323,7 @@ body::before{
 }
 .band-title{font-size:20px;font-weight:700;color:#fff;line-height:var(--LH);}
 .band-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:#fff;flex-shrink:0;}
-
+ 
 /* セクションラベル — LH に合わせる */
 .sec{
   font-size:11px;font-weight:700;color:var(--soft);
@@ -334,11 +334,34 @@ body::before{
 }
 .sec span{background:linear-gradient(transparent 45%,rgba(90,172,205,.28) 45%);padding:0 2px;}
 .sec::after{content:'';flex:1;height:1px;background:var(--border);}
-
+ 
 /* ── TODAY ── */
+/* 気分絵文字 */
+.mood-btn{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--accent-light);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:22px;flex-shrink:0;
+  transition:transform .15s;
+  position:relative;
+}
+.mood-btn:active{transform:scale(.9);}
+.mood-btn.empty{font-size:16px;color:var(--border);}
+.mood-btn.has-mood{background:transparent;border-color:transparent;font-size:26px;}
+/* 気分選択モーダル */
+.mood-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0;}
+.mood-item{
+  width:48px;height:48px;border-radius:50%;
+  border:2px solid var(--border);background:var(--card-bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;cursor:pointer;transition:all .15s;
+}
+.mood-item:active,.mood-item.selected{border-color:var(--accent);background:var(--accent-light);transform:scale(1.12);}
+.mood-item.remove{font-size:14px;color:var(--soft);}
+.mood-custom-row{display:flex;gap:8px;margin-top:8px;}
+ 
 .today-bar{
   margin:0 14px 0;
-  /* 高さを LH×2 にスナップ */
   padding:14px 16px;
   display:flex;align-items:center;gap:12px;
   background:var(--card-bg);
@@ -346,14 +369,13 @@ body::before{
   border:1px solid var(--border);
   border-top:4px solid var(--accent2);
   box-shadow:var(--shadow);
-  /* 罫線を透かすため背景を半透明に */
 }
 .tnav{width:28px;height:28px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;color:var(--accent);}
 .tcenter{flex:1;text-align:center;}
 .td-lbl{font-size:10px;color:var(--soft);line-height:1.4;}
 .td-big{font-size:18px;font-weight:700;line-height:var(--LH);color:var(--text);}
 .td-badge{display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;}
-
+ 
 /* 時間割カード — 半透明白で罫線を透かしつつ読みやすく */
 .slist{padding:0 14px;display:flex;flex-direction:column;gap:0;}
 .pc{
@@ -383,7 +405,7 @@ body::before{
 .psub{font-size:14px;font-weight:700;line-height:var(--LH);}
 .ptm{font-size:10px;color:var(--soft);line-height:1.3;}
 .pc-done{opacity:.38;}
-
+ 
 /* 予定カード */
 .evlist{padding:0 14px;display:flex;flex-direction:column;gap:9px;}
 .evc{
@@ -398,7 +420,7 @@ body::before{
 .evn{font-size:13px;font-weight:700;line-height:var(--LH);}
 .evt{font-size:10px;color:var(--soft);}
 .evdel{background:none;border:none;color:var(--soft);font-size:14px;cursor:pointer;}
-
+ 
 /* メモ — 罫線を引き継ぐ。背景を透明にして body の罫線をそのまま使う */
 .memo-wrap{
   margin:0 14px;
@@ -424,7 +446,7 @@ body::before{
   padding:0;
   display:block;
 }
-
+ 
 /* 写真 — テープ留め */
 .photo-row{padding:0 14px 0;display:flex;gap:8px;margin-top:14px;}
 .pslot{
@@ -445,7 +467,58 @@ body::before{
 .pslot:nth-child(2n)::before{background:rgba(107,191,142,.44);}
 .pslot:nth-child(3n)::before{background:rgba(240,201,106,.52);}
 .pslot:nth-child(4n)::before{background:rgba(155,143,212,.44);}
-
+ 
+/* タグバッジ（写真スロット上） */
+.ptag-badge{
+  position:absolute;bottom:2px;left:0;right:0;
+  text-align:center;font-size:8px;font-weight:700;
+  color:#fff;background:rgba(0,0,0,.45);
+  border-radius:0 0 3px 3px;
+  padding:1px 2px;
+  pointer-events:none;z-index:2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+/* タグ選択モーダル */
+.tag-chip-row{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 4px;}
+.tag-chip{
+  padding:6px 13px;border-radius:20px;
+  border:1.5px solid var(--border);
+  background:var(--card-bg);
+  font-family:inherit;font-size:12px;font-weight:700;
+  color:var(--soft);cursor:pointer;
+  transition:all .15s;
+}
+.tag-chip.selected{background:var(--accent);border-color:var(--accent);color:#fff;}
+/* ギャラリー タグビュー */
+.gal-tab-row{display:flex;gap:0;border-bottom:2px solid var(--border);margin:0 0 2px;}
+.gal-tab{flex:1;padding:10px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--soft);background:none;border:none;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;}
+.gal-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tag-filter-row{display:flex;gap:6px;overflow-x:auto;padding:10px 14px 4px;scrollbar-width:none;}
+.tag-filter-row::-webkit-scrollbar{display:none;}
+.tag-filter-chip{
+  padding:5px 12px;border-radius:16px;
+  border:1.5px solid var(--border);
+  background:var(--card-bg);
+  font-family:inherit;font-size:11px;font-weight:700;
+  color:var(--soft);cursor:pointer;white-space:nowrap;flex-shrink:0;
+}
+.tag-filter-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.tag-photo-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:3px;
+  padding:6px 10px 20px;
+}
+.tag-photo-cell{
+  aspect-ratio:1;border-radius:6px;overflow:hidden;
+  position:relative;cursor:pointer;background:var(--bg);
+}
+.tag-photo-cell img{width:100%;height:100%;object-fit:cover;}
+.tag-photo-date{
+  position:absolute;bottom:0;left:0;right:0;
+  font-size:8px;font-weight:700;color:#fff;
+  background:rgba(0,0,0,.4);padding:2px 4px;text-align:center;
+}
+.tag-empty{padding:32px 0;text-align:center;color:var(--soft);font-size:13px;}
+ 
 /* CALENDAR */
 .cal-top{padding:50px 14px 6px;display:flex;align-items:center;justify-content:center;gap:12px;}
 .cal-month{font-size:21px;font-weight:700;line-height:var(--LH);}
@@ -509,7 +582,7 @@ body::before{
 [data-theme="pink"] .cc-ev{background:rgba(232,112,154,.15);color:var(--text);}
 [data-theme="dark"] .cc-ev{background:rgba(200,200,216,.12);color:var(--text);}
 [data-theme="grid"] .cc-ev{background:rgba(100,100,100,.12);color:var(--text);}
-
+ 
 /* 付箋 */
 .imp-box{margin:8px 14px 0;background:var(--imp-bg);border:1px solid var(--imp-border);border-radius:var(--rs);padding:8px 12px;position:relative;box-shadow:2px 3px 0 rgba(0,0,0,.08);}
 .imp-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--imp-top);border-radius:var(--rs) var(--rs) 0 0;}
@@ -518,7 +591,7 @@ body::before{
 .imp-edit{font-size:11px;color:var(--accent);border:none;background:none;font-family:inherit;cursor:pointer;font-weight:700;}
 .imp-item{font-size:12px;display:flex;gap:5px;align-items:flex-start;margin-bottom:2px;color:var(--imp-text);line-height:var(--LH);}
 .imp-item::before{content:'✓';color:var(--imp-label);font-size:10px;line-height:var(--LH);flex-shrink:0;}
-
+ 
 .cal-detail-wrap{margin:8px 14px 0;}
 .cd{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r);padding:12px;box-shadow:var(--shadow);}
 .cd-hdr{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;line-height:var(--LH);}
@@ -526,7 +599,7 @@ body::before{
 .cd-row{display:flex;gap:7px;font-size:12px;align-items:center;line-height:var(--LH);}
 .cd-num{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;background:var(--accent-light);color:var(--accent);}
 .add-ev-btn{display:flex;align-items:center;justify-content:center;gap:5px;margin:8px 14px 0;background:rgba(255,255,255,.8);border:1.5px dashed var(--border);border-radius:var(--rs);padding:10px;cursor:pointer;font-family:inherit;font-size:12px;color:var(--soft);width:calc(100% - 28px);}
-
+ 
 /* TIMETABLE */
 .tt-top{padding:50px 14px 8px;display:flex;justify-content:space-between;align-items:center;}
 .day-tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:0 14px 8px;}
@@ -545,7 +618,7 @@ body::before{
 .ct-name{font-size:13px;font-weight:700;line-height:var(--LH);}
 .ct-days{font-size:10px;color:var(--soft);}
 .ctdel{background:none;border:none;color:var(--soft);font-size:15px;cursor:pointer;}
-
+ 
 /* YEARBOOK */
 .yr-hdr{padding:50px 18px 8px;font-size:22px;font-weight:700;line-height:var(--LH);}
 .yr-list{padding:0 14px;display:flex;flex-direction:column;gap:8px;}
@@ -565,7 +638,7 @@ body::before{
 .mphoto-ov{position:absolute;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;opacity:0;border-radius:3px;}
 .mphoto:active .mphoto-ov{opacity:1;}
 .mr-edit{background:none;border:none;font-size:13px;cursor:pointer;padding:4px;flex-shrink:0;color:var(--soft);}
-
+ 
 /* SETTINGS */
 .slist-s{padding:0 14px;display:flex;flex-direction:column;gap:6px;}
 .sit{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;min-height:calc(var(--LH)*2);}
@@ -576,7 +649,7 @@ body::before{
 .toggle.on{background:var(--accent);}
 .toggle::after{content:'';position:absolute;width:17px;height:17px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
 .toggle.on::after{left:20px;}
-
+ 
 /* MODALS */
 .moverlay{display:none;position:fixed;inset:0;background:rgba(44,74,88,.3);backdrop-filter:blur(4px);z-index:200;align-items:flex-end;justify-content:center;}
 .moverlay.open{display:flex;}
@@ -594,7 +667,7 @@ body::before{
 .frow{display:flex;gap:7px;}
 .btn-p{width:100%;padding:12px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;}
 .btn-s{width:100%;padding:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);color:var(--soft);font-family:inherit;font-size:13px;cursor:pointer;margin-top:5px;}
-
+ 
 .c-pg{background:#fde8ee;color:#c05070;}
 .c-word{background:#dff0fb;color:#2f7ab0;}
 .c-manner{background:#dff7ec;color:#2a9060;}
@@ -604,11 +677,11 @@ body::before{
 .c-design{background:#fbe8f8;color:#a830a0;}
 .c-job{background:#eef8dc;color:#6aa018;}
 .c-custom{background:#eef2f4;color:#4a6a78;}
-
+ 
 #screen-daydetail .sh{padding-top:52px;}
 .toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
-
+ 
 /* ══ THEME: GRID（グリッド画像背景・シンプル） ══ */
 [data-theme="grid"]{
   --bg:transparent;
@@ -685,7 +758,7 @@ body::before{
 [data-theme="grid"] .today-bar{border-top-color:#bbb;}
 [data-theme="grid"] .ttc{border-left-color:rgba(150,150,150,.4);}
 .hbtn-light{width:34px;height:34px;border-radius:50%;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--accent);flex-shrink:0;}
-
+ 
 /* ── 2カラムレイアウト ── */
 .layout-cols{display:flex;gap:8px;padding:0 14px;margin-bottom:0;}
 .col-left{flex:0 0 44%;display:flex;flex-direction:column;gap:0;}
@@ -728,11 +801,11 @@ body::before{
 .col-period-now{color:var(--accent);font-weight:700;}
 .col-period-done{opacity:.38;}
 .col-now-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-
+ 
 /* ===== LAYOUT B — 2カラム（スケッチ風） ===== */
 .layout-b-wrap{display:none;padding:0 14px;gap:14px;}
 .layout-b-wrap.active{display:flex;}
-
+ 
 /* 左カラム — 時間割 */
 .col-left{
   flex:0 0 44%;
@@ -759,12 +832,12 @@ body::before{
 .col-period-now{color:var(--accent);}
 .col-period-done{opacity:.38;}
 .col-now-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-
+ 
 /* 右カラム */
 .col-right{
   flex:1;display:flex;flex-direction:column;gap:10px;
 }
-
+ 
 /* 日付ブロック */
 .col-date-box{
   background:var(--card-bg);
@@ -776,7 +849,7 @@ body::before{
 }
 .col-date-main{font-size:20px;font-weight:700;line-height:1.3;color:var(--text);}
 .col-date-sub{font-size:11px;color:var(--soft);margin-top:4px;}
-
+ 
 /* 予定ブロック */
 .col-ev-box{
   background:var(--card-bg);
@@ -791,7 +864,7 @@ body::before{
 .col-ev-title{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:6px;}
 .col-ev-item{font-size:14px;font-weight:700;line-height:1.6;color:var(--text);}
 .col-ev-time{font-size:11px;color:var(--soft);margin-top:2px;}
-
+ 
 /* 電車バスブロック */
 .col-transit-box{
   background:var(--card-bg);
@@ -801,9 +874,22 @@ body::before{
   padding:14px 14px;
   box-shadow:0 1px 6px rgba(0,0,0,.07);
 }
-.col-transit-title{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:5px;}
+.col-transit-title{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:5px;display:flex;align-items:center;justify-content:space-between;}
+.col-transit-title-btn{font-size:11px;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:8px;padding:2px 8px;cursor:pointer;font-weight:700;font-family:inherit;}
 .col-transit-time{font-size:15px;font-weight:700;color:var(--text);}
-
+/* 電車テンプレモーダル */
+.transit-tpl-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:12px;}
+.transit-tpl-tab{flex:1;padding:8px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--soft);background:none;border:none;font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;}
+.transit-tpl-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.transit-day-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.transit-day-lbl{width:24px;font-size:13px;font-weight:700;color:var(--text);flex-shrink:0;text-align:center;}
+.transit-day-inp{flex:1;border:1.5px solid var(--border);border-radius:var(--rs);padding:7px 10px;font-family:inherit;font-size:12px;color:var(--text);background:var(--bg);outline:none;}
+.transit-day-inp:focus{border-color:var(--accent);}
+.transit-shift-row{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:8px;}
+.transit-shift-lbl{font-size:11px;font-weight:700;color:var(--soft);margin-bottom:6px;}
+.transit-shift-inp{width:100%;border:1.5px solid var(--border);border-radius:var(--rs);padding:7px 10px;font-family:inherit;font-size:12px;color:var(--text);background:var(--bg);outline:none;}
+.transit-shift-inp:focus{border-color:var(--accent);}
+ 
 /* メモ row */
 .col-memo-row{padding:0 14px;margin-top:18px;}
 .col-memo-wrap{
@@ -820,10 +906,10 @@ body::before{
   color:var(--text);outline:none;
   min-height:80px;line-height:var(--LH);padding:0;
 }
-
+ 
 /* 写真 row — レイアウトB共通 */
 .col-photo-row{padding:0 14px;display:flex;gap:8px;margin-top:8px;}
-
+ 
 /* ===== GALLERY ===== */
 .gal-folder-grid{
   padding:0 14px;
@@ -893,7 +979,7 @@ body::before{
 }
 .gal-add-folder::before{display:none;}
 .gal-add-icon{font-size:28px;color:var(--border);}
-
+ 
 /* フォルダ詳細ビュー */
 .gal-detail{display:none;padding:0 0 76px;}
 .gal-detail.active{display:block;}
@@ -1008,7 +1094,7 @@ body::before{
   color:#fff;font-size:28px;cursor:pointer;
   background:none;border:none;
 }
-
+ 
 /* ===== カレンダータブ切り替え ===== */
 .cal-tab-bar{
   display:flex;gap:0;padding:0 14px 10px;
@@ -1023,14 +1109,14 @@ body::before{
 .cal-tab:first-child{border-radius:var(--rs) 0 0 var(--rs);}
 .cal-tab:last-child{border-radius:0 var(--rs) var(--rs) 0;border-left:none;}
 .cal-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-
+ 
 /* シフトビューのセル */
 .cc.shift-mode{
   border-radius:0;
   border:none;
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
-  background:transparent;
+  background:var(--card-bg);
   padding:3px 4px;
   min-height:72px;
   align-items:flex-start;
@@ -1050,13 +1136,14 @@ body::before{
   display:none;
   flex-direction:column;gap:1px;
   margin-top:2px;width:100%;
+  align-items:center;
 }
 .cc.shift-mode .cc-shift{display:flex;}
 .cc.shift-mode .cc-ev{display:none;}
 .cc-shift-time{
   font-size:10px;font-weight:700;
   color:var(--text);line-height:1.5;
-  text-align:right;
+  text-align:center;
 }
 .cc-shift-edit{
   font-size:8px;color:var(--soft);
@@ -1078,7 +1165,7 @@ body::before{
   width:100%;outline:none;
 }
 .shift-time-input:focus{border-color:var(--accent);}
-
+ 
 /* テンプレートボタン */
 .tpl-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
 .tpl-btn{
@@ -1091,7 +1178,7 @@ body::before{
 }
 .tpl-btn:active{background:var(--accent-light);}
 .tpl-del{color:var(--soft);font-size:11px;margin-left:2px;}
-
+ 
 /* 複数日選択グリッド */
 .copy-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px;}
 .copy-cal-dh{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:9px;color:var(--soft);font-weight:700;margin-bottom:2px;}
@@ -1107,8 +1194,8 @@ body::before{
 </style>
 </head>
 <body>
-
-
+ 
+ 
 <!-- TODAY -->
 <div class="screen active" id="screen-today">
   <div class="screen-band">
@@ -1118,7 +1205,7 @@ body::before{
       <div class="band-btn" onclick="openEvModal(null)">＋</div>
     </div>
   </div>
-
+ 
   <!-- ナビバー（両レイアウト共通） -->
   <div class="today-bar">
     <div class="tnav" onclick="navDay(-1)">‹</div>
@@ -1127,9 +1214,10 @@ body::before{
       <div class="td-big" id="td-big"></div>
       <div id="td-badge"></div>
     </div>
+    <div class="mood-btn empty" id="mood-btn" onclick="openMoodModal()">＋</div>
     <div class="tnav" onclick="navDay(1)">›</div>
   </div>
-
+ 
   <!-- ===== LAYOUT A（縦並び・デフォルト） ===== -->
   <div id="layout-a">
     <div style="height:6px"></div>
@@ -1149,7 +1237,7 @@ body::before{
     <div class="photo-row" id="t-photos"></div>
     <div style="height:20px"></div>
   </div>
-
+ 
   <!-- ===== LAYOUT B（2カラム・スケッチ風） ===== -->
   <div id="layout-b" style="display:none;">
     <div style="height:10px"></div>
@@ -1165,14 +1253,17 @@ body::before{
         </div>
         <div class="col-ev-box" id="b-evs"></div>
         <div class="col-transit-box">
-          <div class="col-transit-title">🚃 電車・バス</div>
+          <div class="col-transit-title">
+            <span>🚃 電車・バス</span>
+            <button class="col-transit-title-btn" onclick="openTransitTplModal()">📋 テンプレ</button>
+          </div>
           <textarea class="col-transit-time" id="b-transit"
             style="width:100%;border:none;background:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--text);outline:none;resize:none;min-height:32px;line-height:1.5;"
             placeholder="例：7:45発　快速"></textarea>
         </div>
       </div>
     </div>
-
+ 
     <!-- メモ -->
     <div class="col-memo-row" style="margin-top:8px;">
       <div class="col-memo-wrap">
@@ -1180,14 +1271,14 @@ body::before{
         <textarea class="col-memo-in" id="b-memo" placeholder="今日はどんな日だった？"></textarea>
       </div>
     </div>
-
+ 
     <!-- 写真 -->
     <div style="height:14px"></div>
     <div class="col-photo-row" id="b-photos"></div>
     <div style="height:18px"></div>
   </div>
 </div>
-
+ 
 <!-- CALENDAR -->
 <div class="screen" id="screen-calendar">
   <div class="screen-band" style="padding-bottom:10px;">
@@ -1215,7 +1306,7 @@ body::before{
   <button class="add-ev-btn" onclick="openEvModal(selDate)">＋ 予定・特別日を追加</button>
   <div style="height:6px"></div>
 </div>
-
+ 
 <!-- TIMETABLE -->
 <div class="screen" id="screen-timetable">
   <div class="screen-band">
@@ -1231,7 +1322,7 @@ body::before{
   <div class="custom-list" id="custom-list"></div>
   <div style="height:6px"></div>
 </div>
-
+ 
 <!-- YEARBOOK -->
 <div class="screen" id="screen-yearbook">
   <div class="screen-band">
@@ -1240,7 +1331,7 @@ body::before{
   <div class="yr-list" id="yr-list"></div>
   <div style="height:6px"></div>
 </div>
-
+ 
 <!-- SETTINGS -->
 <div class="screen" id="screen-settings">
   <div class="screen-band">
@@ -1275,7 +1366,7 @@ body::before{
     <div>2. 共有ボタン（□↑）→「ホーム画面に追加」✨</div>
   </div>
 </div>
-
+ 
 <!-- DAY DETAIL (from calendar) -->
 <div class="screen" id="screen-daydetail">
   <div class="screen-band">
@@ -1299,7 +1390,7 @@ body::before{
   <div class="photo-row" id="dd-photos"></div>
   <div style="height:6px"></div>
 </div>
-
+ 
 <!-- BOTTOM NAV -->
 <nav class="bnav">
   <button class="nb active" onclick="goScreen('today',this)">
@@ -1321,7 +1412,7 @@ body::before{
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>設定
   </button>
 </nav>
-
+ 
 <!-- MODALS -->
 <div class="moverlay" id="modal-add-event" onclick="closeOut(event,'modal-add-event')">
   <div class="modal">
@@ -1338,7 +1429,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-add-event')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-add-special" onclick="closeOut(event,'modal-add-special')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1352,7 +1443,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-add-special')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-imp" onclick="closeOut(event,'modal-imp')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1364,7 +1455,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-imp')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-edit-tt" onclick="closeOut(event,'modal-edit-tt')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1377,7 +1468,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-edit-tt')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-period-times" onclick="closeOut(event,'modal-period-times')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1395,7 +1486,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-period-times')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-custom-tt" onclick="closeOut(event,'modal-custom-tt')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1418,7 +1509,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-custom-tt')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-month-edit" onclick="closeOut(event,'modal-month-edit')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1429,7 +1520,7 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-month-edit')">キャンセル</button>
   </div>
 </div>
-
+ 
 <div class="moverlay" id="modal-shortcut" onclick="closeOut(event,'modal-shortcut')">
   <div class="modal">
     <div class="mhandle"></div>
@@ -1448,9 +1539,9 @@ body::before{
     <button class="btn-s" onclick="closeModal('modal-shortcut')">閉じる</button>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast"></div>
-
+ 
 <script>
 const DN=['日','月','火','水','木','金','土'];
 const MN=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
@@ -1470,11 +1561,11 @@ const DEFAULT_PT={
   木:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
   金:JSON.parse(JSON.stringify(DEFAULT_PT_DAY)),
 };
-
+ 
 // ===== INDEXED DB — 写真専用ストレージ =====
 const IDB_NAME='sapp_photos', IDB_VER=1, IDB_STORE='photos';
 let idb=null;
-
+ 
 function openIDB(){
   return new Promise(function(resolve,reject){
     if(idb){resolve(idb);return;}
@@ -1516,7 +1607,7 @@ function idbDel(key){
     });
   });
 }
-
+ 
 // ===== LOCAL STORAGE — 設定・テキストデータのみ =====
 function loadD(){
   try{var d=localStorage.getItem('sapp3');if(d)return JSON.parse(d);}catch(e){}
@@ -1524,7 +1615,9 @@ function loadD(){
     events:[],specials:[],memos:{},
     mSumm:{'2026-3':{main:'春休み🌸',sub:''},'2026-4':{main:'新学期スタート✨',sub:''},'2026-5':{main:'GW🎏',sub:''},'2026-6':{main:'主な予定',sub:''},'2026-7':{main:'主な予定',sub:''},'2026-8':{main:'夏休み🌻',sub:''}},
     customs:[],shifts:{},shiftTemplates:[],
-    galFolders:[],
+    galFolders:[],customPhotoTags:[],
+    transitDayTpl:{},transitShiftTpl:{},
+    moods:{},moodCustom:[],
     important:{'default':['スーツ！','誕生日プレゼント']}};
 }
 let D=loadD();
@@ -1556,7 +1649,7 @@ function sv(){
   try{localStorage.setItem('sapp3',JSON.stringify(slim));}
   catch(e){showToast('設定の保存に失敗しました');}
 }
-
+ 
 // ── 今日の写真 ──
 function savePhoto(dateStr,idx,dataUrl){
   return idbSet('photo:'+dateStr+':'+idx, dataUrl);
@@ -1584,9 +1677,9 @@ function loadGalPhoto(folderIdx,photoIdx){
 function deleteGalPhoto(folderIdx,photoIdx){
   return idbDel('gal:'+folderIdx+':'+photoIdx);
 }
-
+ 
 let vDate=new Date(),calY=new Date().getFullYear(),calM=new Date().getMonth(),selDate=null,prevScr='today',ttDay=null,editMKey=null,ctPCount=1;
-
+ 
 function goScreen(n,btn){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
@@ -1598,19 +1691,19 @@ function goScreen(n,btn){
   if(n==='yearbook')rYr();
   if(n==='gallery')rGallery();
 }
-
+ 
 function navDay(d){vDate=new Date(vDate);vDate.setDate(vDate.getDate()+d);rToday();}
-
+ 
 // ===== LAYOUT =====
 let currentLayout = localStorage.getItem('sapp3_layout') || 'a';
-
+ 
 function toggleLayout(){
   currentLayout = currentLayout === 'a' ? 'b' : 'a';
   localStorage.setItem('sapp3_layout', currentLayout);
   applyLayout();
   rToday();
 }
-
+ 
 function applyLayout(){
   const isB = currentLayout === 'b';
   document.getElementById('layout-a').style.display = isB ? 'none' : 'block';
@@ -1618,7 +1711,7 @@ function applyLayout(){
   const btn = document.getElementById('layout-toggle-btn');
   if(btn) btn.textContent = isB ? '☰' : '⊞';
 }
-
+ 
 function rToday(){
   applyLayout();
   const ds=toS(vDate),dn=DN[vDate.getDay()],isT=ds===toS(new Date());
@@ -1631,22 +1724,23 @@ function rToday(){
   rEvs('t-evs',ds,true,()=>rToday());
   rMemo('t-memo',ds);
   rPhotos('t-photos',ds);
-
+  rMoodBtn(ds);
+ 
   // Layout B rendering
   if(currentLayout==='b') rTodayB(ds,dn,sp,vDate);
 }
-
+ 
 function rTodayB(ds,dn,sp,dateObj){
   const now=new Date();
   const nm=now.getHours()*60+now.getMinutes();
   const isT=ds===toS(new Date());
-
+ 
   // 日付
   const dateEl=document.getElementById('b-date');
   if(dateEl) dateEl.textContent=dateObj.getDate()+'日（'+dn+'）';
   const badge2=document.getElementById('b-badge2');
   if(badge2) badge2.textContent=sp?(spI(sp.type)+' '+sp.name):(dateObj.getFullYear()+'/'+( dateObj.getMonth()+1)+'/'+dateObj.getDate());
-
+ 
   // 左カラム時間割
   const bsched=document.getElementById('b-sched');
   if(bsched){
@@ -1678,7 +1772,7 @@ function rTodayB(ds,dn,sp,dateObj){
       bsched.appendChild(tRow);
     }
   }
-
+ 
   // 右カラム予定
   const bevs=document.getElementById('b-evs');
   if(bevs){
@@ -1698,14 +1792,33 @@ function rTodayB(ds,dn,sp,dateObj){
       });
     }
   }
-
+ 
   // 電車バス
   const tr=document.getElementById('b-transit');
   if(tr){
-    tr.value=D.memos[ds+'_transit']||'';
-    tr.oninput=function(){D.memos[ds+'_transit']=tr.value;sv();};
+    var savedTransit = D.memos[ds+'_transit']||'';
+    if(savedTransit){
+      tr.value = savedTransit;
+      tr.style.color = 'var(--text)';
+      tr.oninput=function(){D.memos[ds+'_transit']=tr.value;sv();};
+    } else {
+      var autoTr = getAutoTransit(ds, vDate);
+      if(autoTr){
+        tr.value = autoTr;
+        tr.style.color = 'var(--soft)';
+        tr.placeholder = '例：7:45発　快速';
+      } else {
+        tr.value = '';
+        tr.style.color = 'var(--text)';
+        tr.placeholder = '例：7:45発　快速';
+      }
+      tr.oninput=function(){
+        tr.style.color='var(--text)';
+        D.memos[ds+'_transit']=tr.value;sv();
+      };
+    }
   }
-
+ 
   // メモ
   const bm=document.getElementById('b-memo');
   if(bm){
@@ -1714,7 +1827,7 @@ function rTodayB(ds,dn,sp,dateObj){
     bm.value=D.memos[ds]||'';
     bm.oninput=function(){D.memos[ds]=bm.value;sv();};
   }
-
+ 
   // 写真
   rPhotos('b-photos',ds);
 }
@@ -1731,7 +1844,7 @@ function rSched(elId,ds,dn,sp){
     el.appendChild(c);
   });
 }
-
+ 
 function rEvs(elId,ds,del,cb){
   const el=document.getElementById(elId);el.innerHTML='';
   const evs=D.events.filter(e=>e.date===ds);
@@ -1743,17 +1856,16 @@ function rEvs(elId,ds,del,cb){
     el.appendChild(c);
   });
 }
-
+ 
 function rMemo(elId,ds){
   const el=document.getElementById(elId);el.value=D.memos[ds]||'';
   el.oninput=()=>{D.memos[ds]=el.value;sv();};
 }
-
+ 
 function rPhotos(cont,ds){
   var el=document.getElementById(cont);
   if(!el)return;
   el.innerHTML='';
-  // 4スロット分をIndexedDBから非同期読み込み
   var promises=[];
   for(var ii=0;ii<4;ii++){promises.push(loadPhoto(ds,ii));}
   Promise.all(promises).then(function(srcs){
@@ -1770,10 +1882,31 @@ function rPhotos(cont,ds){
           var del=document.createElement('button');del.className='pdel';del.textContent='×';
           del.addEventListener('click',(function(i2){return function(e){
             e.stopPropagation();e.preventDefault();
-            deletePhoto(ds,i2).then(function(){rPhotos(cont,ds);});
+            deletePhoto(ds,i2).then(function(){
+              deletePhotoTagData(ds,i2).then(function(){ rPhotos(cont,ds); });
+            });
           };})(idx));
           slot.appendChild(del);
-          slot.addEventListener('click',function(e){if(e.target.classList.contains('pdel'))return;inp.click();});
+          // タグバッジを非同期で追加
+          (function(s, i2){
+            loadPhotoTagData(ds, i2).then(function(tags){
+              if(tags && tags.length > 0){
+                var badge = document.createElement('div');
+                badge.className = 'ptag-badge';
+                var allTags = [...BASIC_TAGS.map(function(t){return {id:t.id,label:t.label.split(' ')[1]};}),
+                               ...(D.customPhotoTags||[]).map(function(t){return {id:t,label:t};})];
+                badge.textContent = tags.map(function(t){
+                  var found = allTags.find(function(bt){ return bt.id===t; });
+                  return found ? found.label : t;
+                }).join(' ');
+                s.appendChild(badge);
+              }
+            });
+          })(slot, idx);
+          slot.addEventListener('click',function(e){
+            if(e.target.classList.contains('pdel'))return;
+            inp.click();
+          });
         }else{
           var pp=document.createElement('span');pp.className='pp';pp.textContent='＋';slot.appendChild(pp);
           slot.addEventListener('click',function(){inp.click();});
@@ -1783,7 +1916,7 @@ function rPhotos(cont,ds){
     }
   });
 }
-
+ 
 function hPhoto(inp,ds,i,cont){
   var f=inp.files[0];if(!f)return;
   var r=new FileReader();
@@ -1799,7 +1932,8 @@ function hPhoto(inp,ds,i,cont){
       var compressed=canvas.toDataURL('image/jpeg',0.85);
       savePhoto(ds,i,compressed).then(function(){
         rPhotos(cont,ds);
-        showToast('写真を保存しました');
+        // タグ選択モーダルを開く
+        openPhotoTagModal(ds, i, cont);
       }).catch(function(err){
         showToast('保存に失敗しました: '+err);
       });
@@ -1808,9 +1942,9 @@ function hPhoto(inp,ds,i,cont){
   };
   r.readAsDataURL(f);
 }
-
+ 
 function delEv(idx){D.events.splice(idx,1);sv();rToday();if(selDate)rDD(selDate);}
-
+ 
 // CALENDAR
 function rCal(){
   document.getElementById('cal-mtitle').textContent = calY+'年 '+MN[calM];
@@ -1820,17 +1954,17 @@ function rCal(){
   var first = new Date(calY,calM,1).getDay();
   var days  = new Date(calY,calM+1,0).getDate();
   var isShift = calTab === 'shift';
-
+ 
   // シフトモード時はグリッドにクラス追加
   grid.className = isShift ? 'cal-grid shift-mode-grid' : 'cal-grid';
-
+ 
   // 空白セル
   for(var i=0;i<first;i++){
     var empty=document.createElement('div');
     empty.className = isShift ? 'cc shift-mode empty' : 'cc empty';
     grid.appendChild(empty);
   }
-
+ 
   for(var dd=1;dd<=days;dd++){
     (function(d){
       var ds = calY+'-'+p2(calM+1)+'-'+p2(d);
@@ -1843,13 +1977,13 @@ function rCal(){
       if(dow===6) cls+=' sat';
       if(D.specials.find(function(s){return s.date===ds;})) cls+=' sp-day';
       cell.className = cls;
-
+ 
       // 日付数字
       var numEl = document.createElement('div');
       numEl.className = 'cc-num';
       numEl.textContent = d;
       cell.appendChild(numEl);
-
+ 
       if(isShift){
         // シフトモード：出退勤時刻を表示、タップで入力
         var shift = D.shifts ? D.shifts[ds] : null;
@@ -1890,7 +2024,7 @@ function rCal(){
       grid.appendChild(cell);
     })(dd);
   }
-
+ 
   // 重要なこと
   var impKey = calY+'-'+(calM+1);
   var impItems = D.important[impKey]||D.important['default']||[];
@@ -1903,13 +2037,13 @@ function rCal(){
   }
   if(selDate) rCalDetail(selDate);
 }
-
+ 
 function calSel(ds){
   selDate=ds;rCal();
   document.getElementById('cdw').style.display='block';
   document.getElementById('cdw').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
+ 
 function rCalDetail(ds){
   var dt=new Date(ds+'T00:00:00'),dn=DN[dt.getDay()];
   var sp=D.specials.find(function(s){return s.date===ds;});
@@ -1933,12 +2067,12 @@ function rCalDetail(ds){
     h+='</div>';
   }
   if(memo) h+='<div style="margin-top:6px;font-size:11px;color:var(--soft);border-top:1px solid var(--border);padding-top:6px;">📝 '+memo+'</div>';
-
+ 
   // 写真を横並びで表示
   var photoPart='<div id="cd-photos-row" style="display:flex;gap:5px;margin-top:8px;border-top:1px solid var(--border);padding-top:8px;"></div>';
   h += photoPart;
   document.getElementById('cd').innerHTML=h;
-
+ 
   // IDBから写真ロード
   var photoRow=document.getElementById('cd-photos-row');
   var photoPromises=[loadPhoto(ds,0),loadPhoto(ds,1),loadPhoto(ds,2),loadPhoto(ds,3)];
@@ -1957,13 +2091,13 @@ function rCalDetail(ds){
     if(!hasPhoto) photoRow.style.display='none';
   });
 }
-
+ 
 function goDayDetail(ds){
   prevScr='calendar';selDate=ds;rDD(ds);
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-daydetail').classList.add('active');
 }
-
+ 
 function rDD(ds){
   const dt=new Date(ds+'T00:00:00'),dn=DN[dt.getDay()];
   const sp=D.specials.find(s=>s.date===ds);
@@ -1974,16 +2108,16 @@ function rDD(ds){
   rMemo('dd-memo',ds);
   rPhotos('dd-photos',ds);
 }
-
+ 
 function backFromDay(){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+prevScr).classList.add('active');
   if(prevScr==='calendar')rCal();
   if(prevScr==='today')rToday();
 }
-
+ 
 function changeMonth(d){calM+=d;if(calM>11){calM=0;calY++;}if(calM<0){calM=11;calY--;}selDate=null;document.getElementById('cdw').style.display='none';rCal();}
-
+ 
 // TIMETABLE
 function rTT(){
   if(!ttDay)ttDay=['月','火','水','木','金'].includes(DN[new Date().getDay()])?DN[new Date().getDay()]:'月';
@@ -2002,7 +2136,7 @@ function rTT(){
   });
   rCList();
 }
-
+ 
 function rCList(){
   const el=document.getElementById('custom-list');el.innerHTML='';
   if(!D.customs.length){el.innerHTML='<div style="padding:8px 4px;color:var(--soft);font-size:12px;">カスタム時間割なし</div>';return;}
@@ -2012,7 +2146,7 @@ function rCList(){
     el.appendChild(c);
   });
 }
-
+ 
 // YEARBOOK
 function rYr(){
   const el=document.getElementById('yr-list');el.innerHTML='';
@@ -2022,7 +2156,7 @@ function rYr(){
     const summ=D.mSumm[key]||{main:'主な予定',sub:''};
     const isCur=now.getFullYear()===yr&&(now.getMonth()+1)===m;
     const row=document.createElement('div');row.className='mr'+(isCur?' cur':'');
-
+ 
     const mphoto=document.createElement('div');mphoto.className='mphoto';
     const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
     inp.onchange=e=>hMPhoto(e.target,key);
@@ -2034,17 +2168,17 @@ function rYr(){
     const ov=document.createElement('div');ov.className='mphoto-ov';ov.textContent='✏️';
     mphoto.appendChild(ov);mphoto.appendChild(inp);
     mphoto.onclick=e=>{e.stopPropagation();inp.click();};
-
+ 
     const editBtn=document.createElement('button');editBtn.className='mr-edit';editBtn.textContent='✏️';
     editBtn.onclick=e=>{e.stopPropagation();openMEdit(key,m,yr);};
-
+ 
     row.innerHTML=`<div class="mlbl">${m}月</div><div class="msumm"><div class="mmain">${summ.main}</div><div class="msub">${summ.sub}</div></div>`;
     row.appendChild(editBtn);row.appendChild(mphoto);
     row.onclick=()=>{calY=yr;calM=m-1;goScreen('calendar',document.querySelectorAll('.nb')[1]);};
     el.appendChild(row);
   });
 }
-
+ 
 function hMPhoto(inp,key){
   var f=inp.files[0];if(!f)return;
   var r=new FileReader();
@@ -2066,7 +2200,7 @@ function hMPhoto(inp,key){
   };
   r.readAsDataURL(f);
 }
-
+ 
 function openMEdit(key,m,yr){
   editMKey=key;const summ=D.mSumm[key]||{main:'',sub:''};
   document.getElementById('me-title').textContent=`${yr}年${m}月を編集`;
@@ -2079,7 +2213,7 @@ function saveMonthEdit(){
   D.mSumm[editMKey]={main:document.getElementById('me-main').value,sub:document.getElementById('me-sub').value};
   sv();closeModal('modal-month-edit');rYr();showToast('保存しました');
 }
-
+ 
 // MODAL ACTIONS
 function openEvModal(date){
   document.getElementById('ev-date').value=date||toS(new Date());
@@ -2087,7 +2221,7 @@ function openEvModal(date){
   ['ev-start','ev-end'].forEach(id=>document.getElementById(id).value='');
   openModal('modal-add-event');
 }
-
+ 
 function addEvent(){
   const date=document.getElementById('ev-date').value,name=document.getElementById('ev-name').value.trim();
   if(!date||!name){showToast('日付と内容を入力してね');return;}
@@ -2095,7 +2229,7 @@ function addEvent(){
   sv();closeModal('modal-add-event');showToast('予定を追加しました ✨');rToday();rCal();
   if(selDate)rDD(selDate);
 }
-
+ 
 function addSpecial(){
   const date=document.getElementById('sp-date').value,name=document.getElementById('sp-name').value.trim();
   if(!date||!name){showToast('日付と名前を入力してね');return;}
@@ -2104,7 +2238,7 @@ function addSpecial(){
   sv();closeModal('modal-add-special');showToast('特別日を追加しました ⭐');rCal();rToday();
   document.getElementById('sp-name').value='';
 }
-
+ 
 function openImpModal(){
   const key=`${calY}-${calM+1}`;
   const items=D.important[key]||D.important['default']||[];
@@ -2117,7 +2251,7 @@ function saveImportant(){
   D.important[key]=document.getElementById('imp-input').value.split('\n').map(s=>s.trim()).filter(Boolean);
   sv();closeModal('modal-imp');rCal();showToast('保存しました');
 }
-
+ 
 function loadTTFields(){
   const day=document.getElementById('tt-day').value;
   const periods=D.tt[day]||[];
@@ -2149,10 +2283,10 @@ function saveTT(){
   const inps=modal.querySelectorAll('.tt-inp');
   const tss=modal.querySelectorAll('.tt-ts');
   const tes=modal.querySelectorAll('.tt-te');
-
+ 
   // 科目を保存
   D.tt[day]=[...inps].map(inp=>{const s=inp.value.trim();return{s:s||'　',c:SC[s]||'c-custom'};});
-
+ 
   // 時限を曜日別で保存
   if(Array.isArray(D.pt)){
     // 旧フォーマット（配列）→ 曜日別オブジェクトに変換
@@ -2160,10 +2294,10 @@ function saveTT(){
     D.pt={月:JSON.parse(JSON.stringify(arr)),火:JSON.parse(JSON.stringify(arr)),水:JSON.parse(JSON.stringify(arr)),木:JSON.parse(JSON.stringify(arr)),金:JSON.parse(JSON.stringify(arr))};
   }
   D.pt[day]=[...tss].map((ts,i)=>({s:ts.value,e:tes[i].value}));
-
+ 
   sv();closeModal('modal-edit-tt');rTT();showToast(day+'曜の時間割を更新しました');rToday();
 }
-
+ 
 function loadPTFields(){
   const day=document.getElementById('pt-day')?document.getElementById('pt-day').value:'月';
   const el=document.getElementById('pt-fields');el.innerHTML='';
@@ -2186,7 +2320,7 @@ function savePT(){
   D.pt[day]=ss.map((s,i)=>({s:s.value,e:es[i].value}));
   sv();closeModal('modal-period-times');rTT();showToast(day+'曜の時間を更新しました');rToday();
 }
-
+ 
 function copyPTToAll(){
   const modal=document.getElementById('modal-period-times');
   const day=document.getElementById('pt-day')?document.getElementById('pt-day').value:'月';
@@ -2196,7 +2330,7 @@ function copyPTToAll(){
   ['月','火','水','木','金'].forEach(d=>{D.pt[d]=JSON.parse(JSON.stringify(arr));});
   sv();showToast('全曜日にコピーしました');
 }
-
+ 
 let _ctPCount=1;
 function addCtP(){_ctPCount++;const el=document.getElementById('ct-periods');const d=document.createElement('div');d.className='fg';d.innerHTML=`<label class="fl">コマ ${_ctPCount}</label><input type="text" class="fi" placeholder="内容">`;el.appendChild(d);}
 function saveCT(){
@@ -2211,7 +2345,7 @@ function saveCT(){
   _ctPCount=1;rTT();showToast('カスタム時間割を追加しました');
 }
 function delCT(i){D.customs.splice(i,1);sv();rCList();}
-
+ 
 // MODALS
 function openModal(id){
   document.getElementById(id).classList.add('open');
@@ -2221,7 +2355,7 @@ function openModal(id){
 }
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function closeOut(e,id){if(e.target.id===id)closeModal(id);}
-
+ 
 // UTILS
 function toS(d){return`${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;}
 function p2(n){return String(n).padStart(2,'0');}
@@ -2239,9 +2373,9 @@ function clearData(){
     };
   });
 }
-
+ 
 rToday();
-
+ 
 // ===== THEMES =====
 const THEMES = [
   {
@@ -2317,7 +2451,7 @@ const THEMES = [
     }
   },
 ];
-
+ 
 // テーマ別モチーフを適用するID→motifキーのマップ
 const MOTIF_MAP = {
   'mo-today':    'today',
@@ -2337,7 +2471,7 @@ const MOTIF_MAP = {
   'mo-gal':      'secPhoto',
   'mo-custom':   'custom',
 };
-
+ 
 function initThemes() {
   const saved = localStorage.getItem('sapp3_theme') || 'blue';
   applyTheme(saved, false);
@@ -2345,7 +2479,7 @@ function initThemes() {
   applyLayout();
   applySpecialThemeEffects(saved);
 }
-
+ 
 function applyTheme(id, save) {
   if(save===undefined) save=true;
   document.documentElement.setAttribute('data-theme', id);
@@ -2354,7 +2488,7 @@ function applyTheme(id, save) {
   applyChalkGrid(id);
   renderThemeGrid();
 }
-
+ 
 function applyChalkGrid(id) {
   if(id !== 'chalk') {
     document.body.style.backgroundImage = '';
@@ -2387,7 +2521,7 @@ function applyChalkGrid(id) {
   document.body.style.backgroundSize=W+'px '+H+'px';
   document.body.style.backgroundRepeat='repeat-y';
 }
-
+ 
 function applyMotifs(id) {
   const theme = THEMES.find(t => t.id === id);
   if(!theme) return;
@@ -2403,7 +2537,7 @@ function applyMotifs(id) {
     });
   });
 }
-
+ 
 function renderThemeGrid() {
   const el = document.getElementById('theme-grid');
   if(!el) return;
@@ -2421,7 +2555,7 @@ function renderThemeGrid() {
       'cursor:pointer;font-family:inherit;text-align:left;',
       'transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,.10);',
     ].join('');
-
+ 
     // デコ絵文字ミニ表示
     const decoWrap = document.createElement('div');
     decoWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:1px;width:38px;flex-shrink:0;';
@@ -2431,7 +2565,7 @@ function renderThemeGrid() {
       s.textContent = em;
       decoWrap.appendChild(s);
     });
-
+ 
     const info = document.createElement('div');
     info.style.cssText = 'flex:1;';
     const lbl = document.createElement('div');
@@ -2441,7 +2575,7 @@ function renderThemeGrid() {
     desc.style.cssText = 'font-size:10px;color:' + (isActive ? 'rgba(255,255,255,.8)' : 'var(--soft)') + ';margin-top:2px;';
     desc.textContent = t.desc;
     info.appendChild(lbl); info.appendChild(desc);
-
+ 
     // カラードット or グリッドプレビュー
     const dots = document.createElement('div');
     if(t.id === 'grid') {
@@ -2455,26 +2589,26 @@ function renderThemeGrid() {
         dots.appendChild(d);
       });
     }
-
+ 
     btn.appendChild(decoWrap); btn.appendChild(info); btn.appendChild(dots);
     btn.onclick = () => { applyTheme(t.id, true); };
     el.appendChild(btn);
   });
 }
-
-
+ 
+ 
 // ===== GALLERY =====
 let galCurrentFolder = null;
-
+ 
 function rGallery(){
   var theme=THEMES.find(function(t){return t.id===(document.documentElement.getAttribute('data-theme')||'blue');});
   var moEl=document.getElementById('mo-gal');
   if(moEl&&theme) moEl.textContent=theme.motifs.secPhoto||'📷';
-
+ 
   var grid=document.getElementById('gal-folder-grid');
   if(!grid) return;
   grid.innerHTML='<div style="color:var(--soft);font-size:12px;padding:8px 0;">読み込み中...</div>';
-
+ 
   var folders=D.galFolders||[];
   // フォルダごとに先頭4枚のプレビューをIDBから取得
   var folderPromises=folders.map(function(folder,idx){
@@ -2483,7 +2617,7 @@ function rGallery(){
     var ps=previewIdxs.map(function(pi){return loadGalPhoto(idx,pi);});
     return Promise.all(ps).then(function(srcs){return {folder:folder,idx:idx,srcs:srcs};});
   });
-
+ 
   Promise.all(folderPromises).then(function(results){
     grid.innerHTML='';
     results.forEach(function(res){
@@ -2519,7 +2653,7 @@ function rGallery(){
     grid.appendChild(addBtn);
   });
 }
-
+ 
 function openGalFolder(idx){
   galCurrentFolder = idx;
   const folder = D.galFolders[idx];
@@ -2529,7 +2663,7 @@ function openGalFolder(idx){
   document.getElementById('gal-detail-title').textContent = folder.name;
   renderGalPhotos(idx);
 }
-
+ 
 function closeGalDetail(){
   galCurrentFolder = null;
   document.getElementById('gal-list-view').style.display = 'block';
@@ -2537,15 +2671,15 @@ function closeGalDetail(){
   det.classList.remove('active');
   rGallery();
 }
-
+ 
 var galSelectMode = false;
 var galSelectedPIs = [];
-
+ 
 function toggleSelectMode(){
   if(galSelectMode){ exitSelectMode(); }
   else{ enterSelectMode(); }
 }
-
+ 
 function enterSelectMode(){
   galSelectMode = true;
   galSelectedPIs = [];
@@ -2557,7 +2691,7 @@ function enterSelectMode(){
   if(btn) btn.textContent = '✕';
   updateSelectCount();
 }
-
+ 
 function exitSelectMode(){
   galSelectMode = false;
   galSelectedPIs = [];
@@ -2572,12 +2706,12 @@ function exitSelectMode(){
     el.classList.remove('selected');
   });
 }
-
+ 
 function updateSelectCount(){
   var el = document.getElementById('gal-select-count');
   if(el) el.textContent = galSelectedPIs.length + '枚選択中';
 }
-
+ 
 function deleteSelectedPhotos(){
   if(galSelectedPIs.length === 0){ showToast('写真を選んでください'); return; }
   if(!confirm(galSelectedPIs.length + '枚の写真を削除しますか？')) return;
@@ -2589,7 +2723,7 @@ function deleteSelectedPhotos(){
     showToast(delPs.length + '枚削除しました');
   });
 }
-
+ 
 function renderGalPhotos(idx){
   var grid=document.getElementById('gal-photo-grid');
   if(!grid) return;
@@ -2617,19 +2751,19 @@ function renderGalPhotos(idx){
       if(!res.src) return;
       var cell=document.createElement('div');
       cell.className='gal-photo-cell';
-
+ 
       // チェックマーク（選択モード用）
       var check=document.createElement('div');
       check.className='gal-select-check';
       check.textContent='✓';
       cell.appendChild(check);
-
+ 
       var img=document.createElement('img');
       img.src=res.src; img.loading='lazy';
-
+ 
       var del=document.createElement('button');
       del.className='gal-photo-del'; del.textContent='×';
-
+ 
       (function(pi2,src2,cellEl){
         // タップ：通常→フルスクリーン、選択モード→選択トグル
         cellEl.onclick=function(e){
@@ -2659,7 +2793,7 @@ function renderGalPhotos(idx){
         });
         cellEl.addEventListener('touchend',function(){clearTimeout(pressTimer);});
         cellEl.addEventListener('touchmove',function(){clearTimeout(pressTimer);});
-
+ 
         del.onclick=function(e){
           e.stopPropagation();
           if(!confirm('この写真を削除しますか？')) return;
@@ -2668,7 +2802,7 @@ function renderGalPhotos(idx){
           });
         };
       })(res.pi,res.src,cell);
-
+ 
       cell.appendChild(img);
       cell.appendChild(del);
       grid.appendChild(cell);
@@ -2680,11 +2814,11 @@ function renderGalPhotos(idx){
     grid.appendChild(addCell);
   });
 }
-
+ 
 function triggerGalPhotoAdd(){
   document.getElementById('gal-photo-input').click();
 }
-
+ 
 function handleGalPhotos(inp){
   if(galCurrentFolder===null) return;
   var files=Array.from(inp.files);
@@ -2723,12 +2857,12 @@ function handleGalPhotos(inp){
   });
   inp.value='';
 }
-
+ 
 function openNewFolderModal(){
   document.getElementById('new-folder-name').value='';
   openModal('modal-new-folder');
 }
-
+ 
 function createFolder(){
   var name = document.getElementById('new-folder-name').value.trim();
   if(!name){ showToast('名前を入力してね'); return; }
@@ -2737,14 +2871,14 @@ function createFolder(){
   sv(); closeModal('modal-new-folder');
   rGallery(); showToast('フォルダを作成しました');
 }
-
+ 
 var renameFolderIdx = null;
 function openRenameFolderModal(idx){
   renameFolderIdx = idx;
   document.getElementById('rename-folder-input').value = D.galFolders[idx].name;
   openModal('modal-rename-folder');
 }
-
+ 
 function renameFolder(){
   var name = document.getElementById('rename-folder-input').value.trim();
   if(!name){ showToast('名前を入力してね'); return; }
@@ -2752,7 +2886,7 @@ function renameFolder(){
   sv(); closeModal('modal-rename-folder');
   rGallery(); showToast('名前を変更しました');
 }
-
+ 
 function deleteFolder(){
   if(!confirm('このフォルダを削除しますか？写真もすべて削除されます')) return;
   var idx=renameFolderIdx;
@@ -2766,37 +2900,37 @@ function deleteFolder(){
     rGallery(); showToast('削除しました');
   });
 }
-
+ 
 function openFullscreen(src){
   document.getElementById('gal-fullscreen-img').src = src;
   document.getElementById('gal-fullscreen').classList.add('open');
 }
-
+ 
 function closeFullscreen(){
   document.getElementById('gal-fullscreen').classList.remove('open');
   document.getElementById('gal-fullscreen-img').src='';
 }
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 // ===== カレンダー タブ =====
 var calTab = 'plan';
 var shiftEditDate = null;
 var copySelectedDays = [];
-
+ 
 function switchCalTab(tab){
   calTab = tab;
   document.getElementById('tab-plan').classList.toggle('active', tab==='plan');
   document.getElementById('tab-shift').classList.toggle('active', tab==='shift');
   rCal();
 }
-
+ 
 function openShiftModal(ds){
   shiftEditDate = ds;
   copySelectedDays = [];
@@ -2806,11 +2940,17 @@ function openShiftModal(ds){
   var shift = D.shifts ? D.shifts[ds] : null;
   document.getElementById('shift-start').value = shift ? (shift.start||'') : '';
   document.getElementById('shift-end').value   = shift ? (shift.end||'') : '';
+  // バステンプレ：現在のシフト時間に対応するものを表示
+  var busEl = document.getElementById('shift-bus');
+  if(busEl){
+    var key = (shift&&shift.start?shift.start:'') + '-' + (shift&&shift.end?shift.end:'');
+    busEl.value = (D.transitShiftTpl && D.transitShiftTpl[key]) || '';
+  }
   renderTemplates();
   renderCopyCal();
   openModal('modal-shift');
 }
-
+ 
 // ── テンプレート ──
 function renderTemplates(){
   var list = document.getElementById('tpl-list');
@@ -2834,7 +2974,7 @@ function renderTemplates(){
     list.appendChild(btn);
   });
 }
-
+ 
 function saveAsTemplate(){
   var s = document.getElementById('shift-start').value;
   var e = document.getElementById('shift-end').value;
@@ -2847,13 +2987,13 @@ function saveAsTemplate(){
   sv(); renderTemplates();
   showToast('テンプレートに保存しました');
 }
-
+ 
 function deleteTpl(e, i){
   e.stopPropagation();
   D.shiftTemplates.splice(i,1);
   sv(); renderTemplates();
 }
-
+ 
 // ── 複数日コピー ──
 function renderCopyCal(){
   var grid = document.getElementById('copy-cal');
@@ -2882,14 +3022,14 @@ function renderCopyCal(){
     })(dd);
   }
 }
-
+ 
 function clearCopyDays(){
   copySelectedDays = [];
   document.querySelectorAll('.copy-day.selected').forEach(function(el){
     el.classList.remove('selected');
   });
 }
-
+ 
 // ── 保存・削除 ──
 function saveShift(){
   if(!shiftEditDate) return;
@@ -2898,22 +3038,28 @@ function saveShift(){
   var e = document.getElementById('shift-end').value;
   if(!s && !e){ deleteShift(); return; }
   var data = {start:s, end:e};
-  // 編集中の日に保存
   D.shifts[shiftEditDate] = data;
-  // 選択した日にもコピー
   copySelectedDays.forEach(function(ds){
     D.shifts[ds] = {start:s, end:e};
   });
+  // バステンプレを保存
+  var busEl = document.getElementById('shift-bus');
+  if(busEl && (s||e)){
+    var key = s + '-' + e;
+    if(!D.transitShiftTpl) D.transitShiftTpl = {};
+    D.transitShiftTpl[key] = busEl.value.trim();
+  }
   sv();
   closeModal('modal-shift');
   rCal();
+  rToday();
   var msg = copySelectedDays.length > 0
     ? '保存しました（計'+(copySelectedDays.length+1)+'日）'
     : 'シフトを保存しました';
   showToast(msg);
   copySelectedDays = [];
 }
-
+ 
 function deleteShift(){
   if(!shiftEditDate) return;
   if(D.shifts) delete D.shifts[shiftEditDate];
@@ -2923,10 +3069,397 @@ function deleteShift(){
   showToast('削除しました');
   copySelectedDays = [];
 }
-
+ 
+// ===== 写真タグ機能 =====
+const BASIC_TAGS = [
+  {id:'food',   label:'🍽️ food'},
+  {id:'study',  label:'📚 study'},
+  {id:'memo',   label:'📝 memo'},
+  {id:'play',   label:'🎮 play'},
+  {id:'outing', label:'🚶 outing'},
+  {id:'selfie', label:'🤳 selfie'},
+];
+ 
+// タグ保存・読み込み
+function savePhotoTagData(dateStr, idx, tags){
+  return idbSet('phototag:'+dateStr+':'+idx, JSON.stringify(tags));
+}
+function loadPhotoTagData(dateStr, idx){
+  return idbGet('phototag:'+dateStr+':'+idx).then(function(v){
+    return v ? JSON.parse(v) : [];
+  });
+}
+function deletePhotoTagData(dateStr, idx){
+  return idbDel('phototag:'+dateStr+':'+idx);
+}
+ 
+// タグ選択モーダル用の状態
+var _tagCtx = null; // {dateStr, idx, cont}
+var _tagSelected = [];
+ 
+function openPhotoTagModal(dateStr, idx, cont){
+  _tagCtx = {dateStr, idx, cont};
+  _tagSelected = [];
+ 
+  // 既存タグを読み込んで初期選択
+  loadPhotoTagData(dateStr, idx).then(function(existing){
+    _tagSelected = existing.slice();
+    renderTagChips();
+  });
+  openModal('modal-photo-tag');
+}
+ 
+function renderTagChips(){
+  var customTags = D.customPhotoTags || [];
+ 
+  // 基本タグ
+  var basicEl = document.getElementById('tag-basic-chips');
+  basicEl.innerHTML = '';
+  BASIC_TAGS.forEach(function(t){
+    var btn = document.createElement('button');
+    btn.className = 'tag-chip' + (_tagSelected.includes(t.id) ? ' selected' : '');
+    btn.textContent = t.label;
+    btn.onclick = function(){ toggleTagSelect(t.id); };
+    basicEl.appendChild(btn);
+  });
+ 
+  // カスタムタグ
+  var custEl = document.getElementById('tag-custom-chips');
+  custEl.innerHTML = '';
+  if(customTags.length === 0){
+    custEl.innerHTML = '<span style="font-size:11px;color:var(--soft);">まだマイタグがありません</span>';
+  } else {
+    customTags.forEach(function(t){
+      var btn = document.createElement('button');
+      btn.className = 'tag-chip' + (_tagSelected.includes(t) ? ' selected' : '');
+      btn.textContent = '🏷️ ' + t;
+      btn.onclick = function(){ toggleTagSelect(t); };
+      custEl.appendChild(btn);
+    });
+  }
+}
+ 
+function toggleTagSelect(tagId){
+  var i = _tagSelected.indexOf(tagId);
+  if(i === -1) _tagSelected.push(tagId);
+  else _tagSelected.splice(i, 1);
+  renderTagChips();
+}
+ 
+function addCustomTag(){
+  var inp = document.getElementById('tag-new-input');
+  var val = inp.value.trim();
+  if(!val) return;
+  if(!D.customPhotoTags) D.customPhotoTags = [];
+  if(!D.customPhotoTags.includes(val)){
+    D.customPhotoTags.push(val);
+    sv();
+  }
+  if(!_tagSelected.includes(val)) _tagSelected.push(val);
+  inp.value = '';
+  renderTagChips();
+}
+ 
+function savePhotoTag(){
+  if(!_tagCtx) return;
+  savePhotoTagData(_tagCtx.dateStr, _tagCtx.idx, _tagSelected).then(function(){
+    rPhotos(_tagCtx.cont, _tagCtx.dateStr);
+    closeModal('modal-photo-tag');
+    showToast(_tagSelected.length ? 'タグをつけました 🏷️' : '写真を保存しました');
+  });
+}
+ 
+// ===== ギャラリー タグビュー =====
+var galTab = 'folder';
+var galTagFilter = 'all';
+ 
+function switchGalTab(tab){
+  galTab = tab;
+  document.getElementById('gtab-folder').classList.toggle('active', tab==='folder');
+  document.getElementById('gtab-tag').classList.toggle('active', tab==='tag');
+  document.getElementById('gal-folder-pane').style.display = tab==='folder' ? '' : 'none';
+  document.getElementById('gal-tag-pane').style.display = tab==='tag' ? '' : 'none';
+  if(tab==='tag') renderTagView();
+}
+ 
+async function renderTagView(){
+  var filterRow = document.getElementById('tag-filter-row');
+  var photoGrid = document.getElementById('tag-photo-grid');
+  filterRow.innerHTML = '<div style="font-size:11px;color:var(--soft);padding:4px 0;">読み込み中…</div>';
+  photoGrid.innerHTML = '';
+ 
+  // IDBから全photo:キーを取得してタグ情報と照合
+  var db = await openIDB();
+  var allKeys = await new Promise(function(resolve){
+    var tx = db.transaction(IDB_STORE,'readonly');
+    var req = tx.objectStore(IDB_STORE).getAllKeys();
+    req.onsuccess = function(){ resolve(req.result); };
+  });
+ 
+  // photo: で始まるキーだけ抽出
+  var photoKeys = allKeys.filter(function(k){ return k.startsWith('photo:'); });
+ 
+  // 各写真のタグを並列取得
+  var entries = await Promise.all(photoKeys.map(async function(key){
+    var parts = key.split(':'); // photo:dateStr:idx
+    var dateStr = parts[1], idx = parseInt(parts[2]);
+    var tags = await loadPhotoTagData(dateStr, idx);
+    var src = await loadPhoto(dateStr, idx);
+    return {key, dateStr, idx, tags, src};
+  }));
+  entries = entries.filter(function(e){ return e.src; });
+ 
+  // タグ一覧を集める
+  var allTagIds = new Set(['all']);
+  entries.forEach(function(e){
+    e.tags.forEach(function(t){ allTagIds.add(t); });
+    if(e.tags.length === 0) allTagIds.add('__none__');
+  });
+ 
+  // フィルターチップ
+  filterRow.innerHTML = '';
+  var chips = [
+    {id:'all', label:'すべて'},
+    ...BASIC_TAGS.filter(function(t){ return allTagIds.has(t.id); }).map(function(t){ return {id:t.id, label:t.label}; }),
+    ...(D.customPhotoTags||[]).filter(function(t){ return allTagIds.has(t); }).map(function(t){ return {id:t, label:'🏷️ '+t}; }),
+    ...(allTagIds.has('__none__') ? [{id:'__none__', label:'タグなし'}] : []),
+  ];
+  chips.forEach(function(chip){
+    var btn = document.createElement('button');
+    btn.className = 'tag-filter-chip' + (galTagFilter===chip.id ? ' active' : '');
+    btn.textContent = chip.label;
+    btn.onclick = function(){
+      galTagFilter = chip.id;
+      document.querySelectorAll('.tag-filter-chip').forEach(function(c){ c.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFilteredPhotos(entries);
+    };
+    filterRow.appendChild(btn);
+  });
+ 
+  renderFilteredPhotos(entries);
+}
+ 
+function renderFilteredPhotos(entries){
+  var grid = document.getElementById('tag-photo-grid');
+  grid.innerHTML = '';
+  var filtered = entries.filter(function(e){
+    if(galTagFilter === 'all') return true;
+    if(galTagFilter === '__none__') return e.tags.length === 0;
+    return e.tags.includes(galTagFilter);
+  });
+  // 新しい日付順
+  filtered.sort(function(a,b){ return b.dateStr.localeCompare(a.dateStr); });
+ 
+  if(filtered.length === 0){
+    grid.innerHTML = '<div class="tag-empty" style="grid-column:1/-1;">📭 写真がありません</div>';
+    return;
+  }
+  filtered.forEach(function(e){
+    var cell = document.createElement('div');
+    cell.className = 'tag-photo-cell';
+    var img = document.createElement('img');
+    img.src = e.src;
+    var dateLbl = document.createElement('div');
+    dateLbl.className = 'tag-photo-date';
+    var d = new Date(e.dateStr+'T00:00:00');
+    dateLbl.textContent = (d.getMonth()+1)+'/'+d.getDate();
+    cell.appendChild(img);
+    cell.appendChild(dateLbl);
+    // タップでフルスクリーン（既存の写真ビューアを流用）
+    cell.onclick = function(){ openPhotoFullscreen(e.src); };
+    grid.appendChild(cell);
+  });
+}
+ 
+// シンプルなフルスクリーンビューア
+function openPhotoFullscreen(src){
+  var ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;';
+  var img = document.createElement('img');
+  img.src = src;
+  img.style.cssText = 'max-width:95vw;max-height:90vh;border-radius:8px;object-fit:contain;';
+  var close = document.createElement('button');
+  close.textContent = '✕';
+  close.style.cssText = 'position:absolute;top:20px;right:20px;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;';
+  close.onclick = function(){ document.body.removeChild(ov); };
+  ov.onclick = function(e){ if(e.target===ov) document.body.removeChild(ov); };
+  ov.appendChild(img);
+  ov.appendChild(close);
+  document.body.appendChild(ov);
+}
+ 
+// ===== 電車 曜日テンプレート =====
+function openTransitTplModal(){
+  renderTransitDayFields();
+  openModal('modal-transit-tpl');
+}
+ 
+// ── 曜日ごとテンプレ ──
+function renderTransitDayFields(){
+  var days = ['月','火','水','木','金','土','日'];
+  var tpls = D.transitDayTpl || {};
+  var el = document.getElementById('transit-day-fields');
+  el.innerHTML = '';
+  days.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'transit-day-row';
+    var lbl = document.createElement('div');
+    lbl.className = 'transit-day-lbl';
+    lbl.textContent = d;
+    if(d==='日') lbl.style.color = 'var(--red)';
+    if(d==='土') lbl.style.color = '#8080e0';
+    var inp = document.createElement('textarea');
+    inp.className = 'transit-day-inp';
+    inp.rows = 2;
+    inp.style.resize = 'none';
+    inp.placeholder = '例：7:45発 快速\n（空欄で自動表示しない）';
+    inp.value = tpls[d] || '';
+    inp.dataset.day = d;
+    row.appendChild(lbl);
+    row.appendChild(inp);
+    el.appendChild(row);
+  });
+}
+ 
+function saveTransitDayTpl(){
+  var inputs = document.querySelectorAll('#transit-day-fields .transit-day-inp');
+  if(!D.transitDayTpl) D.transitDayTpl = {};
+  inputs.forEach(function(inp){
+    D.transitDayTpl[inp.dataset.day] = inp.value.trim();
+  });
+  sv();
+  closeModal('modal-transit-tpl');
+  rToday();
+  showToast('電車テンプレートを保存しました 🚃');
+}
+ 
+// ── 自動取得：ds日の電車テキストを決定 ──
+function getAutoTransit(ds, dateObj){
+  var dn = DN[dateObj.getDay()];
+ 
+  // 1. シフト連動を優先チェック（シフトモーダルで入力したバス時間）
+  var shift = D.shifts && D.shifts[ds];
+  if(shift && (shift.start || shift.end)){
+    var key = (shift.start||'') + '-' + (shift.end||'');
+    var shiftTr = D.transitShiftTpl && D.transitShiftTpl[key];
+    if(shiftTr) return shiftTr;
+  }
+ 
+  // 2. 曜日テンプレにフォールバック
+  var dayTr = D.transitDayTpl && D.transitDayTpl[dn];
+  if(dayTr) return dayTr;
+ 
+  return null;
+}
+ 
+// ===== 気分絵文字 =====
+const MOOD_BASIC = ['😭','😡','🤩','😁','😞','🙁','😴','🥰','😤','😂','🥺','😎'];
+ 
+function rMoodBtn(ds){
+  var btn = document.getElementById('mood-btn');
+  if(!btn) return;
+  var mood = D.moods && D.moods[ds];
+  if(mood){
+    btn.textContent = mood;
+    btn.classList.remove('empty');
+    btn.classList.add('has-mood');
+  } else {
+    btn.textContent = '＋';
+    btn.classList.add('empty');
+    btn.classList.remove('has-mood');
+  }
+}
+ 
+function openMoodModal(){
+  var ds = toS(vDate);
+  var dt = vDate;
+  document.getElementById('mood-modal-title').textContent =
+    (dt.getMonth()+1)+'月'+dt.getDate()+'日の気分は？';
+  renderMoodGrids(ds);
+  openModal('modal-mood');
+}
+ 
+function renderMoodGrids(ds){
+  var current = D.moods && D.moods[ds];
+  var customs = D.moodCustom || [];
+ 
+  // 基本グリッド
+  var bg = document.getElementById('mood-basic-grid');
+  bg.innerHTML = '';
+  MOOD_BASIC.forEach(function(e){
+    var item = document.createElement('div');
+    item.className = 'mood-item' + (current===e ? ' selected' : '');
+    item.textContent = e;
+    item.onclick = function(){ selectMood(e); };
+    bg.appendChild(item);
+  });
+ 
+  // カスタムグリッド
+  var cg = document.getElementById('mood-custom-grid');
+  cg.innerHTML = '';
+  if(customs.length === 0){
+    cg.innerHTML = '<div style="font-size:11px;color:var(--soft);width:100%;text-align:center;">まだありません</div>';
+  } else {
+    customs.forEach(function(e, i){
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'position:relative;';
+      var item = document.createElement('div');
+      item.className = 'mood-item' + (current===e ? ' selected' : '');
+      item.textContent = e;
+      item.onclick = function(){ selectMood(e); };
+      var del = document.createElement('div');
+      del.style.cssText = 'position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:var(--red);color:#fff;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;';
+      del.textContent = '×';
+      del.onclick = function(e2){ e2.stopPropagation(); deleteMoodCustom(i); };
+      wrap.appendChild(item);
+      wrap.appendChild(del);
+      cg.appendChild(wrap);
+    });
+  }
+}
+ 
+function selectMood(emoji){
+  var ds = toS(vDate);
+  if(!D.moods) D.moods = {};
+  D.moods[ds] = emoji;
+  sv();
+  rMoodBtn(ds);
+  closeModal('modal-mood');
+  showToast('気分を記録しました '+emoji);
+}
+ 
+function removeMood(){
+  var ds = toS(vDate);
+  if(D.moods) delete D.moods[ds];
+  sv();
+  rMoodBtn(ds);
+  closeModal('modal-mood');
+  showToast('気分を削除しました');
+}
+ 
+function addMoodCustom(){
+  var inp = document.getElementById('mood-custom-input');
+  var val = inp.value.trim();
+  if(!val) return;
+  if(!D.moodCustom) D.moodCustom = [];
+  if(!D.moodCustom.includes(val)){
+    D.moodCustom.push(val);
+    sv();
+  }
+  inp.value = '';
+  renderMoodGrids(toS(vDate));
+}
+ 
+function deleteMoodCustom(i){
+  D.moodCustom.splice(i,1);
+  sv();
+  renderMoodGrids(toS(vDate));
+}
+ 
 initThemes();
 </script>
-
+ 
 <!-- GALLERY SCREEN -->
 <div class="screen" id="screen-gallery">
   <!-- フォルダ一覧 -->
@@ -2935,11 +3468,24 @@ initThemes();
       <div class="band-title"><span id="mo-gal">📷</span> 写真</div>
       <div class="band-btn" onclick="openNewFolderModal()">＋</div>
     </div>
-    <div style="height:14px"></div>
-    <div class="gal-folder-grid" id="gal-folder-grid"></div>
-    <div style="height:20px"></div>
+    <!-- ギャラリー内タブ -->
+    <div class="gal-tab-row">
+      <button class="gal-tab active" id="gtab-folder" onclick="switchGalTab('folder')">📁 フォルダ</button>
+      <button class="gal-tab" id="gtab-tag" onclick="switchGalTab('tag')">🏷️ タグ</button>
+    </div>
+    <!-- フォルダグリッド -->
+    <div id="gal-folder-pane">
+      <div style="height:14px"></div>
+      <div class="gal-folder-grid" id="gal-folder-grid"></div>
+      <div style="height:20px"></div>
+    </div>
+    <!-- タグビュー -->
+    <div id="gal-tag-pane" style="display:none;">
+      <div class="tag-filter-row" id="tag-filter-row"></div>
+      <div class="tag-photo-grid" id="tag-photo-grid"></div>
+    </div>
   </div>
-
+ 
   <!-- フォルダ詳細 -->
   <div class="gal-detail" id="gal-detail-view">
     <div class="gal-detail-header">
@@ -2961,7 +3507,7 @@ initThemes();
   </div>
   </div>
 </div>
-
+ 
 <!-- フォルダ作成モーダル -->
 <div class="moverlay" id="modal-new-folder" onclick="closeOut(event,'modal-new-folder')">
   <div class="modal">
@@ -2975,7 +3521,7 @@ initThemes();
     <button class="btn-s" onclick="closeModal('modal-new-folder')">キャンセル</button>
   </div>
 </div>
-
+ 
 <!-- フォルダ名変更モーダル -->
 <div class="moverlay" id="modal-rename-folder" onclick="closeOut(event,'modal-rename-folder')">
   <div class="modal">
@@ -2990,20 +3536,20 @@ initThemes();
     <button class="btn-s" onclick="closeModal('modal-rename-folder')">キャンセル</button>
   </div>
 </div>
-
+ 
 <!-- 写真フルスクリーン -->
 <div class="gal-fullscreen" id="gal-fullscreen" onclick="closeFullscreen()">
   <button class="gal-fullscreen-close" onclick="closeFullscreen()">✕</button>
   <img id="gal-fullscreen-img" src="" alt="">
 </div>
-
-
+ 
+ 
 <!-- シフト入力モーダル -->
 <div class="moverlay" id="modal-shift" onclick="closeOut(event,'modal-shift')">
   <div class="modal">
     <div class="mhandle"></div>
     <div class="mtitle" id="shift-modal-title">シフトを入力</div>
-
+ 
     <!-- テンプレート -->
     <div class="fg">
       <label class="fl">⚡ テンプレートから選ぶ</label>
@@ -3012,7 +3558,7 @@ initThemes();
         ＋ 現在の時間をテンプレートに保存
       </button>
     </div>
-
+ 
     <!-- 時刻入力 -->
     <div class="fg">
       <label class="fl">出勤時刻</label>
@@ -3022,7 +3568,7 @@ initThemes();
       <label class="fl">退勤時刻</label>
       <input type="time" class="shift-time-input" id="shift-end">
     </div>
-
+ 
     <!-- 複数日コピー -->
     <div class="fg">
       <label class="fl" style="display:flex;justify-content:space-between;align-items:center;">
@@ -3032,12 +3578,67 @@ initThemes();
       <div class="copy-cal-dh"><div style="color:#e08080">日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div style="color:#8080e0">土</div></div>
       <div class="copy-cal" id="copy-cal"></div>
     </div>
-
+ 
+    <!-- バス時間テンプレ -->
+    <div class="fg">
+      <label class="fl">🚌 このシフトのバス時間（テンプレ）</label>
+      <textarea class="shift-time-input" id="shift-bus" rows="2" style="resize:none;font-size:13px;line-height:1.5;" placeholder="例：7:15発 急行&#10;帰り：17:45発"></textarea>
+      <div style="font-size:10px;color:var(--soft);margin-top:4px;">このシフト時間と一致する日に電車・バス欄へ自動表示されます</div>
+    </div>
+ 
     <button class="btn-p" onclick="saveShift()">この日＋選択した日に保存</button>
     <button class="btn-s" style="color:#e07a7a;" onclick="deleteShift()">この日のシフトを削除</button>
     <button class="btn-s" onclick="closeModal('modal-shift')">キャンセル</button>
   </div>
 </div>
-
+ 
+<!-- 気分絵文字モーダル -->
+<div class="moverlay" id="modal-mood" onclick="closeOut(event,'modal-mood')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle" id="mood-modal-title">今日の気分は？</div>
+    <div class="mood-grid" id="mood-basic-grid"></div>
+    <div style="font-size:11px;color:var(--soft);margin-bottom:8px;">カスタム絵文字</div>
+    <div class="mood-grid" id="mood-custom-grid"></div>
+    <div class="mood-custom-row">
+      <input type="text" class="fi" id="mood-custom-input" placeholder="絵文字を入力…" style="flex:1;font-size:18px;" maxlength="4">
+      <button onclick="addMoodCustom()" style="padding:8px 14px;background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--rs);font-family:inherit;font-size:13px;font-weight:700;color:var(--accent);cursor:pointer;">追加</button>
+    </div>
+    <button class="btn-s" style="margin-top:12px;color:var(--red);border-color:var(--red);" onclick="removeMood()">気分を消す</button>
+    <button class="btn-s" onclick="closeModal('modal-mood')">閉じる</button>
+  </div>
+</div>
+ 
+<!-- 写真タグ選択モーダル -->
+<div class="moverlay" id="modal-photo-tag" onclick="closeOut(event,'modal-photo-tag')">
+  <div class="modal">
+    <div class="mhandle"></div>
+    <div class="mtitle">🏷️ タグをつける</div>
+    <div style="font-size:11px;color:var(--soft);margin-bottom:4px;">基本タグ</div>
+    <div class="tag-chip-row" id="tag-basic-chips"></div>
+    <div style="font-size:11px;color:var(--soft);margin:10px 0 4px;">マイタグ</div>
+    <div class="tag-chip-row" id="tag-custom-chips"></div>
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <input type="text" class="fi" id="tag-new-input" placeholder="新しいタグを追加…" style="flex:1;font-size:13px;" maxlength="12">
+      <button onclick="addCustomTag()" style="padding:8px 14px;background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--rs);font-family:inherit;font-size:13px;font-weight:700;color:var(--accent);cursor:pointer;">追加</button>
+    </div>
+    <div style="font-size:10px;color:var(--soft);margin-top:6px;">複数選択できます。タグなしでも保存できます。</div>
+    <button class="btn-p" onclick="savePhotoTag()" style="margin-top:14px;">保存する</button>
+    <button class="btn-s" onclick="closeModal('modal-photo-tag')">スキップ</button>
+  </div>
+</div>
+ 
+<!-- 電車・バス テンプレートモーダル -->
+<div class="moverlay" id="modal-transit-tpl" onclick="closeOut(event,'modal-transit-tpl')">
+  <div class="modal" style="max-height:88vh;overflow-y:auto;">
+    <div class="mhandle"></div>
+    <div class="mtitle">🚃 電車 曜日テンプレート</div>
+    <div style="font-size:11px;color:var(--soft);margin-bottom:12px;line-height:1.6;">曜日ごとに乗る電車の時間を設定します。手動入力がない日は自動で表示されます。</div>
+    <div id="transit-day-fields"></div>
+    <button class="btn-p" onclick="saveTransitDayTpl()">保存する</button>
+    <button class="btn-s" onclick="closeModal('modal-transit-tpl')">閉じる</button>
+  </div>
+</div>
+ 
 </body>
 </html>
